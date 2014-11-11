@@ -38,7 +38,7 @@ namespace PosauneAnalytics.UnitTests
             calc.AssetPrice = 60.00;
             calc.Strike = 65.00;
             calc.TimeToMaturity = 0.25;
-            calc.RiskFreeRate = 0.8;
+            calc.RiskFreeRate = 0.08;
             calc.Volatility = .30;
 
             var price = calc.BlackScholesPrice();
