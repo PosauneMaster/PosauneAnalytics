@@ -11,7 +11,7 @@ namespace PosauneAnalytics.Web.Application
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            txtAnalysisDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
         }
     }
 }
