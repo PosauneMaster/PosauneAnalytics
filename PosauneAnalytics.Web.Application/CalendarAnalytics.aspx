@@ -3,6 +3,13 @@
 
 <asp:Content ContentPlaceHolderID="headerPalceHolder" runat="server">
 
+    <link rel='stylesheet' href='Content/fullcalendar.min.css' />
+    <script src='Scripts/jquery.min.js'></script>
+    <script src='Scripts/moment.min.js'></script>
+    <script src='Scripts/fullcalendar.min.js'></script>
+<%--    <script>var $j=jQuery.noConflict(true);</script>--%>
+
+
     <style type="text/css">
         #expirationTable td {
             white-space:nowrap;
@@ -49,9 +56,74 @@
 	        outline: none;
         }
 
+        #calendar {
+            width: 600px;
+            margin: 0 auto;
+            font-size: 12px;
+        }
+        
+        /*.fc-header-title {
+            font-size: 10px;
+            white-space: normal !important;
+        }*/
+
+
+
+        /*.fc-header-title h2 {
+            font-size: .9em;
+            white-space: normal !important;
+        }
+
+        .fc-view-month .fc-event, .fc-view-agendaWeek .fc-event {
+            font-size: 0;
+            overflow: hidden;
+            height: 2px;
+        }
+
+        .fc-view-agendaWeek .fc-event-vert {
+            font-size: 0;
+            overflow: hidden;
+            width: 2px !important;
+        }
+
+        .fc-agenda-axis {
+            width: 20px !important;
+            font-size: .7em;
+        }
+
+        .fc-button-content {
+            padding: 0;
+        }*/
+
+        /*#mainTable, th, td {
+            border:1px solid green;
+            border-collapse: collapse;
+        }*/
+
     </style>
 
     <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var $j = jQuery.noConflict(true);
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev, next, today',
+                    center: 'title',
+                    right: 'month, agendaWeek, agendaDay'
+                },
+                defaultView: 'month',
+                editable: true,
+                allDaySlot: false,
+                selectable: true,
+                slotMinutes: 15,
+            });
+
+
+
+        });
+
 
         var _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -76,18 +148,16 @@
 
     </script>
 
-
-
-
 </asp:Content>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
   
     <div style="height:50px;"></div>
 
-    <table>
+    <table id="mainTable">
         <tr>
             <td>
+                <div>
                 <table>
                     <tr>
                         <td><span>Analysis Date:</span></td>
@@ -97,11 +167,16 @@
                             <ajaxToolkit:CalendarExtender runat="server" ID="calAnalysisDate" Enabled="true" Format="MM/dd/yyyy" PopupButtonID="imgAnalysisDate" TargetControlID="txtAnalysisDate"></ajaxToolkit:CalendarExtender>
                         </td>
                     </tr>
-                    <tr style="height:24px;"></tr>
                 </table>
-
+                    </div>
+                </td>
+                <td style="width:80px;"></td>
+                <td></td>
+                </tr>
+        <tr>
+            <td>
+                <div>
                 <table id="expirationTable">
-                    <tr style="height:24px;"></tr>
                     <tr>
                         <th>Expiration Date</th>
                         <th></th>
@@ -271,12 +346,11 @@
                         <td><asp:TextBox runat="server" ID="txtWdays10" CssClass="expireInfo"></asp:TextBox></td>
                     </tr>
                 </table>
+                    </div>
             </td>
-
-            <td>
-                <div id='calendar' style="border:solid 1px black;">
-                    <aja
-                </div>
+            <td></td>
+            <td style="width:500px; height:500px;">
+                <div id='calendar'></div>
             </td>
         </tr>
 
