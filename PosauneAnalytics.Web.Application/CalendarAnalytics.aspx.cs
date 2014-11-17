@@ -22,6 +22,7 @@ namespace PosauneAnalytics.Web.Application
             txtExpirationDate8.Attributes.Add("onchange", "calcDateDiff('#txtExpirationDate8', '#txtDays8');");
             txtExpirationDate9.Attributes.Add("onchange", "calcDateDiff('#txtExpirationDate9', '#txtDays9');");
             txtExpirationDate10.Attributes.Add("onchange", "calcDateDiff('#txtExpirationDate10', '#txtDays10');");
+
         }
     }
 }

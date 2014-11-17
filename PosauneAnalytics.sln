@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.UnitTests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.Web.Application", "PosauneAnalytics.Web.Application\PosauneAnalytics.Web.Application.csproj", "{6B409225-39CA-4AC7-A285-CEB1B3006B73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.Web.UI", "PosauneAnalytics.Web.UI\PosauneAnalytics.Web.UI.csproj", "{5CD775E0-6EE3-488B-B274-1C843AE20828}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6B409225-39CA-4AC7-A285-CEB1B3006B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B409225-39CA-4AC7-A285-CEB1B3006B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B409225-39CA-4AC7-A285-CEB1B3006B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CD775E0-6EE3-488B-B274-1C843AE20828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD775E0-6EE3-488B-B274-1C843AE20828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD775E0-6EE3-488B-B274-1C843AE20828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD775E0-6EE3-488B-B274-1C843AE20828}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

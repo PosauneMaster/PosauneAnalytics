@@ -7,6 +7,7 @@
     <script src='Scripts/jquery.min.js'></script>
     <script src='Scripts/moment.min.js'></script>
     <script src='Scripts/fullcalendar.min.js'></script>
+    <script src='Scripts/jquery-ui.custom.min.js'></script>
 <%--    <script>var $j=jQuery.noConflict(true);</script>--%>
 
 
@@ -61,6 +62,7 @@
             margin: 0 auto;
             font-size: 12px;
         }
+
         
         /*.fc-header-title {
             font-size: 10px;
@@ -118,11 +120,37 @@
                 allDaySlot: false,
                 selectable: true,
                 slotMinutes: 15,
+                droppable: true, // this allows things to be dropped onto the calendar
+                drop: function () {
+                    // is the "remove after drop" checkbox checked?
+                    if ($('#drop-remove').is(':checked')) {
+                        // if so, remove the element from the "Draggable Events" list
+                        $(this).remove();
+                    }
+                }
+            });
+
+            $('#external-events .fc-event').each(function () {
+
+                // store data so the calendar knows to render an event upon drop
+                $(this).data('event', {
+                    title: $.trim($(this).text()), // use the element's text as the event title
+                    stick: true // maintain when user navigates (see docs on the renderEvent method)
+                });
+
+                // make the event draggable using jQuery UI
+                $(this).draggable({
+                    zIndex: 999,
+                    revert: true,      // will cause the event to go back to its
+                    revertDuration: 0  //  original position after the drag
+                });
+
             });
 
 
-
         });
+
+
 
 
         var _MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -195,7 +223,7 @@
                         </td>
                         <td style="width: 10px;"></td>
                         <td>
-                            <asp:TextBox runat="server" ID="txtVolatility1" CssClass="expireInfo"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtVolatility1" CssClass="expireInfo" On></asp:TextBox>
                             <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender1" TargetControlID="txtVolatility1" Mask="99.99%" MaskType="None" AcceptNegative="None" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays1" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
@@ -349,6 +377,20 @@
                     </div>
             </td>
             <td></td>
+            <td>
+                <div id='external-events'>
+                    <h4>Draggable Events</h4>
+                    <div class='fc-event'>My Event 1</div>
+                    <div class='fc-event'>My Event 2</div>
+                    <div class='fc-event'>My Event 3</div>
+                    <div class='fc-event'>My Event 4</div>
+                    <div class='fc-event'>My Event 5</div>
+                    <p>
+                        <input type='checkbox' id='drop-remove' />
+                        <label for='drop-remove'>remove after drop</label>
+                    </p>
+                </div>
+            </td>
             <td style="width:500px; height:500px;">
                 <div id='calendar'></div>
             </td>
