@@ -3,12 +3,12 @@
 
 <asp:Content ContentPlaceHolderID="headerPalceHolder" runat="server">
 
-    <link rel='stylesheet' href='Content/fullcalendar.min.css' />
-    <script src='Scripts/jquery.min.js'></script>
+    <link href='Content/fullcalendar.css' rel='stylesheet' />
+    <link href='Content/fullcalendar.print.css' rel='stylesheet' media='print' />
     <script src='Scripts/moment.min.js'></script>
+    <script src='Scripts/jquery-1.10.2.min.js'></script>
+    <script src='Scripts/jquery-ui-1.11.2.min.js'></script>
     <script src='Scripts/fullcalendar.min.js'></script>
-    <script src='Scripts/jquery-ui.custom.min.js'></script>
-<%--    <script>var $j=jQuery.noConflict(true);</script>--%>
 
 
     <style type="text/css">
@@ -63,45 +63,42 @@
             font-size: 12px;
         }
 
+        	#wrap {
+		width: 1100px;
+		margin: 0 auto;
+	}
+		
+	#external-events {
+		float: left;
+		width: 150px;
+		padding: 0 10px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+	}
+		
+	#external-events h4 {
+		font-size: 16px;
+		margin-top: 0;
+		padding-top: 1em;
+	}
+		
+	#external-events .fc-event {
+		margin: 10px 0;
+		cursor: pointer;
+	}
+		
+	#external-events p {
+		margin: 1.5em 0;
+		font-size: 11px;
+		color: #666;
+	}
+		
+	#external-events p input {
+		margin: 0;
+		vertical-align: middle;
+	}
         
-        /*.fc-header-title {
-            font-size: 10px;
-            white-space: normal !important;
-        }*/
-
-
-
-        /*.fc-header-title h2 {
-            font-size: .9em;
-            white-space: normal !important;
-        }
-
-        .fc-view-month .fc-event, .fc-view-agendaWeek .fc-event {
-            font-size: 0;
-            overflow: hidden;
-            height: 2px;
-        }
-
-        .fc-view-agendaWeek .fc-event-vert {
-            font-size: 0;
-            overflow: hidden;
-            width: 2px !important;
-        }
-
-        .fc-agenda-axis {
-            width: 20px !important;
-            font-size: .7em;
-        }
-
-        .fc-button-content {
-            padding: 0;
-        }*/
-
-        /*#mainTable, th, td {
-            border:1px solid green;
-            border-collapse: collapse;
-        }*/
-
     </style>
 
     <script type="text/javascript">
@@ -149,9 +146,6 @@
 
 
         });
-
-
-
 
         var _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -202,8 +196,8 @@
                 <td></td>
                 </tr>
         <tr>
-            <td>
-                <div>
+            <td style="vertical-align:top; padding:50px 12px 0 0;">
+                <div style="border: 1px solid #ccc; background: #eee; padding: 10px;">
                 <table id="expirationTable">
                     <tr>
                         <th>Expiration Date</th>
@@ -377,18 +371,15 @@
                     </div>
             </td>
             <td></td>
-            <td>
+            <td style="vertical-align:top; padding:50px 12px 0 0;">
                 <div id='external-events'>
-                    <h4>Draggable Events</h4>
-                    <div class='fc-event'>My Event 1</div>
-                    <div class='fc-event'>My Event 2</div>
-                    <div class='fc-event'>My Event 3</div>
-                    <div class='fc-event'>My Event 4</div>
-                    <div class='fc-event'>My Event 5</div>
-                    <p>
-                        <input type='checkbox' id='drop-remove' />
-                        <label for='drop-remove'>remove after drop</label>
-                    </p>
+                    <h4>Weights</h4>
+                    <div class='fc-event'>Weight: Zero</div>
+                    <div class='fc-event' style="background-color:darkblue; color:white;">Weight: 1.5</div>
+                    <div class='fc-event' style="background-color:green; color:white;">Weight: 2.0</div>
+                    <div class='fc-event' style="background-color:olive; color:white;">Weight: 2.5</div>
+                    <div class='fc-event' style="background-color:orange; color:black;">Weight: 3.0</div>
+                    <div class='fc-event' style="background-color:gold; color:black;">Weight: Custom</div>
                 </div>
             </td>
             <td style="width:500px; height:500px;">

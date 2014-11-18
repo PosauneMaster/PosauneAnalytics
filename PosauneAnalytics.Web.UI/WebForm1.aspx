@@ -17,6 +17,7 @@
 
     $(document).ready(function () {
 
+        $('#myEvent1').data('event', {title: 'myEvent1', stick: true });
 
         /* initialize the external events
 		-----------------------------------------------------------------*/
@@ -51,6 +52,7 @@
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar
             drop: function () {
+                alert('Dropped!');
                 // is the "remove after drop" checkbox checked?
                 if ($('#drop-remove').is(':checked')) {
                     // if so, remove the element from the "Draggable Events" list
@@ -120,7 +122,7 @@
 
 		<div id='external-events'>
 			<h4>Draggable Events</h4>
-			<div class='fc-event'>My Event 1</div>
+			<div class='fc-event' id="myEvent1">My Event 1</div>
 			<div class='fc-event'>My Event 2</div>
 			<div class='fc-event'>My Event 3</div>
 			<div class='fc-event'>My Event 4</div>
