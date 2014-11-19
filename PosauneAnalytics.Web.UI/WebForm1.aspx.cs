@@ -13,5 +13,17 @@ namespace PosauneAnalytics.Web.UI
         {
 
         }
+
+        [System.Web.Services.WebMethod]
+        public static void TestAjax()
+        {
+
+        }
+    }
+
+    public class CalendarEvent
+    {
+        public DateTime Date { get; set; }
+        public double Weight { get; set; }
     }
 }

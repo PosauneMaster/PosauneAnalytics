@@ -24,10 +24,23 @@
 
         $('#external-events .fc-event').each(function () {
 
-            // store data so the calendar knows to render an event upon drop
-            $(this).data('event', {
+            var eventObject = {
                 title: $.trim($(this).text()), // use the element's text as the event title
-                stick: true // maintain when user navigates (see docs on the renderEvent method)
+                backgroundColor: $(this).css('background-color'),
+                textColor: $(this).css('color'),
+                weight: $(this).attr('data-weight').valueOf()
+
+            };
+
+            // store data so the calendar knows to render an event upon drop
+            $(this).data('eventObject', {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                stick: true, // maintain when user navigates (see docs on the renderEvent method)
+                color: $(this).color,
+                backgroundColor: $(this).css('background-color'),
+                textColor: $(this).css('color'),
+                weight: $(this).attr('data-weight').valueOf()
+
             });
 
             // make the event draggable using jQuery UI
@@ -47,19 +60,63 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+                right: 'month'
             },
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar
-            drop: function () {
-                alert('Dropped!');
-                // is the "remove after drop" checkbox checked?
-                if ($('#drop-remove').is(':checked')) {
-                    // if so, remove the element from the "Draggable Events" list
-                    $(this).remove();
+            drop: function (date, allDay) { // this function is called when something is dropped
+
+                // retrieve the dropped element's stored Event Object
+                var originalEventObject = $(this).data('eventObject');
+
+                // we need to copy it, so that multiple events don't have a reference to the same object
+                var copiedEventObject = $.extend({}, originalEventObject);
+
+                // assign it the date that was reported
+                copiedEventObject.start = date;
+                copiedEventObject.allDay = allDay;
+                copiedEventObject.title = originalEventObject.title;
+                copiedEventObject.backgroundColor = originalEventObject.backgroundColor;
+                copiedEventObject.textColor = originalEventObject.textColor;
+                copiedEventObject.weight = originalEventObject.weight;
+                copiedEventObject.id = date.toDateString();
+                copiedEventObject.editable = false;
+
+                $('#calendar').fullCalendar('removeEvents', copiedEventObject.id);
+
+                postEvent();
+
+                if (copiedEventObject.weight != "1")
+                {
+                    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
                 }
+
+
+                // render the event on the calendar
+                // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+                //$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+                //// is the "remove after drop" checkbox checked?
+                //if ($('#drop-remove').is(':checked')) {
+                //    // if so, remove the element from the "Draggable Events" list
+                //    $(this).remove();
+                //}
+
             }
         });
+
+        function postEvent() {
+
+            $.ajax({
+                type: 'POST',
+                url: 'WebForm1.aspx/TestAjax',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json'
+
+
+            });
+
+        };
 
 
     });
@@ -120,18 +177,16 @@
 <body>
 	<div id='wrap'>
 
-		<div id='external-events'>
-			<h4>Draggable Events</h4>
-			<div class='fc-event' id="myEvent1">My Event 1</div>
-			<div class='fc-event'>My Event 2</div>
-			<div class='fc-event'>My Event 3</div>
-			<div class='fc-event'>My Event 4</div>
-			<div class='fc-event'>My Event 5</div>
-			<p>
-				<input type='checkbox' id='drop-remove' />
-				<label for='drop-remove'>remove after drop</label>
-			</p>
-		</div>
+        <div id='external-events'>
+            <h4>Weights</h4>
+            <div class='fc-event' data-weight="0">Weight: Zero</div>
+            <div class='fc-event' data-weight="1" style="background-color:black; color:white;">Weight: Normal</div>
+            <div class='fc-event' data-weight="1.5" style="background-color:darkblue; color:white;">Weight: 1.5</div>
+            <div class='fc-event' data-weight="2.0" style="background-color:green; color:white;">Weight: 2.0</div>
+            <div class='fc-event' data-weight="2.5" style="background-color:olive; color:white;">Weight: 2.5</div>
+            <div class='fc-event' data-weight="3.0" style="background-color:orange; color:black;">Weight: 3.0</div>
+            <div class='fc-event' data-weight="4.0" style="background-color:gold; color:black;">Weight: Custom</div>
+        </div>
 
 		<div id='calendar'></div>
 
