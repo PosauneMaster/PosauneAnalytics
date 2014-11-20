@@ -62,12 +62,12 @@
             margin: 0 auto;
             font-size: 12px;
         }
+        
+        #wrap {
+            width: 1100px;
+		    margin: 0 auto;
+        }
 
-        	#wrap {
-		width: 1100px;
-		margin: 0 auto;
-	}
-		
 	#external-events {
 		float: left;
 		width: 150px;
@@ -106,69 +106,124 @@
         $(document).ready(function () {
 
             var $j = jQuery.noConflict(true);
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev, next, today',
-                    center: 'title',
-                    right: 'month, agendaWeek, agendaDay'
-                },
-                defaultView: 'month',
-                editable: true,
-                allDaySlot: false,
-                selectable: true,
-                slotMinutes: 15,
-                droppable: true, // this allows things to be dropped onto the calendar
-                drop: function () {
-                    // is the "remove after drop" checkbox checked?
-                    if ($('#drop-remove').is(':checked')) {
-                        // if so, remove the element from the "Draggable Events" list
-                        $(this).remove();
-                    }
+
+            $('#txtWeight').keydown(function () {
+
+                if ($.isNumeric(this.value))
+                {
+                    $('#customEvent').text = 'Weight:' + this.value;
+                    //$('#customEvent').attr('data-weight').val(this.value);
                 }
+
+
             });
+
+
+            $('#myEvent1').data('event', { title: 'myEvent1', stick: true });
 
             $('#external-events .fc-event').each(function () {
 
-                // store data so the calendar knows to render an event upon drop
-                $(this).data('event', {
-                    title: $.trim($(this).text()), // use the element's text as the event title
-                    stick: true // maintain when user navigates (see docs on the renderEvent method)
+                var eventObject = {
+                    title: $.trim($(this).text()),
+                    backgroundColor: $(this).css('background-color'),
+                    textColor: $(this).css('color'),
+                    weight: $(this).attr('data-weight').valueOf()
+
+                };
+
+                $(this).data('eventObject', {
+                    title: $.trim($(this).text()),
+                    stick: true,
+                    color: $(this).color,
+                    backgroundColor: $(this).css('background-color'),
+                    textColor: $(this).css('color'),
+                    weight: $(this).attr('data-weight').valueOf()
+
                 });
 
-                // make the event draggable using jQuery UI
                 $(this).draggable({
                     zIndex: 999,
-                    revert: true,      // will cause the event to go back to its
-                    revertDuration: 0  //  original position after the drag
+                    revert: true,
+                    revertDuration: 0
                 });
 
             });
 
 
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month'
+                },
+                editable: true,
+                droppable: true,
+                drop: function (date, allDay) {
+
+                    var originalEventObject = $(this).data('eventObject');
+
+                    var copiedEventObject = $.extend({}, originalEventObject);
+
+                    copiedEventObject.start = date;
+                    copiedEventObject.allDay = allDay;
+                    copiedEventObject.title = originalEventObject.title;
+                    copiedEventObject.backgroundColor = originalEventObject.backgroundColor;
+                    copiedEventObject.textColor = originalEventObject.textColor;
+                    copiedEventObject.weight = originalEventObject.weight;
+                    copiedEventObject.id = date.toDateString();
+                    copiedEventObject.editable = false;
+
+                    $('#calendar').fullCalendar('removeEvents', copiedEventObject.id);
+
+                    postEvent();
+
+                    if (copiedEventObject.weight != "1") {
+                        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+                    }
+                }
+            });
         });
+
+        function weightChanged() {
+
+        }
+
+        function postEvent() {
+
+            $.ajax({
+                type: 'POST',
+                url: 'CalendarAnalytics.aspx/TestAjax',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json'
+
+            });
+        };
+
 
         var _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
         function calcDateDiff(ctrlAnalysisDate, ctrlTarget) {
 
             var date1 = parseDate($("#<%= txtAnalysisDate.ClientID %>").val());
-            var date2 = parseDate($(ctrlAnalysisDate).val());
-            var diff = dateDiffInDays(date1, date2);
-            $(ctrlTarget).val(diff);
-        }
+        var date2 = parseDate($(ctrlAnalysisDate).val());
+        var diff = dateDiffInDays(date1, date2);
+        $(ctrlTarget).val(diff);
+    }
 
-        function parseDate(str) {
-            var mdy = str.split('/')
-            return new Date(mdy[2], mdy[0] - 1, mdy[1]);
-        }
+    function parseDate(str) {
+        var mdy = str.split('/')
+        return new Date(mdy[2], mdy[0] - 1, mdy[1]);
+    }
 
-        function dateDiffInDays(a, b) {
-            var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-            var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-            return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-        }
+    function dateDiffInDays(a, b) {
+        var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+    }
 
-    </script>
+
+
+</script>
 
 </asp:Content>
 
@@ -374,12 +429,18 @@
             <td style="vertical-align:top; padding:50px 12px 0 0;">
                 <div id='external-events'>
                     <h4>Weights</h4>
-                    <div class='fc-event'>Weight: Zero</div>
-                    <div class='fc-event' style="background-color:darkblue; color:white;">Weight: 1.5</div>
-                    <div class='fc-event' style="background-color:green; color:white;">Weight: 2.0</div>
-                    <div class='fc-event' style="background-color:olive; color:white;">Weight: 2.5</div>
-                    <div class='fc-event' style="background-color:orange; color:black;">Weight: 3.0</div>
-                    <div class='fc-event' style="background-color:gold; color:black;">Weight: Custom</div>
+                    <div class='fc-event' data-weight="0">Weight: Zero</div>
+                    <div class='fc-event' data-weight="1" style="background-color:black; color:white;">Weight: Normal</div>
+                    <div class='fc-event' data-weight="1.5" style="background-color:darkblue; color:white;">Weight: 1.5</div>
+                    <div class='fc-event' data-weight="2.0" style="background-color:green; color:white;">Weight: 2.0</div>
+                    <div class='fc-event' data-weight="2.5" style="background-color:olive; color:white;">Weight: 2.5</div>
+                    <div class='fc-event' data-weight="3.0" style="background-color:orange; color:black;">Weight: 3.0</div>
+                    <h4>Custom</h4>
+                    <div style="vertical-align:bottom;">
+                        <label for="txtWeight" style="font-size:12px; font-weight:normal;">Weight:</label>
+                        <input id="txtWeight" type="number" style="width:50px; margin-left:15px;" /><br />
+                    </div>
+                    <div class='fc-event' id="customEvent" data-weight="4.0" style="background-color:gold; color:black;">Weight: Custom</div>
                 </div>
             </td>
             <td style="width:500px; height:500px;">
