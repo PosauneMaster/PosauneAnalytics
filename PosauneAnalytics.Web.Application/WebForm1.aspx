@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="PosauneAnalytics.Web.UI.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="PosauneAnalytics.Web.Application.WebForm1" %>
 
 <!DOCTYPE html>
 
@@ -13,12 +13,11 @@
 <script src='Scripts/jquery-1.10.2.min.js'></script>
 <script src='Scripts/jquery-ui-1.11.2.min.js'></script>
 <script src='Scripts/fullcalendar.min.js'></script>
-
 <script>
 
     $(document).ready(function () {
 
-        $('#myEvent1').data('event', {title: 'myEvent1', stick: true });
+        $('#myEvent1').data('event', { title: 'myEvent1', stick: true });
 
         /* initialize the external events
 		-----------------------------------------------------------------*/
@@ -85,18 +84,9 @@
 
                 $('#calendar').fullCalendar('removeEvents', copiedEventObject.id);
 
-                $.ajax({
-                    type: 'POST',
-                    url: 'WebForm1.aspx/TestAjax',
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json'
+                postEvent();
 
-
-                });
-
-
-                if (copiedEventObject.weight != "1")
-                {
+                if (copiedEventObject.weight != "1") {
                     $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
                 }
 

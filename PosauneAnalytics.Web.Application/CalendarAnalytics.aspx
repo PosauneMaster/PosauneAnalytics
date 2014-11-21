@@ -105,7 +105,7 @@
 
         $(document).ready(function () {
 
-            var $j = jQuery.noConflict(true);
+            //var $j = jQuery.noConflict(true);
 
             $('#txtWeight').keydown(function () {
 
@@ -114,8 +114,6 @@
                     $('#customEvent').text = 'Weight:' + this.value;
                     //$('#customEvent').attr('data-weight').val(this.value);
                 }
-
-
             });
 
 
@@ -175,7 +173,14 @@
 
                     $('#calendar').fullCalendar('removeEvents', copiedEventObject.id);
 
-                    postEvent();
+                    var result =  $.ajax({
+                        type: 'POST',
+                        url: 'CalendarAnalytics.aspx/AjaxPost',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json'
+
+                    });
+
 
                     if (copiedEventObject.weight != "1") {
                         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
@@ -184,46 +189,29 @@
             });
         });
 
-        function weightChanged() {
-
-        }
-
-        function postEvent() {
-
-            $.ajax({
-                type: 'POST',
-                url: 'CalendarAnalytics.aspx/TestAjax',
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json'
-
-            });
-        };
-
 
         var _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
         function calcDateDiff(ctrlAnalysisDate, ctrlTarget) {
 
             var date1 = parseDate($("#<%= txtAnalysisDate.ClientID %>").val());
-        var date2 = parseDate($(ctrlAnalysisDate).val());
-        var diff = dateDiffInDays(date1, date2);
-        $(ctrlTarget).val(diff);
-    }
+            var date2 = parseDate($(ctrlAnalysisDate).val());
+            var diff = dateDiffInDays(date1, date2);
+            $(ctrlTarget).val(diff);
+        }
 
-    function parseDate(str) {
-        var mdy = str.split('/')
-        return new Date(mdy[2], mdy[0] - 1, mdy[1]);
-    }
+        function parseDate(str) {
+            var mdy = str.split('/')
+            return new Date(mdy[2], mdy[0] - 1, mdy[1]);
+        }
 
-    function dateDiffInDays(a, b) {
-        var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-        var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-    }
+        function dateDiffInDays(a, b) {
+            var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+            var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+            return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+        }
 
-
-
-</script>
+    </script>
 
 </asp:Content>
 

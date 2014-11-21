@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,7 @@ namespace PosauneAnalytics.Web.Application
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Debug.WriteLine("Page Load");
             txtAnalysisDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
             txtExpirationDate1.Attributes.Add("onchange", "calcDateDiff('#txtExpirationDate1', '#txtDays1');");
             txtExpirationDate2.Attributes.Add("onchange", "calcDateDiff('#txtExpirationDate2', '#txtDays2');");
@@ -24,5 +26,20 @@ namespace PosauneAnalytics.Web.Application
             txtExpirationDate10.Attributes.Add("onchange", "calcDateDiff('#txtExpirationDate10', '#txtDays10');");
 
         }
+
+        [System.Web.Services.WebMethod]
+        public static void AjaxPost()
+        {
+            Debug.WriteLine("AjaxPost");
+        }
+
+        public class CalendarEvent
+        {
+            public DateTime Date { get; set; }
+            public double Weight { get; set; }
+        }
+
+
+
     }
 }
