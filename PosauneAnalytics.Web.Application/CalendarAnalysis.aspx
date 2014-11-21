@@ -220,9 +220,9 @@
 
             $('#calendar').fullCalendar({
                 header: {
-                    left: 'prev,next today',
+                    left: '',
                     center: 'title',
-                    right: 'month'
+                    right: 'today prev,next '
                 },
                 editable: true,
                 droppable: true,
@@ -251,13 +251,17 @@
 
                     });
 
-                    if (copiedEventObject.weight != "1.0") {
+                    if (copiedEventObject.weight != "1.0" && copiedEventObject.weight != "-1.0") {
                         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+                    }
+
+                    if (originalEventObject.title.indexOf('Custom') > 0)
+                    {
+                        originalEventObject.weight = "-1.0";
                     }
 
                     $('#customEvent').html('Weight: Custom');
                     $('#txtWeight').val('');
-                    originalEventObject.weight = "1.0";
 
                 }
             });
@@ -497,7 +501,7 @@
                             <input id="txtWeight" style="width:50px; margin-left:15px; height:16px;" /><br />
                         </div>
                     </div>
-                    <div class='fc-event' id="customEvent" data-weight="1.0" style="background-color:gold; color:black;">Weight: Custom</div>
+                    <div class='fc-event' id="customEvent" data-weight="-1.0" style="background-color:gold; color:black;">Weight: Custom</div>
                 </div>
             </td>
             <td style="width:500px; height:500px;">
