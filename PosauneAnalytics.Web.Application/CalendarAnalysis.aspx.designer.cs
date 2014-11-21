@@ -10,7 +10,7 @@
 namespace PosauneAnalytics.Web.Application {
     
     
-    public partial class CalendarAnalytics {
+    public partial class CalendarAnalysis {
         
         /// <summary>
         /// txtAnalysisDate control.
@@ -76,15 +76,6 @@ namespace PosauneAnalytics.Web.Application {
         protected global::System.Web.UI.WebControls.TextBox txtVolatility1;
         
         /// <summary>
-        /// volExtender1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender1;
-        
-        /// <summary>
         /// txtDays1 control.
         /// </summary>
         /// <remarks>
@@ -137,15 +128,6 @@ namespace PosauneAnalytics.Web.Application {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVolatility2;
-        
-        /// <summary>
-        /// volExtender2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender2;
         
         /// <summary>
         /// txtDays2 control.
@@ -202,15 +184,6 @@ namespace PosauneAnalytics.Web.Application {
         protected global::System.Web.UI.WebControls.TextBox txtVolatility3;
         
         /// <summary>
-        /// volExtender3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender3;
-        
-        /// <summary>
         /// txtDays3 control.
         /// </summary>
         /// <remarks>
@@ -263,15 +236,6 @@ namespace PosauneAnalytics.Web.Application {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVolatility4;
-        
-        /// <summary>
-        /// volExtender4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender4;
         
         /// <summary>
         /// txtDays4 control.
@@ -328,15 +292,6 @@ namespace PosauneAnalytics.Web.Application {
         protected global::System.Web.UI.WebControls.TextBox txtVolatility5;
         
         /// <summary>
-        /// volExtender5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender5;
-        
-        /// <summary>
         /// txtDays5 control.
         /// </summary>
         /// <remarks>
@@ -389,15 +344,6 @@ namespace PosauneAnalytics.Web.Application {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVolatility6;
-        
-        /// <summary>
-        /// volExtender6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender6;
         
         /// <summary>
         /// txtDays6 control.
@@ -454,15 +400,6 @@ namespace PosauneAnalytics.Web.Application {
         protected global::System.Web.UI.WebControls.TextBox txtVolatility7;
         
         /// <summary>
-        /// volExtender7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender7;
-        
-        /// <summary>
         /// txtDays7 control.
         /// </summary>
         /// <remarks>
@@ -515,15 +452,6 @@ namespace PosauneAnalytics.Web.Application {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVolatility8;
-        
-        /// <summary>
-        /// volExtender8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender8;
         
         /// <summary>
         /// txtDays8 control.
@@ -580,15 +508,6 @@ namespace PosauneAnalytics.Web.Application {
         protected global::System.Web.UI.WebControls.TextBox txtVolatility9;
         
         /// <summary>
-        /// volExtender9 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender9;
-        
-        /// <summary>
         /// txtDays9 control.
         /// </summary>
         /// <remarks>
@@ -641,15 +560,6 @@ namespace PosauneAnalytics.Web.Application {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVolatility10;
-        
-        /// <summary>
-        /// volExtender10 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender volExtender10;
         
         /// <summary>
         /// txtDays10 control.

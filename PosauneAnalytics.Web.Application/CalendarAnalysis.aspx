@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CalendarAnalytics.aspx.cs" Inherits="PosauneAnalytics.Web.Application.CalendarAnalytics" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CalendarAnalysis.aspx.cs" Inherits="PosauneAnalytics.Web.Application.CalendarAnalysis" %>
 
 
 <asp:Content ContentPlaceHolderID="headerPalceHolder" runat="server">
@@ -12,6 +12,7 @@
 
 
     <style type="text/css">
+
         #expirationTable td {
             white-space:nowrap;
         }
@@ -98,6 +99,15 @@
 		margin: 0;
 		vertical-align: middle;
 	}
+
+    #analysis-date {
+        width: 260px;
+        height:50px;
+        padding: 6px 0 0 5px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+    }
         
     </style>
 
@@ -107,12 +117,72 @@
 
             //var $j = jQuery.noConflict(true);
 
-            $('#txtWeight').keydown(function () {
+            $('.expireInfo').keypress(function (e) {
+
+                var v = $('#' + e.currentTarget.id).val();
+                var verified;
+
+                if (v.indexOf('.') >= 0) {
+                    verified = (e.which == 8 || e.which == undefined || e.which == 0) ? null : String.fromCharCode(e.which).match(/[^0-9]/);
+                }
+                else {
+                    verified = (e.which == 8 || e.which == undefined || e.which == 0 || e.which == 46) ? null : String.fromCharCode(e.which).match(/[^0-9]/);
+                }
+
+                if (verified)
+                {
+                    e.preventDefault();
+                }
+
+            });
+
+            $('.expireInfo').change(function (e) {
+
+                var v = $('#' + e.currentTarget.id).val();
+
+                if ($.isNumeric(v))
+                {
+                    $('#' + e.currentTarget.id).val(v + '%');
+                }
+                else
+                {
+                    $('#' + e.currentTarget.id).val('');
+                }
+            });
+
+
+            $('#txtWeight').keyup(function (obj) {
 
                 if ($.isNumeric(this.value))
                 {
-                    $('#customEvent').text = 'Weight:' + this.value;
-                    //$('#customEvent').attr('data-weight').val(this.value);
+                    $('#customEvent').html('Weight: ' + this.value);
+
+                    var eventObj = $('#customEvent').data('eventObject');
+                    eventObj.weight = this.value;
+                }
+                else
+                {
+                    obj.stopPropagation();
+                }
+            });
+
+            $('#txtWeight').keypress(function (e) {
+
+                var v = $('#txtWeight').val();
+                var verified;
+
+                if (v.indexOf('.') >= 0)
+                {
+                    verified = (e.which == 8 || e.which == undefined || e.which == 0 ) ? null : String.fromCharCode(e.which).match(/[^0-9]/);
+                }
+                else
+                {
+                    verified = (e.which == 8 || e.which == undefined || e.which == 0 || e.which == 46) ? null : String.fromCharCode(e.which).match(/[^0-9]/);
+                }
+
+                if (verified)
+                {
+                    e.preventDefault();
                 }
             });
 
@@ -164,7 +234,7 @@
 
                     copiedEventObject.start = date;
                     copiedEventObject.allDay = allDay;
-                    copiedEventObject.title = originalEventObject.title;
+                    copiedEventObject.title = "Weight: " + originalEventObject.weight;
                     copiedEventObject.backgroundColor = originalEventObject.backgroundColor;
                     copiedEventObject.textColor = originalEventObject.textColor;
                     copiedEventObject.weight = originalEventObject.weight;
@@ -175,16 +245,20 @@
 
                     var result =  $.ajax({
                         type: 'POST',
-                        url: 'CalendarAnalytics.aspx/AjaxPost',
+                        url: 'CalendarAnalysis.aspx/AjaxPost',
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json'
 
                     });
 
-
-                    if (copiedEventObject.weight != "1") {
+                    if (copiedEventObject.weight != "1.0") {
                         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
                     }
+
+                    $('#customEvent').html('Weight: Custom');
+                    $('#txtWeight').val('');
+                    originalEventObject.weight = "1.0";
+
                 }
             });
         });
@@ -222,7 +296,7 @@
     <table id="mainTable">
         <tr>
             <td>
-                <div>
+                <div id="analysis-date">
                 <table>
                     <tr>
                         <td><span>Analysis Date:</span></td>
@@ -260,8 +334,7 @@
                         </td>
                         <td style="width: 10px;"></td>
                         <td>
-                            <asp:TextBox runat="server" ID="txtVolatility1" CssClass="expireInfo" On></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender1" TargetControlID="txtVolatility1" Mask="99.99%" MaskType="None" AcceptNegative="None" />
+                            <asp:TextBox runat="server" ID="txtVolatility1" CssClass="expireInfo" ClientIDMode="Static" ></asp:TextBox>
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays1" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays1" CssClass="expireInfo"></asp:TextBox></td>
@@ -277,7 +350,6 @@
                         <td style="width: 10px;"></td>
                         <td>
                             <asp:TextBox runat="server" ID="txtVolatility2" CssClass="expireInfo"></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender2" TargetControlID="txtVolatility2" Mask="99.99%" MaskType="Number" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays2" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays2" CssClass="expireInfo"></asp:TextBox></td>
@@ -293,7 +365,6 @@
                         <td style="width: 10px;"></td>
                         <td>
                             <asp:TextBox runat="server" ID="txtVolatility3" CssClass="expireInfo"></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender3" TargetControlID="txtVolatility3" Mask="99.99%" MaskType="Number" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays3" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays3" CssClass="expireInfo"></asp:TextBox></td>
@@ -309,7 +380,6 @@
                         <td style="width: 10px;"></td>
                         <td>
                             <asp:TextBox runat="server" ID="txtVolatility4" CssClass="expireInfo"></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender4" TargetControlID="txtVolatility4" Mask="99.99%" MaskType="Number" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays4" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays4" CssClass="expireInfo"></asp:TextBox></td>
@@ -325,7 +395,6 @@
                         <td style="width: 10px;"></td>
                         <td>
                             <asp:TextBox runat="server" ID="txtVolatility5" CssClass="expireInfo"></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender5" TargetControlID="txtVolatility5" Mask="99.99%" MaskType="Number" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays5" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays5" CssClass="expireInfo"></asp:TextBox></td>
@@ -341,7 +410,6 @@
                         <td style="width: 10px;"></td>
                         <td>
                             <asp:TextBox runat="server" ID="txtVolatility6" CssClass="expireInfo"></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender6" TargetControlID="txtVolatility6" Mask="99.99%" MaskType="Number" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays6" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays6" CssClass="expireInfo"></asp:TextBox></td>
@@ -357,7 +425,6 @@
                         <td style="width: 10px;"></td>
                         <td>
                             <asp:TextBox runat="server" ID="txtVolatility7" CssClass="expireInfo"></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender7" TargetControlID="txtVolatility7" Mask="99.99%" MaskType="Number" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays7" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays7" CssClass="expireInfo"></asp:TextBox></td>
@@ -373,7 +440,6 @@
                         <td style="width: 10px;"></td>
                         <td>
                             <asp:TextBox runat="server" ID="txtVolatility8" CssClass="expireInfo"></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender8" TargetControlID="txtVolatility8" Mask="99.99%" MaskType="Number" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays8" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays8" CssClass="expireInfo"></asp:TextBox></td>
@@ -389,7 +455,6 @@
                         <td style="width: 10px;"></td>
                         <td>
                             <asp:TextBox runat="server" ID="txtVolatility9" CssClass="expireInfo"></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender9" TargetControlID="txtVolatility9" Mask="99.99%" MaskType="Number" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays9" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays9" CssClass="expireInfo"></asp:TextBox></td>
@@ -405,7 +470,6 @@
                         <td style="width: 10px;"></td>
                         <td>
                             <asp:TextBox runat="server" ID="txtVolatility10" CssClass="expireInfo"></asp:TextBox>
-                            <ajaxToolkit:MaskedEditExtender runat="server" ID="volExtender10" TargetControlID="txtVolatility10" Mask="99.99%" MaskType="Number" />
                         </td>
                         <td><asp:TextBox runat="server" ID="txtDays10" CssClass="expireInfo" ClientIDMode="Static"></asp:TextBox></td>
                         <td><asp:TextBox runat="server" ID="txtWdays10" CssClass="expireInfo"></asp:TextBox></td>
@@ -418,17 +482,22 @@
                 <div id='external-events'>
                     <h4>Weights</h4>
                     <div class='fc-event' data-weight="0">Weight: Zero</div>
-                    <div class='fc-event' data-weight="1" style="background-color:black; color:white;">Weight: Normal</div>
+                    <div class='fc-event' data-weight="1.0" style="background-color:black; color:white;">Weight: Normal</div>
                     <div class='fc-event' data-weight="1.5" style="background-color:darkblue; color:white;">Weight: 1.5</div>
                     <div class='fc-event' data-weight="2.0" style="background-color:green; color:white;">Weight: 2.0</div>
                     <div class='fc-event' data-weight="2.5" style="background-color:olive; color:white;">Weight: 2.5</div>
                     <div class='fc-event' data-weight="3.0" style="background-color:orange; color:black;">Weight: 3.0</div>
-                    <h4>Custom</h4>
-                    <div style="vertical-align:bottom;">
-                        <label for="txtWeight" style="font-size:12px; font-weight:normal;">Weight:</label>
-                        <input id="txtWeight" type="number" style="width:50px; margin-left:15px;" /><br />
+                    <div>
+                        <div style="margin-bottom:4px;">
+                            <input type="checkbox" id="recurring-event" style="float:left; margin-right: 0.4em;"/>
+                            <label for="recurring-event" style="font-size:12px; font-weight:normal;">Recurring Event</label>
+                        </div>
+                        <div style="vertical-align:bottom;">
+                            <label for="txtWeight" style="font-size:12px; font-weight:normal;">Weight:</label>
+                            <input id="txtWeight" style="width:50px; margin-left:15px; height:16px;" /><br />
+                        </div>
                     </div>
-                    <div class='fc-event' id="customEvent" data-weight="4.0" style="background-color:gold; color:black;">Weight: Custom</div>
+                    <div class='fc-event' id="customEvent" data-weight="1.0" style="background-color:gold; color:black;">Weight: Custom</div>
                 </div>
             </td>
             <td style="width:500px; height:500px;">

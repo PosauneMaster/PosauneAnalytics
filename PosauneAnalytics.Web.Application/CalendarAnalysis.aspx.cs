@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace PosauneAnalytics.Web.Application
 {
-    public partial class CalendarAnalytics : System.Web.UI.Page
+    public partial class CalendarAnalysis : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
