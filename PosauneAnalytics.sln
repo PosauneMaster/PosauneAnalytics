@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.Web.Applic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.Web.UI", "PosauneAnalytics.Web.UI\PosauneAnalytics.Web.UI.csproj", "{5CD775E0-6EE3-488B-B274-1C843AE20828}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.TestHarness", "PosauneAnalytics.TestHarness\PosauneAnalytics.TestHarness.csproj", "{4696D090-2738-40B2-B62A-F9605FDA1401}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.FileManager", "PosauneAnalytics.FileManager\PosauneAnalytics.FileManager.csproj", "{496B9709-771C-418B-8267-AFFDF48317B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{5CD775E0-6EE3-488B-B274-1C843AE20828}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CD775E0-6EE3-488B-B274-1C843AE20828}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CD775E0-6EE3-488B-B274-1C843AE20828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4696D090-2738-40B2-B62A-F9605FDA1401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4696D090-2738-40B2-B62A-F9605FDA1401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4696D090-2738-40B2-B62A-F9605FDA1401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4696D090-2738-40B2-B62A-F9605FDA1401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496B9709-771C-418B-8267-AFFDF48317B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496B9709-771C-418B-8267-AFFDF48317B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496B9709-771C-418B-8267-AFFDF48317B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496B9709-771C-418B-8267-AFFDF48317B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

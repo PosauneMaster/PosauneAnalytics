@@ -90,7 +90,7 @@ namespace PosauneAnalytics.Logging
 
             string x = String.Format(@"<log4net>
                 <appender name=""RollingFileAppender"" type=""log4net.Appender.RollingFileAppender"">
-                <file value=""Logs\docusign.log""/>
+                <file value=""Logs\PosauneAnalytics.log""/>
                 <appendToFile value=""true""/>
                 <rollingStyle value=""Size""/>
                 <maxSizeRollBackups value=""5""/>
