@@ -9,6 +9,12 @@
     <title><%: Page.Title %> - Posaune Analytics</title>
 
     <asp:PlaceHolder runat="server">
+        <link href='Content/fullcalendar.css' rel='stylesheet' />
+        <link href='Content/fullcalendar.print.css' rel='stylesheet' media='print' />
+        <script src='Scripts/moment.min.js'></script>
+        <script src='Scripts/jquery-1.10.2.min.js'></script>
+        <script src='Scripts/jquery-ui-1.11.2.min.js'></script>
+        <script src='Scripts/fullcalendar.min.js'></script>
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
@@ -53,6 +59,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" runat="server" href="~/CalendarAnalytics.aspx">Calendar Analytics</a>
+                    <a class="navbar-brand" runat="server" href="~/DownloadManager.aspx">Download Manager</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">

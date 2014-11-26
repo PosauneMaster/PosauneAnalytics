@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -43,6 +44,13 @@ namespace PosauneAnalytics.TestHarness
 
             ZipUtils zu = new ZipUtils();
             zu.UnZip(ms, fileName);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DateTime date = dateTimePicker1.Value;
+            ICmeDownloader downloader = new CmeDownloader(date);
+            downloader.ListDirectoryDetails();
         }
     }
 }

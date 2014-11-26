@@ -3,12 +3,12 @@
 
 <asp:Content ContentPlaceHolderID="headerPalceHolder" runat="server">
 
-    <link href='Content/fullcalendar.css' rel='stylesheet' />
+<%--    <link href='Content/fullcalendar.css' rel='stylesheet' />
     <link href='Content/fullcalendar.print.css' rel='stylesheet' media='print' />
     <script src='Scripts/moment.min.js'></script>
     <script src='Scripts/jquery-1.10.2.min.js'></script>
     <script src='Scripts/jquery-ui-1.11.2.min.js'></script>
-    <script src='Scripts/fullcalendar.min.js'></script>
+    <script src='Scripts/fullcalendar.min.js'></script>--%>
 
 
     <style type="text/css">

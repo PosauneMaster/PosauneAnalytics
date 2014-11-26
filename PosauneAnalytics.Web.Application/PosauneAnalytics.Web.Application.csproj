@@ -226,6 +226,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="DownloadManager.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="HiddenWebServices.aspx" />
     <Content Include="images\Calendar_scheduleHS.png" />
@@ -430,6 +431,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DownloadManager.aspx.cs">
+      <DependentUpon>DownloadManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DownloadManager.aspx.designer.cs">
+      <DependentUpon>DownloadManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -474,6 +482,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PosauneAnalytics.FileManager\PosauneAnalytics.FileManager.csproj">
+      <Project>{496b9709-771c-418b-8267-affdf48317b3}</Project>
+      <Name>PosauneAnalytics.FileManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

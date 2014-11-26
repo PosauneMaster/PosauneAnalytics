@@ -32,6 +32,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnListBlob = new System.Windows.Forms.Button();
             this.btnDownloadBlob = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDownload
@@ -71,11 +72,22 @@
             this.btnDownloadBlob.UseVisualStyleBackColor = true;
             this.btnDownloadBlob.Click += new System.EventHandler(this.btnDownloadBlob_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(32, 110);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "List Details";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnDownloadBlob);
             this.Controls.Add(this.btnListBlob);
             this.Controls.Add(this.dateTimePicker1);
@@ -92,6 +104,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button btnListBlob;
         private System.Windows.Forms.Button btnDownloadBlob;
+        private System.Windows.Forms.Button button1;
     }
 }
 
