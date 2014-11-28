@@ -10,21 +10,66 @@ namespace PosauneAnalytics.Web.Application
 {
     public partial class DownloadManager : System.Web.UI.Page
     {
+        private IDownloadService _downloadService;
         protected void Page_Load(object sender, EventArgs e)
         {
-            ICmeDownloader downloader = new CmeDownloader();
+            _downloadService = new DownloadService();
 
-            var availableFiles = downloader.ListDirectoryDetails();
+            var availableFiles = _downloadService.ListFtpDirectoryDetails();
 
             gvAvailableFiles.DataSource = availableFiles;
-
             gvAvailableFiles.DataBind();
 
-            List<string> myList = new List<string>();
-            myList.Add("myString");
-            GridView1.DataSource = myList;
-            GridView1.DataBind();
+            var downloadedFiles = _downloadService.GetDownloadedFiles();
 
+            gvDownloadedFiles.DataSource = downloadedFiles.Select(f => new {filename=f});
+            gvDownloadedFiles.DataBind();
+        }
+
+        private bool HasRowsChecked()
+        {
+            foreach (GridViewRow row in gvAvailableFiles.Rows)
+            {
+                var cb = row.FindControl("chkSelected") as CheckBox;
+
+                if (cb != null && cb.Checked)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private List<GridViewRow> GetCheckedRows()
+        {
+            var rowList = new List<GridViewRow>();
+
+            foreach (GridViewRow row in gvAvailableFiles.Rows)
+            {
+                var cb = row.FindControl("chkSelected") as CheckBox;
+
+                if (cb != null && cb.Checked)
+                {
+                    rowList.Add(row);
+                }
+            }
+
+            return rowList;
+        }
+
+        protected void btnDownload_Click(object sender, EventArgs e)
+        {
+            var filenames = new List<string>();
+            foreach (GridViewRow row in gvAvailableFiles.Rows)
+            {
+                var lbl = row.FindControl("lblFilename") as Label;
+                if (lbl != null)
+                {
+                    filenames.Add(lbl.Text);
+                }
+            }
+            _downloadService.DownloadSelected(filenames);
 
         }
     }

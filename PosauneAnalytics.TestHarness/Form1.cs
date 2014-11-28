@@ -1,14 +1,6 @@
 ﻿using PosauneAnalytics.FileManager;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PosauneAnalytics.TestHarness
@@ -24,7 +16,7 @@ namespace PosauneAnalytics.TestHarness
         {
             DateTime date = dateTimePicker1.Value;
             CmeDownloader downloader = new CmeDownloader(date);
-            var download = downloader.Download();
+            var download = downloader.Download(DateTime.Now);
 
             IBlobManager blob = new BlobManager();
             blob.Upload(download.FileStream, download.FileName);

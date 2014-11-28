@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CalendarAnalysis.aspx.cs" Inherits="PosauneAnalytics.Web.Application.CalendarAnalysis" %>
+﻿<%@ Page Language="C#" Title="Calendar" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CalendarAnalysis.aspx.cs" Inherits="PosauneAnalytics.Web.Application.CalendarAnalysis" %>
 
 
 <asp:Content ContentPlaceHolderID="headerPalceHolder" runat="server">
