@@ -79,6 +79,12 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PosauneAnalytics.FileManager\PosauneAnalytics.FileManager.csproj">
+      <Project>{496b9709-771c-418b-8267-affdf48317b3}</Project>
+      <Name>PosauneAnalytics.FileManager</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

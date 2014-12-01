@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="VolatilityAnalysisModel" targetNamespace="http://tempuri.org/VolatilityAnalysisModel.xsd" xmlns:mstns="http://tempuri.org/VolatilityAnalysisModel.xsd" xmlns="http://tempuri.org/VolatilityAnalysisModel.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="VolatilityAnalysisModel" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="VolatilityAnalysisModel" msprop:Generator_UserDSName="VolatilityAnalysisModel">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SeriesBase" msprop:Generator_TableClassName="SeriesBaseDataTable" msprop:Generator_TableVarName="tableSeriesBase" msprop:Generator_TablePropName="SeriesBase" msprop:Generator_RowDeletingName="SeriesBaseRowDeleting" msprop:Generator_RowChangingName="SeriesBaseRowChanging" msprop:Generator_RowEvHandlerName="SeriesBaseRowChangeEventHandler" msprop:Generator_RowDeletedName="SeriesBaseRowDeleted" msprop:Generator_UserTableName="SeriesBase" msprop:Generator_RowChangedName="SeriesBaseRowChanged" msprop:Generator_RowEvArgName="SeriesBaseRowChangeEvent" msprop:Generator_RowClassName="SeriesBaseRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StrikePrice" msprop:Generator_ColumnVarNameInTable="columnStrikePrice" msprop:Generator_ColumnPropNameInRow="StrikePrice" msprop:Generator_ColumnPropNameInTable="StrikePriceColumn" msprop:Generator_UserColumnName="StrikePrice" type="xs:double" />
+              <xs:element name="SettlePriceCall" msprop:Generator_ColumnVarNameInTable="columnSettlePriceCall" msprop:Generator_ColumnPropNameInRow="SettlePriceCall" msprop:Generator_ColumnPropNameInTable="SettlePriceCallColumn" msprop:Generator_UserColumnName="SettlePriceCall" type="xs:string" minOccurs="0" />
+              <xs:element name="SettlePricePut" msprop:Generator_ColumnVarNameInTable="columnSettlePricePut" msprop:Generator_ColumnPropNameInRow="SettlePricePut" msprop:Generator_ColumnPropNameInTable="SettlePricePutColumn" msprop:Generator_UserColumnName="SettlePricePut" type="xs:string" minOccurs="0" />
+              <xs:element name="ImpliedVolCall" msprop:Generator_ColumnVarNameInTable="columnImpliedVolCall" msprop:Generator_ColumnPropNameInRow="ImpliedVolCall" msprop:Generator_ColumnPropNameInTable="ImpliedVolCallColumn" msprop:Generator_UserColumnName="ImpliedVolCall" type="xs:string" minOccurs="0" />
+              <xs:element name="ImpliedVolPut" msprop:Generator_ColumnVarNameInTable="columnImpliedVolPut" msprop:Generator_ColumnPropNameInRow="ImpliedVolPut" msprop:Generator_ColumnPropNameInTable="ImpliedVolPutColumn" msprop:Generator_UserColumnName="ImpliedVolPut" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SeriesBase" />
+      <xs:field xpath="mstns:StrikePrice" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
