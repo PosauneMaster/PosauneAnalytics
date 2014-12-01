@@ -7,6 +7,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div style="margin-top:24px; width:200px;">
         <asp:Label runat="server"></asp:Label>
+        <ajaxToolkit:ComboBox runat="server" ID="cboAvailableFiles"></ajaxToolkit:ComboBox>
     </div>
 
 </asp:Content>

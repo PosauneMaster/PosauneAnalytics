@@ -14,12 +14,12 @@ namespace PosauneAnalytics.Web.Application
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //_downloadService = new DownloadService();
+            _downloadService = new DownloadService();
 
-            //var downloadedFiles = _downloadService.GetDownloadedFiles();
+            var downloadedFiles = _downloadService.GetDownloadedFiles();
 
-            //cboAvailableFiles.DataSource = downloadedFiles;
-            //cboAvailableFiles.DataBind();
+            cboAvailableFiles.DataSource = downloadedFiles;
+            cboAvailableFiles.DataBind();
         }
     }
 }
