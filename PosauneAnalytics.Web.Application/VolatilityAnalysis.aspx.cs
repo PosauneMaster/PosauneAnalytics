@@ -1,4 +1,5 @@
-﻿using PosauneAnalytics.FileManager;
+﻿using AjaxControlToolkit;
+using PosauneAnalytics.FileManager;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -21,8 +22,6 @@ namespace PosauneAnalytics.Web.Application
 
             calAnalysisDate.StartDate = _controller.MinDate;
             calAnalysisDate.EndDate = _controller.MaxDate;
-
-            //tabPanel1.HeaderText = "tab panel 1";
         }
 
         protected void btnRunAnalysis_Click(object sender, EventArgs e)
@@ -35,17 +34,63 @@ namespace PosauneAnalytics.Web.Application
 
             var seriesDataList = _controller.Run(selectedDate);
 
-            SeriesData data = seriesDataList[0];
+            tcVolGrids.Visible = true;
 
-            tabPanel1.HeaderText = data.SeriesName;
-            txtSeries1.Text = data.SeriesName;
-            txtUnderlying1.Text = data.Underlying;
-            txtSymbol1.Text = data.Symbol;
-            txtUnderlyingPrice1.Text = data.Price;
-            gvSeriesInfo1.DataSource = data.Model;
+            foreach(var data in seriesDataList)
+            {
+                TabPanel panel = new TabPanel();
+                panel.HeaderText = data.SeriesName;
 
-            gvSeriesInfo1.DataBind();
+                var control = Page.LoadControl("~/ucVolatiltyTabContent.ascx");
+                panel.Controls.Add(control);
+                tcVolGrids.Tabs.Add(panel);
 
+                ((TextBox)control.FindControl("txtSeries1")).Text = data.SeriesName;
+                ((TextBox)control.FindControl("txtUnderlying1")).Text = data.Underlying;
+                ((TextBox)control.FindControl("txtSymbol1")).Text = data.Symbol;
+                ((TextBox)control.FindControl("txtUnderlyingPrice1")).Text = data.Price;
+
+                var gv = ((GridView)control.FindControl("gvSeriesInfo1"));
+                gv.DataSource = data.Model;
+                gv.DataBind();
+
+            }
+        }
+
+        protected void gvSeriesInfo1_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+
+            GridView gv = sender as GridView;
+
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+
+                var headerGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
+
+                headerGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "Calls",
+                    ColumnSpan = 2,
+                    CssClass = "header_grid"
+                });
+
+                headerGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "",
+                    CssClass = "header_grid"
+
+                });
+
+                headerGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "Puts",
+                    ColumnSpan = 2,
+                    CssClass = "header_grid"
+                });
+
+                gv.Controls[0].Controls.AddAt(0, headerGridRow);
+
+            }
         }
 
     }

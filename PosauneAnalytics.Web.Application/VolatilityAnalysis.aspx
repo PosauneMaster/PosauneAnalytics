@@ -30,8 +30,10 @@
             height: 240px;
             padding: 10px;
             border: 1px solid #ccc;
-            background: #eee;
+            /*background: #eee;*/
+            background-color:lightblue;
             text-align: left;
+            vertical-align:top;
         }
 
             .series_info div {
@@ -49,6 +51,18 @@
         }
 
 
+        .data_grid_center {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            /*color: #0F465B;*/
+            color:black;
+            background-color:lightblue;
+            padding: 0px 0px 0px 20px;
+            font-weight: bold;
+            line-height: 16px;
+            height: 18px;
+        }
+
         .header_grid {
             font-family: Verdana, Arial, Helvetica, sans-serif;
             font-size: 11px;
@@ -61,6 +75,7 @@
             padding-top: 1px;
             padding-right: 1px;
             line-height: 18px;
+            text-align:center;
         }
 
         .button {
@@ -97,6 +112,13 @@
                 background: #1b435e;
             }
 
+             .series_info_textbox {
+                 text-align:right;
+                 font-family: Verdana, Arial, Helvetica, sans-serif;
+                 font-size: 11px;
+                 color: #0F465B;
+             }
+
     </style>
 
 
@@ -125,97 +147,8 @@
         </div>
     </div>
     <div style="margin-top: 24px;">
-        <ajaxToolkit:TabContainer runat="server" ID="tcVolGrids" Height="600px" Width="800px" BorderStyle="None">
-            <ajaxToolkit:TabPanel runat="server" ID="tabPanel1" BorderStyle="None">
-                <ContentTemplate>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="series_info">
-                                    <div>
-                                        <asp:Label runat="server" Text="Series:"></asp:Label>
-                                        <asp:TextBox runat="server" ID="txtSeries1"></asp:TextBox>
-                                    </div>
-                                    <div>
-                                        <asp:Label runat="server" Text="Underlying:"></asp:Label>
-                                        <asp:TextBox runat="server" ID="txtUnderlying1"></asp:TextBox>
-                                    </div>
-                                    <div>
-                                        <asp:Label runat="server" Text="Underlying Price:"></asp:Label>
-                                        <asp:TextBox runat="server" ID="txtUnderlyingPrice1"></asp:TextBox>
-                                    </div>
-                                    <div>
-                                        <asp:Label runat="server" Text="Symbol:"></asp:Label>
-                                        <asp:TextBox runat="server" ID="txtSymbol1"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div style="width: 500px; padding-left:50px; overflow: auto;">
-                                    <asp:GridView runat="server" ID="gvSeriesInfo1" AutoGenerateColumns="false">
-                                        <Columns>
-
-<%--http://forums.asp.net/t/1923151.aspx?multiple+headers+gridview--%>
-
-<%--http://csharpdotnetfreak.blogspot.com/2008/11/merging-gridview-headers-to-have.html--%>
-                                            <asp:TemplateField>
-                                                <HeaderTemplate>
-                                                    <th colspan="2">Calls</th>
-                                                    <th></th>
-                                                    <th colspan="2">Puts</th>
-                                                </HeaderTemplate>
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField HeaderText="Implied Vol Call" SortExpression="ImpliedVolCall">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblImpliedCVolCall" runat="server" Text='<%# Bind("ImpliedVolCall")%>'></asp:Label>
-                                                </ItemTemplate>
-                                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="60px" />
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField HeaderText="Settle Price Call" SortExpression="SettlePriceCall">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblSettlePriceCall" runat="server" Text='<%# Bind("SettlePriceCall")%>'></asp:Label>
-                                                </ItemTemplate>
-                                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="60px" />
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField HeaderText="Strike" SortExpression="StrikePrice">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblStrikePrice" runat="server" Text='<%# Bind("StrikePrice")%>'></asp:Label>
-                                                </ItemTemplate>
-                                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="60px" />
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField HeaderText="Settle Price Put " SortExpression="SettlePricePut">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblSettlePricePut" runat="server" Text='<%# Bind("SettlePricePut")%>'></asp:Label>
-                                                </ItemTemplate>
-                                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="60px" />
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField HeaderText="Implie Vol Put" SortExpression="ImpliedVolPut">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblImpliedVolPut" runat="server" Text='<%# Bind("ImpliedVolPut")%>'></asp:Label>
-                                                </ItemTemplate>
-                                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="60px" />
-                                            </asp:TemplateField>
-                                        </Columns>
-
-                                    </asp:GridView>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </ContentTemplate>
-            </ajaxToolkit:TabPanel>
+        <ajaxToolkit:TabContainer runat="server" ID="tcVolGrids" Height="600px" Width="800px" BorderStyle="None" Visible="false">
         </ajaxToolkit:TabContainer>
     </div>
-
 </asp:Content>
 

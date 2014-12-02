@@ -67,11 +67,11 @@ namespace PosauneAnalytics.Web.Application
                     {
                         if (opt.SecurityType == SecurityType.Call)
                         {
-                            table.AddSeriesBaseRow(opt.StrikePrice, opt.TickPrice, String.Empty, String.Empty, String.Empty);
+                            table.AddSeriesBaseRow(opt.StrikePrice, opt.TickPrice, String.Empty, String.Empty, String.Empty, false);
                         }
                         else
                         {
-                            table.AddSeriesBaseRow(opt.StrikePrice, String.Empty, opt.TickPrice, String.Empty, String.Empty);
+                            table.AddSeriesBaseRow(opt.StrikePrice, String.Empty, opt.TickPrice, String.Empty, String.Empty, false);
                         }
                     }
                     else
@@ -87,7 +87,41 @@ namespace PosauneAnalytics.Web.Application
                     }
                 }
 
-                table.DefaultView.RowFilter = String.Format("StrikePrice > {0} - 6 and StrikePrice < {0} + 6", si.Underlying.Price);
+                var putRows = from row in table.AsEnumerable<VolatilityAnalysisModel.SeriesBaseRow>()
+                              orderby row.SettlePricePut descending
+                              select row;
+
+                bool isVisible = true;
+                foreach (VolatilityAnalysisModel.SeriesBaseRow r in putRows)
+                {
+                    r.Visible = isVisible;
+                    double d;
+                    if (Double.TryParse(r.SettlePricePut, out d))
+                    {
+                        isVisible = d * 1000 > 15.625;
+                    }
+                }
+
+                var callRows = from row in table.AsEnumerable<VolatilityAnalysisModel.SeriesBaseRow>()
+                              orderby row.SettlePriceCall descending
+                              select row;
+
+                isVisible = true;
+                foreach (VolatilityAnalysisModel.SeriesBaseRow r in putRows)
+                {
+                    r.Visible = isVisible;
+                    double d;
+                    if (Double.TryParse(r.SettlePriceCall, out d))
+                    {
+                        isVisible = d * 1000 > 15.625;
+                    }
+                }
+
+
+
+
+                //table.DefaultView.RowFilter = String.Format("StrikePrice > {0} - 6 and StrikePrice < {0} + 6", si.Underlying.Price);
+                table.DefaultView.RowFilter = "Visible = true";
 
                 seriesData.Add(new SeriesData()
                 {

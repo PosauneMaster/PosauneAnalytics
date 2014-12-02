@@ -10,51 +10,51 @@
 namespace PosauneAnalytics.Web.Application {
     
     
-    public partial class VolatilityAnalysis {
+    public partial class ucVolatiltyTabContent {
         
         /// <summary>
-        /// txtAnalysisDate control.
+        /// txtSeries1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAnalysisDate;
+        protected global::System.Web.UI.WebControls.TextBox txtSeries1;
         
         /// <summary>
-        /// imgAnalysisDate control.
+        /// txtUnderlying1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgAnalysisDate;
+        protected global::System.Web.UI.WebControls.TextBox txtUnderlying1;
         
         /// <summary>
-        /// calAnalysisDate control.
+        /// txtUnderlyingPrice1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender calAnalysisDate;
+        protected global::System.Web.UI.WebControls.TextBox txtUnderlyingPrice1;
         
         /// <summary>
-        /// btnRunAnalysis control.
+        /// txtSymbol1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRunAnalysis;
+        protected global::System.Web.UI.WebControls.TextBox txtSymbol1;
         
         /// <summary>
-        /// tcVolGrids control.
+        /// gvSeriesInfo1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TabContainer tcVolGrids;
+        protected global::System.Web.UI.WebControls.GridView gvSeriesInfo1;
     }
 }

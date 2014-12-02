@@ -17,6 +17,20 @@ namespace PosauneAnalytics.FileManager
         public string Price { get; set; }
         public string Description { get; set; }
         public string TickPrice { get; set; }
+
+        public double DollarPrice
+        {
+            get
+            {
+                double p;
+                if (!Double.TryParse(Price, out p))
+                {
+                    return 0.00d;
+                }
+                return p;
+            }
+        }
+
         protected ISettlementUtils SettlementUtils { get; set; }
 
         public Settlement()

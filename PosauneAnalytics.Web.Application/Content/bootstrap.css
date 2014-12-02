@@ -6814,3 +6814,10 @@ td.visible-print {
     display: none !important;
   }
 }
+
+.ajax__tab_tab
+{
+     -webkit-box-sizing: content-box!important;
+     -moz-box-sizing: content-box!important;
+     box-sizing: content-box!important;
+}

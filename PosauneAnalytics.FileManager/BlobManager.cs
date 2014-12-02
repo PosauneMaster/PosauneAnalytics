@@ -65,7 +65,7 @@ namespace PosauneAnalytics.FileManager
         {
             var blobList = new List<string>();
 
-            foreach (IListBlobItem item in _container.ListBlobs(null, false))
+            foreach (IListBlobItem item in _container.ListBlobs())
             {
                 if (item.GetType() == typeof(CloudBlockBlob))
                 {
