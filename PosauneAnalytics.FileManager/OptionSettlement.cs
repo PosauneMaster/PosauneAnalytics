@@ -10,6 +10,11 @@ namespace PosauneAnalytics.FileManager
     public class OptionSettlement : Settlement
     {
         public double StrikePrice { get; set; }
+        public double ImpliedVolatility { get; set; }
+        public string ImpliedVolatilityDisplay 
+        {
+            get { return ImpliedVolatility.ToString("P2"); }
+        }
         public string UnderlyingKey { get; set; }
         public Settlement Underlying { get; set; }
 

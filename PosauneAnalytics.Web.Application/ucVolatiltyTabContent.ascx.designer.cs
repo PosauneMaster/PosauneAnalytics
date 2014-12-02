@@ -40,6 +40,33 @@ namespace PosauneAnalytics.Web.Application {
         protected global::System.Web.UI.WebControls.TextBox txtUnderlyingPrice1;
         
         /// <summary>
+        /// txtExpirationDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtExpirationDate;
+        
+        /// <summary>
+        /// txtDaysToExpiration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDaysToExpiration;
+        
+        /// <summary>
+        /// txtRiskFreeRate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRiskFreeRate;
+        
+        /// <summary>
         /// txtSymbol1 control.
         /// </summary>
         /// <remarks>

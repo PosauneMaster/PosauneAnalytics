@@ -522,6 +522,10 @@
       <Project>{496b9709-771c-418b-8267-affdf48317b3}</Project>
       <Name>PosauneAnalytics.FileManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PosauneAnalytics.Libraries\PosauneAnalytics.Libraries.csproj">
+      <Project>{90f05c30-7128-432d-bc20-f6d59ace3160}</Project>
+      <Name>PosauneAnalytics.Libraries</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

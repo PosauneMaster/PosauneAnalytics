@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PosauneAnalytics.Libraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,14 @@ namespace PosauneAnalytics.FileManager
     public class OptionParser
     {
         private ISettlementUtils _utils;
+        private IComputationEngine _computationEngine;
 
         public OptionParser() { }
 
         public OptionParser(ISettlementUtils utils)
         {
             _utils = utils;
+            _computationEngine = new ComputationEngine();
         }
 
         public List<OptionSettlement> GetOptions(string symbol, XmlNodeList nodeList)

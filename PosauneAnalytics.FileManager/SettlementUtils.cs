@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PosauneAnalytics.Libraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,15 +8,6 @@ using System.Xml;
 
 namespace PosauneAnalytics.FileManager
 {
-    public enum SecurityType
-    {
-        Put,
-        Call,
-        Future,
-        Other
-    };
-
-
     public class SettlementUtils : ISettlementUtils
     {
         public DateTime GetDateTimeFromNode(XmlNode node, string attrName)

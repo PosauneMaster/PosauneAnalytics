@@ -49,6 +49,9 @@ namespace PosauneAnalytics.Web.Application
                 ((TextBox)control.FindControl("txtUnderlying1")).Text = data.Underlying;
                 ((TextBox)control.FindControl("txtSymbol1")).Text = data.Symbol;
                 ((TextBox)control.FindControl("txtUnderlyingPrice1")).Text = data.Price;
+                ((TextBox)control.FindControl("txtExpirationDate")).Text = data.ExpirationDate;
+                ((TextBox)control.FindControl("txtDaysToExpiration")).Text = data.DaysToExpiration;
+                ((TextBox)control.FindControl("txtRiskFreeRate")).Text = data.RiskFreeRate;
 
                 var gv = ((GridView)control.FindControl("gvSeriesInfo1"));
                 gv.DataSource = data.Model;
@@ -57,41 +60,41 @@ namespace PosauneAnalytics.Web.Application
             }
         }
 
-        protected void gvSeriesInfo1_RowCreated(object sender, GridViewRowEventArgs e)
-        {
+        //protected void gvSeriesInfo1_RowCreated(object sender, GridViewRowEventArgs e)
+        //{
 
-            GridView gv = sender as GridView;
+        //    GridView gv = sender as GridView;
 
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
+        //    if (e.Row.RowType == DataControlRowType.Header)
+        //    {
 
-                var headerGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
+        //        var headerGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
 
-                headerGridRow.Cells.Add(new TableCell()
-                {
-                    Text = "Calls",
-                    ColumnSpan = 2,
-                    CssClass = "header_grid"
-                });
+        //        headerGridRow.Cells.Add(new TableCell()
+        //        {
+        //            Text = "Calls",
+        //            ColumnSpan = 2,
+        //            CssClass = "header_grid"
+        //        });
 
-                headerGridRow.Cells.Add(new TableCell()
-                {
-                    Text = "",
-                    CssClass = "header_grid"
+        //        headerGridRow.Cells.Add(new TableCell()
+        //        {
+        //            Text = "",
+        //            CssClass = "header_grid"
 
-                });
+        //        });
 
-                headerGridRow.Cells.Add(new TableCell()
-                {
-                    Text = "Puts",
-                    ColumnSpan = 2,
-                    CssClass = "header_grid"
-                });
+        //        headerGridRow.Cells.Add(new TableCell()
+        //        {
+        //            Text = "Puts",
+        //            ColumnSpan = 2,
+        //            CssClass = "header_grid"
+        //        });
 
-                gv.Controls[0].Controls.AddAt(0, headerGridRow);
+        //        gv.Controls[0].Controls.AddAt(0, headerGridRow);
 
-            }
-        }
+        //    }
+        //}
 
     }
 }

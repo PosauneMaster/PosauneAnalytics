@@ -52,7 +52,6 @@ namespace PosauneAnalytics.FileManager
                 var myOptions = options10yr.Where(o => o.UnderlyingKey == ty.MonthYear);
 
                 CreateSettlementMap(myOptions, ty);
-
             }
 
             return _map;
@@ -63,7 +62,7 @@ namespace PosauneAnalytics.FileManager
         {
             foreach (var o in optionSettlementList)
             {
-
+                o.Underlying = ty;
                 if (!_map.ContainsKey(o.MaturityDate))
                 {
                     _map.Add(o.MaturityDate, new SeriesInfo() { Underlying = ty, ExpirationDate = o.MaturityDate });

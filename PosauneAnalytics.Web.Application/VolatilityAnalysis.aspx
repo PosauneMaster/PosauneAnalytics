@@ -11,6 +11,7 @@
             background: #eee;
             text-align: left;
             margin-top: 24px;
+            vertical-align:top;
         }
 
         .expireDateInfo {
@@ -27,7 +28,7 @@
 
         .series_info {
             width: 200px;
-            height: 240px;
+            height:auto;
             padding: 10px;
             border: 1px solid #ccc;
             /*background: #eee;*/
@@ -127,28 +128,36 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div>
-        <div id="analysis-date">
-            <table>
-                <tr>
-                    <td><span>Analysis Date:</span></td>
-                    <td>
-                        <asp:TextBox runat="server" ID="txtAnalysisDate" CssClass="expireDateInfo"></asp:TextBox></td>
-                    <td style="padding-top: 12px;">
-                        <asp:ImageButton runat="server" ID="imgAnalysisDate" ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
-                        <ajaxToolkit:CalendarExtender runat="server" ID="calAnalysisDate" Enabled="true" Format="MM/dd/yyyy"
-                            PopupButtonID="imgAnalysisDate" TargetControlID="txtAnalysisDate">
-                        </ajaxToolkit:CalendarExtender>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div style="margin-top:8px; width:260px; text-align:right;">
-            <asp:Button runat="server" ID="btnRunAnalysis" CssClass="button" Text="Run Analysis" OnClick="btnRunAnalysis_Click" />
-        </div>
-    </div>
-    <div style="margin-top: 24px;">
-        <ajaxToolkit:TabContainer runat="server" ID="tcVolGrids" Height="600px" Width="800px" BorderStyle="None" Visible="false">
-        </ajaxToolkit:TabContainer>
+        <table>
+            <tr>
+                <td style="vertical-align:top;">
+                    <div id="analysis-date">
+                        <table>
+                            <tr>
+                                <td><span>Analysis Date:</span></td>
+                                <td>
+                                    <asp:TextBox runat="server" ID="txtAnalysisDate" CssClass="expireDateInfo"></asp:TextBox></td>
+                                <td style="padding-top: 12px;">
+                                    <asp:ImageButton runat="server" ID="imgAnalysisDate" ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
+                                    <ajaxToolkit:CalendarExtender runat="server" ID="calAnalysisDate" Enabled="true" Format="MM/dd/yyyy"
+                                        PopupButtonID="imgAnalysisDate" TargetControlID="txtAnalysisDate">
+                                    </ajaxToolkit:CalendarExtender>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="margin-top: 8px; width: 260px; text-align: right;">
+                        <asp:Button runat="server" ID="btnRunAnalysis" CssClass="button" Text="Run Analysis" OnClick="btnRunAnalysis_Click" />
+                    </div>
+                </td>
+                <td>
+                    <div style="margin-top: 24px; margin-left:24px;">
+                        <ajaxToolkit:TabContainer runat="server" ID="tcVolGrids" Height="800px" Width="800px" BorderStyle="None" Visible="false">
+                        </ajaxToolkit:TabContainer>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </asp:Content>
 

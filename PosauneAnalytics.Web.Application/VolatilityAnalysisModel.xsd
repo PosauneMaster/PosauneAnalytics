@@ -12,7 +12,7 @@
   <xs:element name="VolatilityAnalysisModel" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="VolatilityAnalysisModel" msprop:Generator_UserDSName="VolatilityAnalysisModel">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SeriesBase" msprop:Generator_TableClassName="SeriesBaseDataTable" msprop:Generator_TableVarName="tableSeriesBase" msprop:Generator_RowChangedName="SeriesBaseRowChanged" msprop:Generator_TablePropName="SeriesBase" msprop:Generator_RowDeletingName="SeriesBaseRowDeleting" msprop:Generator_RowChangingName="SeriesBaseRowChanging" msprop:Generator_RowEvHandlerName="SeriesBaseRowChangeEventHandler" msprop:Generator_RowDeletedName="SeriesBaseRowDeleted" msprop:Generator_RowClassName="SeriesBaseRow" msprop:Generator_UserTableName="SeriesBase" msprop:Generator_RowEvArgName="SeriesBaseRowChangeEvent">
+        <xs:element name="SeriesBase" msprop:Generator_TableClassName="SeriesBaseDataTable" msprop:Generator_TableVarName="tableSeriesBase" msprop:Generator_TablePropName="SeriesBase" msprop:Generator_RowDeletingName="SeriesBaseRowDeleting" msprop:Generator_RowChangingName="SeriesBaseRowChanging" msprop:Generator_RowEvHandlerName="SeriesBaseRowChangeEventHandler" msprop:Generator_RowDeletedName="SeriesBaseRowDeleted" msprop:Generator_UserTableName="SeriesBase" msprop:Generator_RowChangedName="SeriesBaseRowChanged" msprop:Generator_RowEvArgName="SeriesBaseRowChangeEvent" msprop:Generator_RowClassName="SeriesBaseRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="StrikePrice" msprop:Generator_ColumnVarNameInTable="columnStrikePrice" msprop:Generator_ColumnPropNameInRow="StrikePrice" msprop:Generator_ColumnPropNameInTable="StrikePriceColumn" msprop:Generator_UserColumnName="StrikePrice" type="xs:double" />
@@ -21,6 +21,8 @@
               <xs:element name="ImpliedVolCall" msprop:Generator_ColumnVarNameInTable="columnImpliedVolCall" msprop:Generator_ColumnPropNameInRow="ImpliedVolCall" msprop:Generator_ColumnPropNameInTable="ImpliedVolCallColumn" msprop:Generator_UserColumnName="ImpliedVolCall" type="xs:string" minOccurs="0" />
               <xs:element name="ImpliedVolPut" msprop:Generator_ColumnVarNameInTable="columnImpliedVolPut" msprop:Generator_ColumnPropNameInRow="ImpliedVolPut" msprop:Generator_ColumnPropNameInTable="ImpliedVolPutColumn" msprop:Generator_UserColumnName="ImpliedVolPut" type="xs:string" minOccurs="0" />
               <xs:element name="Visible" msprop:Generator_ColumnVarNameInTable="columnVisible" msprop:Generator_ColumnPropNameInRow="Visible" msprop:Generator_ColumnPropNameInTable="VisibleColumn" msprop:Generator_UserColumnName="Visible" type="xs:boolean" minOccurs="0" />
+              <xs:element name="DollarSettleCall" msprop:Generator_ColumnVarNameInTable="columnDollarSettleCall" msprop:Generator_ColumnPropNameInRow="DollarSettleCall" msprop:Generator_ColumnPropNameInTable="DollarSettleCallColumn" msprop:Generator_UserColumnName="DollarSettleCall" type="xs:double" minOccurs="0" />
+              <xs:element name="DollarSettlePut" msprop:Generator_ColumnVarNameInTable="columnDollarSettlePut" msprop:Generator_ColumnPropNameInRow="DollarSettlePut" msprop:Generator_ColumnPropNameInTable="DollarSettlePutColumn" msprop:Generator_UserColumnName="DollarSettlePut" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

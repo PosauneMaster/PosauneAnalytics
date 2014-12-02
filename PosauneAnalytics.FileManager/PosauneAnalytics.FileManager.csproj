@@ -68,14 +68,18 @@
     <Compile Include="CmeDownloader.cs" />
     <Compile Include="CmeFileDetails.cs" />
     <Compile Include="CmeFileParser.cs" />
+    <Compile Include="ComputationEngine.cs" />
     <Compile Include="DownloadService.cs" />
+    <Compile Include="FileMapper.cs" />
     <Compile Include="FuturesParser.cs" />
-    <Compile Include="IBlobManager.cs" />
-    <Compile Include="ICmeDownloader.cs" />
-    <Compile Include="ICmeFileParser.cs" />
-    <Compile Include="IDownloadService.cs" />
-    <Compile Include="ISettlementUtils.cs" />
-    <Compile Include="IZipUtils.cs" />
+    <Compile Include="Interfaces\IBlobManager.cs" />
+    <Compile Include="Interfaces\ICmeDownloader.cs" />
+    <Compile Include="Interfaces\ICmeFileParser.cs" />
+    <Compile Include="Interfaces\IComputationEngine.cs" />
+    <Compile Include="Interfaces\IDownloadService.cs" />
+    <Compile Include="Interfaces\IFileMapper.cs" />
+    <Compile Include="Interfaces\ISettlementUtils.cs" />
+    <Compile Include="Interfaces\IZipUtils.cs" />
     <Compile Include="OptionParser.cs" />
     <Compile Include="OptionSettlement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +92,10 @@
     <Compile Include="ZipUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PosauneAnalytics.Libraries\PosauneAnalytics.Libraries.csproj">
+      <Project>{90f05c30-7128-432d-bc20-f6d59ace3160}</Project>
+      <Name>PosauneAnalytics.Libraries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PosauneAnalytics.Logging\PosauneAnalytics.Logging.csproj">
       <Project>{b5c86399-44cf-4d02-9603-26c02255b164}</Project>
       <Name>PosauneAnalytics.Logging</Name>

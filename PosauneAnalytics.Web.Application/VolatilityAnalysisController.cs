@@ -1,4 +1,5 @@
 ﻿using PosauneAnalytics.FileManager;
+using PosauneAnalytics.Libraries;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,6 +12,9 @@ namespace PosauneAnalytics.Web.Application
     public class VolatilityAnalysisController : IVolatilityAnalysisController
     {
         private IDownloadService _downloadService;
+        private IFileMapper _fileMapper;
+        private IComputationEngine _engine;
+
         private Dictionary<DateTime, string> _fileCollection;
 
         public DateTime MinDate { get { return _fileCollection.Keys.Min(); } }
@@ -18,6 +22,9 @@ namespace PosauneAnalytics.Web.Application
 
         public VolatilityAnalysisController()
         {
+            _downloadService = new DownloadService();
+            _fileMapper = new FileMapper();
+            _engine = new ComputationEngine();
             Initialize();
         }
 
@@ -46,82 +53,15 @@ namespace PosauneAnalytics.Web.Application
 
             var fileName = FindFilename(date);
 
-            IBlobManager blobmanager = new BlobManager();
-            MemoryStream ms = blobmanager.Download(fileName);
-
-            IZipUtils zipUtils = new ZipUtils();
-            string xml = zipUtils.UnZip(ms, fileName);
-
-            ICmeFileParser parser = new CmeFileParser();
-
-            var seriesInfoList = parser.Parse(xml);
-
+            var seriesInfoList = _fileMapper.MapToSeries(fileName);
+            
             foreach (SeriesInfo si in seriesInfoList.Values)
             {
                 var table = new VolatilityAnalysisModel.SeriesBaseDataTable();
 
-                foreach(var opt in si.Options)
-                {
-                    VolatilityAnalysisModel.SeriesBaseRow row = table.AsEnumerable().FirstOrDefault(r => r.StrikePrice == opt.StrikePrice);
-                    if (row == null)
-                    {
-                        if (opt.SecurityType == SecurityType.Call)
-                        {
-                            table.AddSeriesBaseRow(opt.StrikePrice, opt.TickPrice, String.Empty, String.Empty, String.Empty, false);
-                        }
-                        else
-                        {
-                            table.AddSeriesBaseRow(opt.StrikePrice, String.Empty, opt.TickPrice, String.Empty, String.Empty, false);
-                        }
-                    }
-                    else
-                    {
-                        if (opt.SecurityType == SecurityType.Call)
-                        {
-                            row.SettlePriceCall = opt.TickPrice;
-                        }
-                        else
-                        {
-                            row.SettlePricePut = opt.TickPrice;
-                        }
-                    }
-                }
+                CreateRows(si, table);
 
-                var putRows = from row in table.AsEnumerable<VolatilityAnalysisModel.SeriesBaseRow>()
-                              orderby row.SettlePricePut descending
-                              select row;
-
-                bool isVisible = true;
-                foreach (VolatilityAnalysisModel.SeriesBaseRow r in putRows)
-                {
-                    r.Visible = isVisible;
-                    double d;
-                    if (Double.TryParse(r.SettlePricePut, out d))
-                    {
-                        isVisible = d * 1000 > 15.625;
-                    }
-                }
-
-                var callRows = from row in table.AsEnumerable<VolatilityAnalysisModel.SeriesBaseRow>()
-                              orderby row.SettlePriceCall descending
-                              select row;
-
-                isVisible = true;
-                foreach (VolatilityAnalysisModel.SeriesBaseRow r in putRows)
-                {
-                    r.Visible = isVisible;
-                    double d;
-                    if (Double.TryParse(r.SettlePriceCall, out d))
-                    {
-                        isVisible = d * 1000 > 15.625;
-                    }
-                }
-
-
-
-
-                //table.DefaultView.RowFilter = String.Format("StrikePrice > {0} - 6 and StrikePrice < {0} + 6", si.Underlying.Price);
-                table.DefaultView.RowFilter = "Visible = true";
+                SetRowVisibility(table);
 
                 seriesData.Add(new SeriesData()
                 {
@@ -129,11 +69,80 @@ namespace PosauneAnalytics.Web.Application
                     Underlying = si.Underlying.Description,
                     Price = si.Underlying.TickPrice,
                     Symbol = si.Underlying.Symbol,
+                    ExpirationDate = si.ExpirationDate.ToString("MM/dd/yyyy"),
+                    RiskFreeRate = si.RiskFreeRate.ToString("P2"),
+                    DaysToExpiration = si.DaysToExpiration.ToString("G"),
                     Model = table
                 });
             }
 
             return seriesData;
+        }
+
+
+        private void SetRowVisibility(VolatilityAnalysisModel.SeriesBaseDataTable table)
+        {
+            var visibleRows = from row in table.AsEnumerable<VolatilityAnalysisModel.SeriesBaseRow>()
+                              where row.DollarSettleCall * 1000 > 15.625 && row.DollarSettlePut * 1000 > 15.625
+                              select row;
+
+
+            foreach (VolatilityAnalysisModel.SeriesBaseRow row in visibleRows)
+            {
+                row.Visible = true;
+            }
+
+            var putRows = from row in table.AsEnumerable<VolatilityAnalysisModel.SeriesBaseRow>()
+                          orderby row.SettlePricePut descending
+                          select row;
+
+            var pr = putRows.Last(r => r.DollarSettlePut * 1000 == 15.625);
+            pr.Visible = true;
+
+            var cr = putRows.First(r => r.DollarSettleCall * 1000 == 15.625);
+            cr.Visible = true;
+
+            table.DefaultView.RowFilter = "Visible = true";
+        }
+
+        private void CreateRows(SeriesInfo si, VolatilityAnalysisModel.SeriesBaseDataTable table)
+        {
+            foreach (var opt in si.Options)
+            {
+                _engine.ComputeImplied(opt);
+                si.RiskFreeRate = _engine.RiskFreeRate;
+                si.DaysToExpiration = (int)_engine.DaysToExpiration;
+
+                VolatilityAnalysisModel.SeriesBaseRow row = table.AsEnumerable().FirstOrDefault(r => r.StrikePrice == opt.StrikePrice);
+                if (row == null)
+                {
+                    if (opt.SecurityType == SecurityType.Call)
+                    {
+                        table.AddSeriesBaseRow(opt.StrikePrice, opt.TickPrice, String.Empty, opt.ImpliedVolatilityDisplay, String.Empty, false, opt.DollarPrice, 0.00d);
+                    }
+                    else
+                    {
+                        table.AddSeriesBaseRow(opt.StrikePrice, String.Empty, opt.TickPrice, String.Empty, opt.ImpliedVolatilityDisplay, false, 0.00d, opt.DollarPrice);
+                    }
+                }
+                else
+                {
+                    if (opt.SecurityType == SecurityType.Call)
+                    {
+                        row.SettlePriceCall = opt.TickPrice;
+                        row.DollarSettleCall = opt.DollarPrice;
+                        row.ImpliedVolCall = opt.ImpliedVolatilityDisplay;
+                        row.Visible = false;
+                    }
+                    else
+                    {
+                        row.SettlePricePut = opt.TickPrice;
+                        row.DollarSettlePut = opt.DollarPrice;
+                        row.ImpliedVolPut = opt.ImpliedVolatilityDisplay;
+                        row.Visible = false;
+                    }
+                }
+            }
         }
 
         private string FindFilename(DateTime date)
@@ -165,6 +174,9 @@ namespace PosauneAnalytics.Web.Application
         public string Underlying { get; set; }
         public string Price { get; set; }
         public string Symbol { get; set; }
+        public string ExpirationDate { get; set; }
+        public string RiskFreeRate { get; set; }
+        public string DaysToExpiration { get; set; }
         public VolatilityAnalysisModel.SeriesBaseDataTable Model { get; set; }
     }
 }

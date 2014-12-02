@@ -75,6 +75,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BlackScholes_Tests.cs" />
+    <Compile Include="ImpliedVolatility_Tests.cs" />
     <Compile Include="PolynominalRegression_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

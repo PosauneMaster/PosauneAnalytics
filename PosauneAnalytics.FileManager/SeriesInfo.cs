@@ -10,6 +10,7 @@ namespace PosauneAnalytics.FileManager
     {
         public Settlement Underlying { get; set; }
         public List<OptionSettlement> Options { get; set; }
+        public int DaysToExpiration { get; set; }
 
         public string ExpirationMonth { get; set; }
 
@@ -21,7 +22,6 @@ namespace PosauneAnalytics.FileManager
             {
                 _expirationDate = value;
                 SetExpiration(value);
-
             }
         }
 
