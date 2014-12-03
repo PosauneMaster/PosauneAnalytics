@@ -8,7 +8,7 @@
                 <div class="series_info">
                     <div>
                         <asp:Label runat="server" Text="Series:"></asp:Label>
-                        <asp:TextBox runat="server" ID="txtSeries1" CssClass="series_info_textbox" BorderStyle="None"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtSeries1" CssClass="series_info_textbox"></asp:TextBox>
                     </div>
                     <div>
                         <asp:Label runat="server" Text="Underlying:"></asp:Label>
@@ -37,7 +37,7 @@
                 </div>
             </td>
             <td>
-                <div style="width: 500px; padding-left: 50px; overflow: auto; max-height:750px;">
+                <div style="width: 500px; padding-left: 40px; overflow: auto; max-height:750px;">
                     <asp:GridView runat="server" ID="gvSeriesInfo1" AutoGenerateColumns="false" OnRowCreated="gvSeriesInfo1_RowCreated">
                         <Columns>
 
@@ -46,8 +46,16 @@
                                     <asp:Label ID="lblImpliedCVolCall" runat="server" Text='<%# Bind("ImpliedVolCall")%>'></asp:Label>
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="100px" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="140px" />
                             </asp:TemplateField>
+
+<%--                            <asp:TemplateField HeaderText="Dollar Price" SortExpression="SettlePriceCall">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblDollarSettleCall" runat="server" Text='<%# Bind("DollarSettleCall", "{0:C4}")%>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="80px" />
+                            </asp:TemplateField>--%>
 
                             <asp:TemplateField HeaderText="Settle" SortExpression="SettlePriceCall">
                                 <ItemTemplate>
@@ -73,12 +81,20 @@
                                 <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="80px" />
                             </asp:TemplateField>
 
+<%--                            <asp:TemplateField HeaderText="Dollar Price" SortExpression="SettlePriceCall">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblDollarSettlePut" runat="server" Text='<%# Bind("DollarSettlePut", "{0:C4}")%>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="80px" />
+                            </asp:TemplateField>--%>
+
                             <asp:TemplateField HeaderText="Implied Vol" SortExpression="ImpliedVolPut">
                                 <ItemTemplate>
                                     <asp:Label ID="lblImpliedVolPut" runat="server" Text='<%# Bind("ImpliedVolPut")%>'></asp:Label>
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="100px" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="140px" />
                             </asp:TemplateField>
                         </Columns>
                         <AlternatingRowStyle BackColor="LightBlue" />

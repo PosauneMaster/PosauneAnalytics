@@ -79,7 +79,6 @@ namespace PosauneAnalytics.Libraries
             double dBlackScholes = 0.0;
 
             d1 = (Math.Log(S / X) + (r + Math.Pow(v,2) / 2.0) * T) / (v * Math.Sqrt(T));
-            d1 = -0.325284717823576;
 
             d2 = d1 - v * Math.Sqrt(T);
             if (CallPutFlag == SecurityType.Call)
@@ -105,7 +104,6 @@ namespace PosauneAnalytics.Libraries
             double dBlackScholes = 0.0;
 
             d1 = (Math.Log(S / X) + (b + Math.Pow(v, 2) / 2.0) * T) / (v * Math.Sqrt(T));
-            d1 = -0.325284717823576;
 
             d2 = d1 - v * Math.Sqrt(T);
             if (CallPutFlag == SecurityType.Call)

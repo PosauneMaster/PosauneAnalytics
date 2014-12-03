@@ -73,15 +73,19 @@ namespace PosauneAnalytics.FileManager
 
                 if (Symbol == "OZN")
                 {
-                    decimal fraction = (Int32)((d - Math.Truncate(d)) * 64);
-
-                    TickPrice = String.Format("{0} {1}", wholePart, fraction);
+                    int fraction = (Int32)((d - Math.Truncate(d)) * 64);
+                    TickPrice = String.Format("{0} {1}", wholePart, fraction.ToString("D2"));
                 }
                 else
                 {
-                    decimal fraction = (d - Math.Truncate(d)) * 32 * 10;
+                    //decimal fraction = (d - Math.Truncate(d)) * 32 * 10;
 
-                    TickPrice = String.Format("{0} {1}", wholePart, Math.Truncate(fraction));
+                    //TickPrice = String.Format("{0} {1}", wholePart, Math.Truncate(fraction));
+
+                    int fraction = (int)((d - Math.Truncate(d)) * 32 * 10);
+
+                    TickPrice = String.Format("{0} {1}", wholePart, fraction.ToString("D3"));
+
                 }
 
 

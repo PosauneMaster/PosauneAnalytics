@@ -15,6 +15,15 @@ namespace PosauneAnalytics.Web.Application
         {
             _downloadService = new DownloadService();
 
+            if (!IsPostBack)
+            {
+                LoadData();
+            }
+        }
+
+        private void LoadData()
+        {
+
             var availableFiles = _downloadService.ListFtpDirectoryDetails();
 
             gvAvailableFiles.DataSource = availableFiles;
@@ -22,7 +31,7 @@ namespace PosauneAnalytics.Web.Application
 
             var downloadedFiles = _downloadService.GetDownloadedFiles();
 
-            gvDownloadedFiles.DataSource = downloadedFiles.Select(f => new {filename=f});
+            gvDownloadedFiles.DataSource = downloadedFiles.Select(f => new { filename = f });
             gvDownloadedFiles.DataBind();
         }
 
@@ -70,6 +79,9 @@ namespace PosauneAnalytics.Web.Application
                 }
             }
             _downloadService.DownloadSelected(filenames);
+
+            LoadData();
+
 
         }
     }

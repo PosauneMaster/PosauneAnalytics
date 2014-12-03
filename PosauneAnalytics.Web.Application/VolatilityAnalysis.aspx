@@ -27,14 +27,16 @@
         }
 
         .series_info {
-            width: 200px;
+            width: 180px;
             height:auto;
             padding: 10px;
             border: 1px solid #ccc;
-            /*background: #eee;*/
-            background-color:lightblue;
+            background-color:#5596C1;
+            color:white;
             text-align: left;
             vertical-align:top;
+            border-radius:15px;
+            margin-top:20px;
         }
 
             .series_info div {
@@ -45,10 +47,11 @@
             font-family: Verdana, Arial, Helvetica, sans-serif;
             font-size: 11px;
             color: #0F465B;
-            padding: 0px 0px 0px 20px;
+            padding: 0px 4px 0px 20px;
             font-weight: normal;
             line-height: 16px;
             height: 18px;
+            text-align:right;
         }
 
 

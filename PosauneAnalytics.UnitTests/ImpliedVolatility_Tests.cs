@@ -34,5 +34,20 @@ namespace PosauneAnalytics.UnitTests
             
         }
 
+        [Test]
+        public void Bisect_Option_Test()
+        {
+            var implied = new ImpliedVolatility();
+            implied.PutCall = SecurityType.Call;
+            implied.AssetPrice = 126343.75;
+            implied.Strike = 126000;
+            implied.TimeToMaturity = 81.00d/360.00d;
+            implied.RiskFreeRate = 0.01;
+            implied.CostOfCarry = 0.01;
+
+            double vol = implied.Bisect(1343.75);
+
+        }
+
     }
 }
