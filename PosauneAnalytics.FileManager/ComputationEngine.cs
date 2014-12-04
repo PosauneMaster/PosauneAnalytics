@@ -42,7 +42,7 @@ namespace PosauneAnalytics.FileManager
                 Strike = option.StrikePrice * 1000,
                 TimeToMaturity = CalcDaysToExpiration(option),
                 RiskFreeRate = RiskFreeRate,
-                CostOfCarry = RiskFreeRate,
+                CostOfCarry = 0.00d,
                 PutCall = option.SecurityType
             };
 

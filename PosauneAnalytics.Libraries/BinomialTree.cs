@@ -32,7 +32,6 @@ namespace PosauneAnalytics.Libraries
         {
         }
 
-
         public BinomialTree(double assetPriceParam, double strikeParam, double timeStepParam, double volatilityParam,
             double riskFreeRateParam, EPutCall putCallParam, int stepsParam)
         {

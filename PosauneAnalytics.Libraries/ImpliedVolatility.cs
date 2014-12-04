@@ -56,8 +56,8 @@ namespace PosauneAnalytics.Libraries
 
             for (int i = 0; i < _maxIterations; i++ )
             {
-                guess2 = _blackScholes.GBlackScholesPrice(PutCall, AssetPrice, Strike, TimeToMaturity, RiskFreeRate, RiskFreeRate, guessVol2);
-                guess1 = _blackScholes.GBlackScholesPrice(PutCall, AssetPrice, Strike, TimeToMaturity, RiskFreeRate, RiskFreeRate, guessVol1);
+                guess2 = _blackScholes.GBlackScholesPrice(PutCall, AssetPrice, Strike, TimeToMaturity, RiskFreeRate, CostOfCarry, guessVol2);
+                guess1 = _blackScholes.GBlackScholesPrice(PutCall, AssetPrice, Strike, TimeToMaturity, RiskFreeRate, CostOfCarry, guessVol1);
 
                 double minVol = min;
                 double maxVol = max;
