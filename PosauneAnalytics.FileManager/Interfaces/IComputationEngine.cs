@@ -12,5 +12,6 @@ namespace PosauneAnalytics.FileManager
         double DaysToExpiration { get; set; }
 
         void ComputeImplied(OptionSettlement option);
+        void ComputeSeriesAnalysis(IEnumerable<SeriesInfo> seriesInfo);
     }
 }

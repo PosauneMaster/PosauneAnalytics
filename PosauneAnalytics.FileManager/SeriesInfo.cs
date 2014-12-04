@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PosauneAnalytics.Libraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,10 @@ namespace PosauneAnalytics.FileManager
     {
         public Settlement Underlying { get; set; }
         public List<OptionSettlement> Options { get; set; }
+        public List<OptionSeries> Series { get; set; }
+        public PolynominalRegression Regression { get; set; }
+
+
         public int DaysToExpiration { get; set; }
 
         public string ExpirationMonth { get; set; }
@@ -31,6 +36,11 @@ namespace PosauneAnalytics.FileManager
         public SeriesInfo()
         {
             Options = new List<OptionSettlement>();
+        }
+
+        public void AddOptionSeries(IEnumerable<OptionSeries> series)
+        {
+            Series = new List<OptionSeries>(series);
         }
 
         public void AddOption(OptionSettlement os)

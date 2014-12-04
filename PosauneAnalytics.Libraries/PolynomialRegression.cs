@@ -15,7 +15,21 @@ namespace PosauneAnalytics.Libraries
         private int _order;
         private Vector<double> _coefs;
 
+        public PolynominalRegression(List<double> xData, List<double> yData)
+        {
+            DenseVector x_data = new DenseVector(xData.ToArray());
+            DenseVector y_data = new DenseVector(yData.ToArray());
+
+            Initialize(x_data, y_data, 2);
+
+        }
+
         public PolynominalRegression(DenseVector xData, DenseVector yData, int order)
+        {
+            Initialize(xData, yData, order);
+        }
+
+        private void Initialize(DenseVector xData, DenseVector yData, int order)
         {
             _order = order;
             int n = xData.Count;
@@ -63,9 +77,9 @@ namespace PosauneAnalytics.Libraries
 
         public string LeastSquaresFit()
         {
-            string x0 = Math.Round(_coefs[0], 2).ToString();
-            string x1 = Math.Round(_coefs[1], 2).ToString();
-            string x2 = Math.Round(_coefs[2], 2).ToString();
+            string x0 = Math.Round(_coefs[0], 4).ToString();
+            string x1 = Math.Round(_coefs[1], 4).ToString();
+            string x2 = Math.Round(_coefs[2], 4).ToString();
 
             string fit = String.Format("{0}x^2 + {1}x + {2}", x2, x1, x0);
 

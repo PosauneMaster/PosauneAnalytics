@@ -295,6 +295,20 @@ namespace PosauneAnalytics.Web.Application {
             
             private global::System.Data.DataColumn columnDollarSettlePut;
             
+            private global::System.Data.DataColumn columnPutDelta;
+            
+            private global::System.Data.DataColumn columnCallDelta;
+            
+            private global::System.Data.DataColumn columnSeriesBaseVol;
+            
+            private global::System.Data.DataColumn columnTheoCallDollar;
+            
+            private global::System.Data.DataColumn columnTheoPutDollar;
+            
+            private global::System.Data.DataColumn columnTheoCall;
+            
+            private global::System.Data.DataColumn columnTheoPut;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SeriesBaseDataTable() {
@@ -394,6 +408,62 @@ namespace PosauneAnalytics.Web.Application {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PutDeltaColumn {
+                get {
+                    return this.columnPutDelta;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CallDeltaColumn {
+                get {
+                    return this.columnCallDelta;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SeriesBaseVolColumn {
+                get {
+                    return this.columnSeriesBaseVol;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TheoCallDollarColumn {
+                get {
+                    return this.columnTheoCallDollar;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TheoPutDollarColumn {
+                get {
+                    return this.columnTheoPutDollar;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TheoCallColumn {
+                get {
+                    return this.columnTheoCall;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TheoPutColumn {
+                get {
+                    return this.columnTheoPut;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +499,7 @@ namespace PosauneAnalytics.Web.Application {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SeriesBaseRow AddSeriesBaseRow(double StrikePrice, string SettlePriceCall, string SettlePricePut, string ImpliedVolCall, string ImpliedVolPut, bool Visible, double DollarSettleCall, double DollarSettlePut) {
+            public SeriesBaseRow AddSeriesBaseRow(double StrikePrice, string SettlePriceCall, string SettlePricePut, string ImpliedVolCall, string ImpliedVolPut, bool Visible, double DollarSettleCall, double DollarSettlePut, double PutDelta, double CallDelta, double SeriesBaseVol, double TheoCallDollar, double TheoPutDollar, string TheoCall, string TheoPut) {
                 SeriesBaseRow rowSeriesBaseRow = ((SeriesBaseRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         StrikePrice,
@@ -439,7 +509,14 @@ namespace PosauneAnalytics.Web.Application {
                         ImpliedVolPut,
                         Visible,
                         DollarSettleCall,
-                        DollarSettlePut};
+                        DollarSettlePut,
+                        PutDelta,
+                        CallDelta,
+                        SeriesBaseVol,
+                        TheoCallDollar,
+                        TheoPutDollar,
+                        TheoCall,
+                        TheoPut};
                 rowSeriesBaseRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSeriesBaseRow);
                 return rowSeriesBaseRow;
@@ -477,6 +554,13 @@ namespace PosauneAnalytics.Web.Application {
                 this.columnVisible = base.Columns["Visible"];
                 this.columnDollarSettleCall = base.Columns["DollarSettleCall"];
                 this.columnDollarSettlePut = base.Columns["DollarSettlePut"];
+                this.columnPutDelta = base.Columns["PutDelta"];
+                this.columnCallDelta = base.Columns["CallDelta"];
+                this.columnSeriesBaseVol = base.Columns["SeriesBaseVol"];
+                this.columnTheoCallDollar = base.Columns["TheoCallDollar"];
+                this.columnTheoPutDollar = base.Columns["TheoPutDollar"];
+                this.columnTheoCall = base.Columns["TheoCall"];
+                this.columnTheoPut = base.Columns["TheoPut"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -498,6 +582,20 @@ namespace PosauneAnalytics.Web.Application {
                 base.Columns.Add(this.columnDollarSettleCall);
                 this.columnDollarSettlePut = new global::System.Data.DataColumn("DollarSettlePut", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDollarSettlePut);
+                this.columnPutDelta = new global::System.Data.DataColumn("PutDelta", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPutDelta);
+                this.columnCallDelta = new global::System.Data.DataColumn("CallDelta", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCallDelta);
+                this.columnSeriesBaseVol = new global::System.Data.DataColumn("SeriesBaseVol", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSeriesBaseVol);
+                this.columnTheoCallDollar = new global::System.Data.DataColumn("TheoCallDollar", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTheoCallDollar);
+                this.columnTheoPutDollar = new global::System.Data.DataColumn("TheoPutDollar", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTheoPutDollar);
+                this.columnTheoCall = new global::System.Data.DataColumn("TheoCall", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTheoCall);
+                this.columnTheoPut = new global::System.Data.DataColumn("TheoPut", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTheoPut);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnStrikePrice}, true));
                 this.columnStrikePrice.AllowDBNull = false;
@@ -767,6 +865,118 @@ namespace PosauneAnalytics.Web.Application {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double PutDelta {
+                get {
+                    try {
+                        return ((double)(this[this.tableSeriesBase.PutDeltaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PutDelta\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.PutDeltaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double CallDelta {
+                get {
+                    try {
+                        return ((double)(this[this.tableSeriesBase.CallDeltaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CallDelta\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.CallDeltaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double SeriesBaseVol {
+                get {
+                    try {
+                        return ((double)(this[this.tableSeriesBase.SeriesBaseVolColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SeriesBaseVol\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.SeriesBaseVolColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double TheoCallDollar {
+                get {
+                    try {
+                        return ((double)(this[this.tableSeriesBase.TheoCallDollarColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TheoCallDollar\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.TheoCallDollarColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double TheoPutDollar {
+                get {
+                    try {
+                        return ((double)(this[this.tableSeriesBase.TheoPutDollarColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TheoPutDollar\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.TheoPutDollarColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TheoCall {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeriesBase.TheoCallColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TheoCall\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.TheoCallColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TheoPut {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeriesBase.TheoPutColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TheoPut\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.TheoPutColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSettlePriceCallNull() {
                 return this.IsNull(this.tableSeriesBase.SettlePriceCallColumn);
             }
@@ -847,6 +1057,90 @@ namespace PosauneAnalytics.Web.Application {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDollarSettlePutNull() {
                 this[this.tableSeriesBase.DollarSettlePutColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPutDeltaNull() {
+                return this.IsNull(this.tableSeriesBase.PutDeltaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPutDeltaNull() {
+                this[this.tableSeriesBase.PutDeltaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCallDeltaNull() {
+                return this.IsNull(this.tableSeriesBase.CallDeltaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCallDeltaNull() {
+                this[this.tableSeriesBase.CallDeltaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSeriesBaseVolNull() {
+                return this.IsNull(this.tableSeriesBase.SeriesBaseVolColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSeriesBaseVolNull() {
+                this[this.tableSeriesBase.SeriesBaseVolColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTheoCallDollarNull() {
+                return this.IsNull(this.tableSeriesBase.TheoCallDollarColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTheoCallDollarNull() {
+                this[this.tableSeriesBase.TheoCallDollarColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTheoPutDollarNull() {
+                return this.IsNull(this.tableSeriesBase.TheoPutDollarColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTheoPutDollarNull() {
+                this[this.tableSeriesBase.TheoPutDollarColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTheoCallNull() {
+                return this.IsNull(this.tableSeriesBase.TheoCallColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTheoCallNull() {
+                this[this.tableSeriesBase.TheoCallColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTheoPutNull() {
+                return this.IsNull(this.tableSeriesBase.TheoPutColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTheoPutNull() {
+                this[this.tableSeriesBase.TheoPutColumn] = global::System.Convert.DBNull;
             }
         }
         

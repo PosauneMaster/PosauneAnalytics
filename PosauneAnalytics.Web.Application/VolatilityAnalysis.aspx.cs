@@ -59,42 +59,5 @@ namespace PosauneAnalytics.Web.Application
 
             }
         }
-
-        //protected void gvSeriesInfo1_RowCreated(object sender, GridViewRowEventArgs e)
-        //{
-
-        //    GridView gv = sender as GridView;
-
-        //    if (e.Row.RowType == DataControlRowType.Header)
-        //    {
-
-        //        var headerGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
-
-        //        headerGridRow.Cells.Add(new TableCell()
-        //        {
-        //            Text = "Calls",
-        //            ColumnSpan = 2,
-        //            CssClass = "header_grid"
-        //        });
-
-        //        headerGridRow.Cells.Add(new TableCell()
-        //        {
-        //            Text = "",
-        //            CssClass = "header_grid"
-
-        //        });
-
-        //        headerGridRow.Cells.Add(new TableCell()
-        //        {
-        //            Text = "Puts",
-        //            ColumnSpan = 2,
-        //            CssClass = "header_grid"
-        //        });
-
-        //        gv.Controls[0].Controls.AddAt(0, headerGridRow);
-
-        //    }
-        //}
-
     }
 }

@@ -27,7 +27,7 @@ namespace PosauneAnalytics.Web.Application
                 headerGridRow.Cells.Add(new TableCell()
                 {
                     Text = "Calls",
-                    ColumnSpan = 2,
+                    ColumnSpan = 3,
                     CssClass = "header_grid"
                 });
 
@@ -41,7 +41,7 @@ namespace PosauneAnalytics.Web.Application
                 headerGridRow.Cells.Add(new TableCell()
                 {
                     Text = "Puts",
-                    ColumnSpan = 2,
+                    ColumnSpan = 3,
                     CssClass = "header_grid"
                 });
 

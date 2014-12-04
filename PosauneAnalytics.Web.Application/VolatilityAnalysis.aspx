@@ -61,7 +61,7 @@
             /*color: #0F465B;*/
             color:black;
             background-color:lightblue;
-            padding: 0px 0px 0px 20px;
+            padding: 0px 4px 0px 20px;
             font-weight: bold;
             line-height: 16px;
             height: 18px;
@@ -121,6 +121,7 @@
                  font-family: Verdana, Arial, Helvetica, sans-serif;
                  font-size: 11px;
                  color: #0F465B;
+                 width:140px;
              }
 
     </style>

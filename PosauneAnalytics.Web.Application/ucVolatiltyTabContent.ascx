@@ -37,32 +37,32 @@
                 </div>
             </td>
             <td>
-                <div style="width: 500px; padding-left: 40px; overflow: auto; max-height:750px;">
+                <div style="width: 800px; padding-left: 40px; overflow: auto; max-height:750px;">
                     <asp:GridView runat="server" ID="gvSeriesInfo1" AutoGenerateColumns="false" OnRowCreated="gvSeriesInfo1_RowCreated">
                         <Columns>
+
+                            <asp:TemplateField HeaderText="Theo Call" SortExpression="TheoCall">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTheoCallPrice" runat="server" Text='<%# Bind("TheoCall")%>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
+                            </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Implied Vol" SortExpression="ImpliedVolCall">
                                 <ItemTemplate>
                                     <asp:Label ID="lblImpliedCVolCall" runat="server" Text='<%# Bind("ImpliedVolCall")%>'></asp:Label>
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="140px" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
                             </asp:TemplateField>
-
-<%--                            <asp:TemplateField HeaderText="Dollar Price" SortExpression="SettlePriceCall">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblDollarSettleCall" runat="server" Text='<%# Bind("DollarSettleCall", "{0:C4}")%>'></asp:Label>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="80px" />
-                            </asp:TemplateField>--%>
 
                             <asp:TemplateField HeaderText="Settle" SortExpression="SettlePriceCall">
                                 <ItemTemplate>
                                     <asp:Label ID="lblSettlePriceCall" runat="server" Text='<%# Bind("SettlePriceCall")%>'></asp:Label>
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="80px" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
                             </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Strike" SortExpression="StrikePrice">
@@ -70,7 +70,7 @@
                                     <asp:Label ID="lblStrikePrice" runat="server" Text='<%# Bind("StrikePrice")%>'></asp:Label>
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                <ItemStyle CssClass="data_grid_center" HorizontalAlign="Left" Width="80px" />
+                                <ItemStyle CssClass="data_grid_center" HorizontalAlign="Left" />
                             </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Settle" SortExpression="SettlePricePut">
@@ -78,24 +78,25 @@
                                     <asp:Label ID="lblSettlePricePut" runat="server" Text='<%# Bind("SettlePricePut")%>'></asp:Label>
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="80px" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
                             </asp:TemplateField>
-
-<%--                            <asp:TemplateField HeaderText="Dollar Price" SortExpression="SettlePriceCall">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblDollarSettlePut" runat="server" Text='<%# Bind("DollarSettlePut", "{0:C4}")%>'></asp:Label>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="80px" />
-                            </asp:TemplateField>--%>
 
                             <asp:TemplateField HeaderText="Implied Vol" SortExpression="ImpliedVolPut">
                                 <ItemTemplate>
                                     <asp:Label ID="lblImpliedVolPut" runat="server" Text='<%# Bind("ImpliedVolPut")%>'></asp:Label>
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
-                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" Width="140px" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
                             </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Theo Put" SortExpression="TheoPut">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTheoPutPrice" runat="server" Text='<%# Bind("TheoPut")%>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left"/>
+                            </asp:TemplateField>
+
                         </Columns>
                         <AlternatingRowStyle BackColor="LightBlue" />
                     </asp:GridView>

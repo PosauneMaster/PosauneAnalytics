@@ -11,6 +11,7 @@ namespace PosauneAnalytics.FileManager
     {
         public double StrikePrice { get; set; }
         public double ImpliedVolatility { get; set; }
+        public double Delta { get; set; }
         public string ImpliedVolatilityDisplay 
         {
             get { return ImpliedVolatility.ToString("P2"); }

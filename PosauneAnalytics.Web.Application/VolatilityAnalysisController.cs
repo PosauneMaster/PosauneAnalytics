@@ -54,6 +54,8 @@ namespace PosauneAnalytics.Web.Application
             var fileName = FindFilename(date);
 
             var seriesInfoList = _fileMapper.MapToSeries(fileName);
+            _engine.ComputeSeriesAnalysis(seriesInfoList.Values);
+
             
             foreach (SeriesInfo si in seriesInfoList.Values)
             {
@@ -72,6 +74,7 @@ namespace PosauneAnalytics.Web.Application
                     ExpirationDate = si.ExpirationDate.ToString("MM/dd/yyyy"),
                     RiskFreeRate = si.RiskFreeRate.ToString("P2"),
                     DaysToExpiration = si.DaysToExpiration.ToString("G"),
+                    Polynomial = si.Regression.LeastSquaresFit(),
                     Model = table
                 });
             }
@@ -107,41 +110,27 @@ namespace PosauneAnalytics.Web.Application
 
         private void CreateRows(SeriesInfo si, VolatilityAnalysisModel.SeriesBaseDataTable table)
         {
-            foreach (var opt in si.Options)
+            foreach(OptionSeries series in si.Series)
             {
-                _engine.ComputeImplied(opt);
-                si.RiskFreeRate = _engine.RiskFreeRate;
-                si.DaysToExpiration = (int)_engine.DaysToExpiration;
+                VolatilityAnalysisModel.SeriesBaseRow row = table.NewSeriesBaseRow();
+                row = table.NewSeriesBaseRow();
+                row.StrikePrice = series.StrikePrice;
+                row.SettlePriceCall = series.Call.TickPrice;
+                row.SettlePricePut = series.Put.TickPrice;
+                row.ImpliedVolCall = series.Call.ImpliedVolatilityDisplay;
+                row.ImpliedVolPut = series.Put.ImpliedVolatilityDisplay;
+                row.Visible = false;
+                row.DollarSettleCall = series.Call.DollarPrice * 1000;
+                row.DollarSettlePut = series.Put.DollarPrice * 1000;
+                row.CallDelta = series.Call.Delta;
+                row.PutDelta = series.Put.Delta;
+                row.SeriesBaseVol = series.SeriesBaseImpliedVolatility;
+                row.TheoCallDollar = series.TheoCallDollar;
+                row.TheoPutDollar = series.TheoPutDollar;
+                row.TheoCall = series.TheoCall;
+                row.TheoPut = series.TheoPut;
 
-                VolatilityAnalysisModel.SeriesBaseRow row = table.AsEnumerable().FirstOrDefault(r => r.StrikePrice == opt.StrikePrice);
-                if (row == null)
-                {
-                    if (opt.SecurityType == SecurityType.Call)
-                    {
-                        table.AddSeriesBaseRow(opt.StrikePrice, opt.TickPrice, String.Empty, opt.ImpliedVolatilityDisplay, String.Empty, false, opt.DollarPrice * 1000, 0.00d);
-                    }
-                    else
-                    {
-                        table.AddSeriesBaseRow(opt.StrikePrice, String.Empty, opt.TickPrice, String.Empty, opt.ImpliedVolatilityDisplay, false, 0.00d, opt.DollarPrice * 1000);
-                    }
-                }
-                else
-                {
-                    if (opt.SecurityType == SecurityType.Call)
-                    {
-                        row.SettlePriceCall = opt.TickPrice;
-                        row.DollarSettleCall = opt.DollarPrice * 1000;
-                        row.ImpliedVolCall = opt.ImpliedVolatilityDisplay;
-                        row.Visible = false;
-                    }
-                    else
-                    {
-                        row.SettlePricePut = opt.TickPrice;
-                        row.DollarSettlePut = opt.DollarPrice * 1000;
-                        row.ImpliedVolPut = opt.ImpliedVolatilityDisplay;
-                        row.Visible = false;
-                    }
-                }
+                table.Rows.Add(row);
             }
         }
 
@@ -177,6 +166,7 @@ namespace PosauneAnalytics.Web.Application
         public string ExpirationDate { get; set; }
         public string RiskFreeRate { get; set; }
         public string DaysToExpiration { get; set; }
+        public string Polynomial { get; set; }
         public VolatilityAnalysisModel.SeriesBaseDataTable Model { get; set; }
     }
 }
