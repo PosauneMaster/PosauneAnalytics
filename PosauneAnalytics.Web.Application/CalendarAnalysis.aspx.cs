@@ -16,11 +16,12 @@ namespace PosauneAnalytics.Web.Application
         }
 
         [System.Web.Services.WebMethod()]
-        public static void AjaxPost(CalendarEvent e)
+        public static void AjaxPost(List<CalendarEvent> calEvents)
         {
             Debug.WriteLine("AjaxPost");
 
         }
+
 
         public class CalendarEvent
         {

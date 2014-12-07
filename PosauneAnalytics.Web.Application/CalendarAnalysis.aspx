@@ -218,79 +218,61 @@
                 droppable: true,
                 drop: function (date, allDay) {
 
+
                     var originalEventObject = $(this).data('eventObject');
+                    var copyEvent = createEvent(date, allDay, originalEventObject);
+
+                    $('#calendar').fullCalendar('removeEvents', copyEvent.id);
+
+                    var fullCalendarEvents = $.makeArray(copyEvent);
 
                     var calEvent =
                         {
-                            EventDate: 'date',
-                            Weight: 'weight'
+                            EventDate: date.toDateString(),
+                            Weight: originalEventObject.weight
                         }
 
-                    var data = JSON.stringify({ calEvent: calEvent });
+                    var calEvents = $.makeArray(calEvent);
+
+                    if ($("#recurring-event").is(':checked'))
+                    {
+                            for (i = 1; i < 53; i++ ) 
+                            {
+                                var nextDate = new Date(date);
+                                nextDate.setDate(date.getDate() + (i * 7));
+
+                                var nextEvent = createEvent(nextDate, allDay, originalEventObject);
+                                $('#calendar').fullCalendar('removeEvents', nextEvent.id);
+
+                                var item =
+                                    {
+                                        EventDate: nextEvent.start.toDateString(),
+                                        Weight: nextEvent.weight
+                                    }
+
+                                calEvents.push(item);
+                                fullCalendarEvents.push(nextEvent);
+                            }
+                    }
+
 
                     var result = $.ajax({
                         type: 'POST',
                         url: 'CalendarAnalysis.aspx/AjaxPost',
-                        contentType: 'application/json',
+                        contentType: 'application/json; charset=utf-8',
                         dataType: "json",
-                        data: "{'data':" +  JSON.stringify(calEvent) + "}",
+                        data: "{'calEvents':" + JSON.stringify(calEvents) + "}",
                         error: function (data) {
-                            alert("Error");
+                            //alert("Error");
                         },
                         success: function (data) {
-                            alert("Success");
+                            //alert("Success");
                         }
-
-
                     });
 
-
-
-                    //http://growingtech.blogspot.in/2012/01/post-complex-data-to-pagemethod-or.html
-
-                    //asp.net jquery ajax passing data
-
-
-
-
-
-
-
-
-
-                    //var calEventArr = $.makeArray(wEvent);
-
-
-                    //if ($("#recurring-event").is(':checked'))
-                    //{
-                    //    for (i = 1; i < 53; i++ ) 
-                    //    {
-                    //        var nextDate = new Date(date);
-                    //        nextDate.setDate(date.getDate() + (i * 7));
-
-                    //        var nextEvent = createEvent(nextDate, allDay, originalEventObject);
-                    //        calEventArr.push(nextEvent);
-                    //    }
-                    //}
-
-                    //var data1 = JSON.stringify(calEventArr);
-
-                    //$('#calendar').fullCalendar('addEventSource', calEventArr);
-
-                    //var result = $.ajax({
-                    //    type: 'POST',
-                    //    url: 'CalendarAnalysis.aspx/AjaxPost',
-                    //    contentType: 'application/json; charset=utf-8',
-                    //    data: JSON.stringify({ 'obj': 'data1' }),
-                    //    error: function (data) {
-                    //        alert("Error");
-                    //    },
-                    //    success: function (data) {
-                    //        alert("Success");
-                    //    }
-                        
-
-                    //});
+                    if (originalEventObject.weight != '1.0') {
+                        $('#calendar').fullCalendar('addEventSource', fullCalendarEvents);
+                    }
 
                     if (originalEventObject.title.indexOf('Custom') > 0)
                     {
