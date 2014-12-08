@@ -29,7 +29,9 @@ namespace PosauneAnalytics.Web.Application
             public string Weight { get; set; }
         }
 
+        protected void btnProfileName_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

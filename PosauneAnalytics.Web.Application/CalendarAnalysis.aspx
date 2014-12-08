@@ -100,7 +100,33 @@
 		background: #eee;
 		text-align: left;
     }
-        
+
+
+    .profile_save_button {
+	    -webkit-box-shadow:rgba(0,0,0,0.98) 0 1px 0 0;
+	    -moz-box-shadow:rgba(0,0,0,0.98) 0 1px 0 0;
+	    box-shadow:rgba(0,0,0,0.98) 0 1px 0 0;
+	    background-color:#EEE;
+	    border-radius:0;
+	    -webkit-border-radius:0;
+	    -moz-border-radius:0;
+	    border:1px solid #999;
+	    color:#666;
+	    font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+	    font-size:11px;
+	    font-weight:700;
+	    padding:2px 6px;
+	    height:28px
+    }
+     .profile_save_button:hover {
+       background: #575a5c;
+       color: #f0ebf0;
+       }
+     /*.profile_save_button:active {
+       border-top-color: #060b0f;
+       background: #060b0f;
+       }*/
+
     </style>
 
     <script type="text/javascript">
@@ -340,6 +366,15 @@
             </td>
             <td style="width:500px; height:500px;">
                 <div id='calendar'></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="text-align:right; background-color:lightgray; padding:5px;">
+                    <asp:Label runat="server" ID="lblProfileName" Text="Profile Name:"></asp:Label>
+                    <asp:TextBox runat="server" ID="txtProfileName"></asp:TextBox>
+                    <asp:Button runat="server" ID="btnProfileName" Text="Save" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
+                </div>
             </td>
         </tr>
 

@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlobManager.cs" />
+    <Compile Include="CalendarWeightEntity.cs" />
     <Compile Include="CmeDownloader.cs" />
     <Compile Include="CmeFileDetails.cs" />
     <Compile Include="CmeFileParser.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Interfaces\IFileMapper.cs" />
     <Compile Include="Interfaces\ISettlementUtils.cs" />
     <Compile Include="Interfaces\IZipUtils.cs" />
+    <Compile Include="ITableStorageManager.cs" />
     <Compile Include="OptionParser.cs" />
     <Compile Include="OptionSettlement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Settlement.cs" />
     <Compile Include="SettlementDownload.cs" />
     <Compile Include="SettlementUtils.cs" />
+    <Compile Include="TableStorageManager.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="VolatilityService.cs" />
     <Compile Include="ZipUtils.cs" />
