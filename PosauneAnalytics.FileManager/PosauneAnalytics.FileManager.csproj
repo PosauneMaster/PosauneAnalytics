@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="BlobManager.cs" />
     <Compile Include="CalendarWeightEntity.cs" />
+    <Compile Include="CloudStorageAccountManager.cs" />
     <Compile Include="CmeDownloader.cs" />
     <Compile Include="CmeFileDetails.cs" />
     <Compile Include="CmeFileParser.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="DownloadService.cs" />
     <Compile Include="FileMapper.cs" />
     <Compile Include="FuturesParser.cs" />
+    <Compile Include="ICloudStorageAccountManager.cs" />
     <Compile Include="Interfaces\IBlobManager.cs" />
     <Compile Include="Interfaces\ICmeDownloader.cs" />
     <Compile Include="Interfaces\ICmeFileParser.cs" />
@@ -81,7 +83,7 @@
     <Compile Include="Interfaces\IFileMapper.cs" />
     <Compile Include="Interfaces\ISettlementUtils.cs" />
     <Compile Include="Interfaces\IZipUtils.cs" />
-    <Compile Include="ITableStorageManager.cs" />
+    <Compile Include="Interfaces\ITableStorageManager.cs" />
     <Compile Include="OptionParser.cs" />
     <Compile Include="OptionSettlement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -18,9 +18,23 @@ namespace PosauneAnalytics.UnitTests
         public void AddCalenderWeight_Test()
         {
             var tableManager = new TableStorageManager();
-            tableManager.StoreCalendar("Main", "admin", DateTime.Now.ToString("yyyyMMdd"), "1.23456");
+            //tableManager.StoreCalendar("Main", "admin", DateTime.Now.ToString("yyyyMMdd"), "1.23456");
+            tableManager.StoreCalendar("Admin", "myCalendar1", DateTime.Now.ToString("yyyyMMdd"), "1.23456");
+            tableManager.StoreCalendar("Admin", "myCalendar2", DateTime.Now.ToString("yyyyMMdd"), "1.23456");
+            tableManager.StoreCalendar("Admin", "myCalendar3", DateTime.Now.ToString("yyyyMMdd"), "1.23456");
+            tableManager.StoreCalendar("Admin", "myCalendar4", DateTime.Now.ToString("yyyyMMdd"), "1.23456");
+            tableManager.StoreCalendar("Admin", "myCalendar5", DateTime.Now.ToString("yyyyMMdd"), "1.23456");
+
+
                 //tableManager.AddCalenderWeight("testTableName", "admin", DateTime.Now, 2.345d);
 
+        }
+
+
+        public void GetPartitionNames_Test()
+        {
+            var tableManager = new TableStorageManager();
+            //tableManager.GetPartitionNames("Admin", )
         }
     }
 }
