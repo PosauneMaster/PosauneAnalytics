@@ -118,14 +118,36 @@
 	    padding:2px 6px;
 	    height:28px
     }
-     .profile_save_button:hover {
-       background: #575a5c;
-       color: #f0ebf0;
-       }
-     /*.profile_save_button:active {
-       border-top-color: #060b0f;
-       background: #060b0f;
-       }*/
+        .profile_save_button:hover {
+            background: #575a5c;
+            color: #f0ebf0;
+        }
+
+        .WindowsStyle .ajax__combobox_inputcontainer .ajax__combobox_textboxcontainer input {
+            margin: 0;
+            border: solid 1px #7F9DB9;
+            border-right: 0px none;
+            padding: 1px 0px 0px 5px;
+            font-size: 13px;
+            height: 18px;
+            position: relative;
+        }
+
+        .WindowsStyle .ajax__combobox_inputcontainer .ajax__combobox_buttoncontainer button {
+            margin: 0;
+            padding: 0;
+            background-image: url(windows-arrow.gif);
+            background-position: top left;
+            border: 0px none;
+            height: 21px;
+            width: 21px;
+        }
+
+        .WindowsStyle .ajax__combobox_itemlist {
+            border-color: #7F9DB9;
+        }
+
+
 
     </style>
 
@@ -371,9 +393,21 @@
         <tr>
             <td colspan="2">
                 <div style="text-align:right; background-color:lightgray; padding:5px;">
-                    <asp:Label runat="server" ID="lblProfileName" Text="Profile Name:"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtProfileName"></asp:TextBox>
-                    <asp:Button runat="server" ID="btnProfileName" Text="Save" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:Label runat="server" ID="lblProfiles" Text="Profiles:"></asp:Label>
+                                <ajaxToolkit:ComboBox runat="server" ID="cboProfiles" DropDownStyle ="DropDown" RenderMode ="Inline" CssClass="WindowsStyle" ></ajaxToolkit:ComboBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label runat="server" ID="lblProfileName" Text="Profile Name:"></asp:Label>
+                                <asp:TextBox runat="server" ID="txtProfileName"></asp:TextBox>
+                                <asp:Button runat="server" ID="btnProfileName" Text="Save" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </td>
         </tr>

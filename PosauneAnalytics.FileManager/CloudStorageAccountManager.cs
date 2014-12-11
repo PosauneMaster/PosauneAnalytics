@@ -10,7 +10,7 @@ namespace PosauneAnalytics.FileManager
 {
     public class CloudStorageAccountManager : ICloudStorageAccountManager
     {
-        internal const string connectonString = "UseDevelopmentStorage=true;";
+        internal const string connectonString = "UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://127.0.0.1;";
 
         public CloudStorageAccount CreateStorageAccount()
         {

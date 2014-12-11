@@ -17,6 +17,8 @@ namespace PosauneAnalytics.FileManager
             this.RowKey = rowKey;
         }
 
+        public string CalendarProfile { get; set; }
+        public DateTime Date { get; set; }
         public string Weight { get; set; }
     }
 }

@@ -125,7 +125,7 @@ namespace PosauneAnalytics.Libraries
         public double GDelta(SecurityType CallPutFlag, double S, double X, double T, double r, double b, double v)
         {
             double d1 = 0.0;
-            double d2 = 0.0;
+            //double d2 = 0.0;
             double gDelta = 0.0;
 
             d1 = (Math.Log(S / X) + (b + Math.Pow(v, 2) / 2.0) * T) / (v * Math.Sqrt(T));

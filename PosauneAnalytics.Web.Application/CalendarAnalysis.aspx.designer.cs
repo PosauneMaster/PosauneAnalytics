@@ -13,6 +13,24 @@ namespace PosauneAnalytics.Web.Application {
     public partial class CalendarAnalysis {
         
         /// <summary>
+        /// lblProfiles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProfiles;
+        
+        /// <summary>
+        /// cboProfiles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ComboBox cboProfiles;
+        
+        /// <summary>
         /// lblProfileName control.
         /// </summary>
         /// <remarks>

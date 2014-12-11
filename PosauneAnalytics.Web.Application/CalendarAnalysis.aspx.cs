@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PosauneAnalytics.FileManager;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,8 +13,18 @@ namespace PosauneAnalytics.Web.Application
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadCalendarProfiles();
+        }
+
+        private void LoadCalendarProfiles()
+        {
+            TableStorageManager tableManager = new TableStorageManager();
+            var names = tableManager.GetProfileNames("Admin1");
+            cboProfiles.DataSource = names;
+            cboProfiles.DataBind();
 
         }
+
 
         [System.Web.Services.WebMethod()]
         public static void AjaxPost(List<CalendarEvent> calEvents)
@@ -21,7 +32,6 @@ namespace PosauneAnalytics.Web.Application
             Debug.WriteLine("AjaxPost");
 
         }
-
 
         public class CalendarEvent
         {
