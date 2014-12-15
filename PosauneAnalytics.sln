@@ -17,6 +17,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.TestHarnes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.FileManager", "PosauneAnalytics.FileManager\PosauneAnalytics.FileManager.csproj", "{496B9709-771C-418B-8267-AFFDF48317B3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{0255B997-C504-47B5-8031-FF6248FAFE2B}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{F641C40D-4C4E-44E8-97E3-B11C96758DB0}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\PosauneAnalyticsCloudWebUI-WAWS-dev.json = PublishScripts\Configurations\PosauneAnalyticsCloudWebUI-WAWS-dev.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +65,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F641C40D-4C4E-44E8-97E3-B11C96758DB0} = {0255B997-C504-47B5-8031-FF6248FAFE2B}
 	EndGlobalSection
 EndGlobal

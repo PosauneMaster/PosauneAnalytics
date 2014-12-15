@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" Title="Calendar" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CalendarAnalysis.aspx.cs" Inherits="PosauneAnalytics.Web.Application.CalendarAnalysis" %>
 
 
-<asp:Content ContentPlaceHolderID="headerPalceHolder" runat="server">
+<asp:Content ContentPlaceHolderID="headerPlaceHolder" runat="server">
 
     <style type="text/css">
 
@@ -393,11 +393,13 @@
         <tr>
             <td colspan="2">
                 <div style="text-align:right; background-color:lightgray; padding:5px;">
-                    <table>
+                    <table style="width:800px;">
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblProfiles" Text="Profiles:"></asp:Label>
-                                <ajaxToolkit:ComboBox runat="server" ID="cboProfiles" DropDownStyle ="DropDown" RenderMode ="Inline" CssClass="WindowsStyle" ></ajaxToolkit:ComboBox>
+                                <div style="text-align:right;">
+                                    <asp:Label runat="server" ID="lblProfiles" Text="Profiles:"></asp:Label>
+                                    <ajaxToolkit:ComboBox runat="server" ID="cboProfiles" DropDownStyle ="DropDown" RenderMode ="Inline"></ajaxToolkit:ComboBox>
+                                </div>
                             </td>
                         </tr>
                         <tr>

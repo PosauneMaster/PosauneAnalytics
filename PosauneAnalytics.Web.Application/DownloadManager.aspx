@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" Title="Downloads" AutoEventWireup="true" MasterPageFile="~/Site.Master"  CodeBehind="DownloadManager.aspx.cs" Inherits="PosauneAnalytics.Web.Application.DownloadManager" %>
 
-<asp:Content ContentPlaceHolderID="headerPalceHolder" runat="server">
+<asp:Content ContentPlaceHolderID="headerPlaceHolder" runat="server">
 
     <script type="text/javascript">
         var allCheckBoxSelector = '#<%=gvAvailableFiles.ClientID%> input[id*="chkAll"]:checkbox';

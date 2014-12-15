@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" Title="Volatility" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="VolatilityAnalysis.aspx.cs" Inherits="PosauneAnalytics.Web.Application.VolatilityAnalysis" %>
 
-<asp:Content ContentPlaceHolderID="headerPalceHolder" runat="server">
+<asp:Content ContentPlaceHolderID="headerPlaceHolder" runat="server">
 
     <style type="text/css">
         #analysis-date {

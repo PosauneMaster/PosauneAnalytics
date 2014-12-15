@@ -19,11 +19,19 @@ namespace PosauneAnalytics.FileManager
         private CloudBlobClient _blobClient;
         private CloudBlobContainer _container;
 
+        private ICloudStorageAccountManager _cloudStorageAccountManager;
+        private CloudStorageAccount _cloudStorageAccount;
+
+
         public BlobManager()
         {
-            _storageAccount = CloudStorageAccount.Parse("UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://127.0.0.1;");
-            _blobClient = _storageAccount.CreateCloudBlobClient();
+            _cloudStorageAccountManager = new CloudStorageAccountManager();
+            _cloudStorageAccount = _cloudStorageAccountManager.CreateStorageAccount();
+
+            _blobClient = _cloudStorageAccount.CreateCloudBlobClient();
             _container = _blobClient.GetContainerReference("cme-dailysettlements");
+
+
         }
 
         public bool Upload(MemoryStream stream, string fileName)

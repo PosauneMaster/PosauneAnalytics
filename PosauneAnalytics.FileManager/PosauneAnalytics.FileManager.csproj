@@ -75,7 +75,7 @@
     <Compile Include="DownloadService.cs" />
     <Compile Include="FileMapper.cs" />
     <Compile Include="FuturesParser.cs" />
-    <Compile Include="ICloudStorageAccountManager.cs" />
+    <Compile Include="Interfaces\ICloudStorageAccountManager.cs" />
     <Compile Include="Interfaces\IBlobManager.cs" />
     <Compile Include="Interfaces\ICmeDownloader.cs" />
     <Compile Include="Interfaces\ICmeFileParser.cs" />
