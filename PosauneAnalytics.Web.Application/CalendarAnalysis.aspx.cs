@@ -20,8 +20,8 @@ namespace PosauneAnalytics.Web.Application
         {
             TableStorageManager tableManager = new TableStorageManager();
             var names = tableManager.GetProfileNames("Admin1");
-            cboProfiles.DataSource = names;
-            cboProfiles.DataBind();
+            //cboProfiles.DataSource = names;
+            //cboProfiles.DataBind();
 
         }
 

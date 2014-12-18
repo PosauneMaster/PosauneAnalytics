@@ -4,50 +4,49 @@
 <asp:Content ContentPlaceHolderID="headerPlaceHolder" runat="server">
 
     <style type="text/css">
-
         #expirationTable td {
-            white-space:nowrap;
+            white-space: nowrap;
         }
 
         .expiration {
-            width:120px;
+            width: 120px;
         }
 
         .volatility {
-            width:100px;
+            width: 100px;
         }
 
         #expirationTable th {
-            text-align:center;
+            text-align: center;
         }
 
-        #expirationTable th td{
-            padding:5px;
-            padding-top:12px;
-        }
+            #expirationTable th td {
+                padding: 5px;
+                padding-top: 12px;
+            }
 
         .expireDateInfo {
-	        background: white;
-	        border: 1px solid #808080;
-	        border-radius: 5px;
-	        box-shadow: 0 0 5px #DDD inset;
-	        color: #666;
-	        float: left;
-	        padding: 5px 10px;
-	        width: 120px;
-	        outline: none;
+            background: white;
+            border: 1px solid #808080;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #DDD inset;
+            color: #666;
+            float: left;
+            padding: 5px 10px;
+            width: 120px;
+            outline: none;
         }
 
         .expireInfo {
-	        background: white;
-	        border: 1px solid #808080;
-	        border-radius: 5px;
-	        box-shadow: 0 0 5px #DDD inset;
-	        color: #666;
-	        float: left;
-	        padding: 5px 10px;
-	        width: 80px;
-	        outline: none;
+            background: white;
+            border: 1px solid #808080;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #DDD inset;
+            color: #666;
+            float: left;
+            padding: 5px 10px;
+            width: 80px;
+            outline: none;
         }
 
         #calendar {
@@ -55,100 +54,83 @@
             margin: 0 auto;
             font-size: 12px;
         }
-        
+
         #wrap {
             width: 1100px;
-		    margin: 0 auto;
+            margin: 0 auto;
         }
 
-	#external-events {
-		float: left;
-		width: 150px;
-		padding: 0 10px;
-		border: 1px solid #ccc;
-		background: #eee;
-		text-align: left;
-	}
-		
-	#external-events h4 {
-		font-size: 16px;
-		margin-top: 0;
-		padding-top: 1em;
-	}
-		
-	#external-events .fc-event {
-		margin: 10px 0;
-		cursor: pointer;
-	}
-		
-	#external-events p {
-		margin: 1.5em 0;
-		font-size: 11px;
-		color: #666;
-	}
-		
-	#external-events p input {
-		margin: 0;
-		vertical-align: middle;
-	}
-
-    #analysis-date {
-        width: 260px;
-        height:50px;
-        padding: 6px 0 0 5px;
-		border: 1px solid #ccc;
-		background: #eee;
-		text-align: left;
-    }
-
-
-    .profile_save_button {
-	    -webkit-box-shadow:rgba(0,0,0,0.98) 0 1px 0 0;
-	    -moz-box-shadow:rgba(0,0,0,0.98) 0 1px 0 0;
-	    box-shadow:rgba(0,0,0,0.98) 0 1px 0 0;
-	    background-color:#EEE;
-	    border-radius:0;
-	    -webkit-border-radius:0;
-	    -moz-border-radius:0;
-	    border:1px solid #999;
-	    color:#666;
-	    font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
-	    font-size:11px;
-	    font-weight:700;
-	    padding:2px 6px;
-	    height:28px
-    }
-        .profile_save_button:hover {
-            background: #575a5c;
-            color: #f0ebf0;
+        #external-events {
+            float: left;
+            width: 150px;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            background: #eee;
+            text-align: left;
         }
 
-        .WindowsStyle .ajax__combobox_inputcontainer .ajax__combobox_textboxcontainer input {
-            margin: 0;
-            border: solid 1px #7F9DB9;
-            border-right: 0px none;
-            padding: 1px 0px 0px 5px;
-            font-size: 13px;
-            height: 18px;
-            position: relative;
-        }
+            #external-events h4 {
+                font-size: 16px;
+                margin-top: 0;
+                padding-top: 1em;
+            }
 
-        .WindowsStyle .ajax__combobox_inputcontainer .ajax__combobox_buttoncontainer button {
-            margin: 0;
-            padding: 0;
-            background-image: url(windows-arrow.gif);
-            background-position: top left;
-            border: 0px none;
-            height: 21px;
-            width: 21px;
-        }
+            #external-events .fc-event {
+                margin: 10px 0;
+                cursor: pointer;
+            }
 
-        .WindowsStyle .ajax__combobox_itemlist {
-            border-color: #7F9DB9;
+            #external-events p {
+                margin: 1.5em 0;
+                font-size: 11px;
+                color: #666;
+            }
+
+                #external-events p input {
+                    margin: 0;
+                    vertical-align: middle;
+                }
+
+        #analysis-date {
+            width: 260px;
+            height: 50px;
+            padding: 6px 0 0 5px;
+            border: 1px solid #ccc;
+            background: #eee;
+            text-align: left;
         }
 
 
+        .profile_save_button {
+            -webkit-box-shadow: rgba(0,0,0,0.98) 0 1px 0 0;
+            -moz-box-shadow: rgba(0,0,0,0.98) 0 1px 0 0;
+            box-shadow: rgba(0,0,0,0.98) 0 1px 0 0;
+            background-color: #EEE;
+            border-radius: 0;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border: 1px solid #999;
+            color: #666;
+            font-family: 'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 6px;
+            height: 24px;
+            width: 80px;
+        }
 
+            .profile_save_button:hover {
+                background: #575a5c;
+                color: #f0ebf0;
+            }
+
+        #profile-options {
+            width: 200px;
+            height: 120px;
+            margin: 1.5em 0;
+            font-size: 12px;
+            color: #666;
+        }
     </style>
 
     <script type="text/javascript">
@@ -364,58 +346,52 @@
 
     <table id="mainTable">
         <tr>
-            <td style="vertical-align:top; padding:50px 12px 0 0;">
-                <div id='external-events'>
-                    <h4>Weights</h4>
-                    <div class='fc-event' data-weight="0">Weight: Zero</div>
-                    <div class='fc-event' data-weight="1.0" style="background-color:black; color:white;">Weight: Normal</div>
-                    <div class='fc-event' data-weight="1.5" style="background-color:darkblue; color:white;">Weight: 1.5</div>
-                    <div class='fc-event' data-weight="2.0" style="background-color:green; color:white;">Weight: 2.0</div>
-                    <div class='fc-event' data-weight="2.5" style="background-color:olive; color:white;">Weight: 2.5</div>
-                    <div class='fc-event' data-weight="3.0" style="background-color:orange; color:black;">Weight: 3.0</div>
-                    <div>
-                        <div style="margin-bottom:4px;">
-                            <input type="checkbox" id="recurring-event" style="float:left; margin-right: 0.4em;"/>
-                            <label for="recurring-event" style="font-size:12px; font-weight:normal;">Recurring Event</label>
-                        </div>
-                        <div style="vertical-align:bottom;">
-                            <label for="txtWeight" style="font-size:12px; font-weight:normal;">Weight:</label>
-                            <input id="txtWeight" style="width:50px; margin-left:15px; height:24px;" /><br />
-                        </div>
-                    </div>
-                    <div class='fc-event' id="customEvent" data-weight="-1.0" style="background-color:gold; color:black;">Weight: Custom</div>
-                </div>
+            <td style="vertical-align: top; padding: 50px 12px 0 0;">
+                <table>
+                    <tr>
+                        <td>
+                            <div id='external-events'>
+                                <h4>Weights</h4>
+                                <div class='fc-event' data-weight="0">Weight: Zero</div>
+                                <div class='fc-event' data-weight="1.0" style="background-color: black; color: white;">Weight: Normal</div>
+                                <div class='fc-event' data-weight="1.5" style="background-color: darkblue; color: white;">Weight: 1.5</div>
+                                <div class='fc-event' data-weight="2.0" style="background-color: green; color: white;">Weight: 2.0</div>
+                                <div class='fc-event' data-weight="2.5" style="background-color: olive; color: white;">Weight: 2.5</div>
+                                <div class='fc-event' data-weight="3.0" style="background-color: orange; color: black;">Weight: 3.0</div>
+                                <div>
+                                    <div style="margin-bottom: 4px;">
+                                        <input type="checkbox" id="recurring-event" style="float: left; margin-right: 0.4em;" />
+                                        <label for="recurring-event" style="font-size: 12px; font-weight: normal;">Recurring Event</label>
+                                    </div>
+                                    <div style="vertical-align: bottom;">
+                                        <label for="txtWeight" style="font-size: 12px; font-weight: normal;">Weight:</label>
+                                        <input id="txtWeight" style="width: 50px; margin-left: 15px; height: 24px;" /><br />
+                                    </div>
+                                </div>
+                                <div class='fc-event' id="customEvent" data-weight="-1.0" style="background-color: gold; color: black;">Weight: Custom</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="profile-options">
+                                <div><asp:Label runat="server" ID="Label3" Text="Profiles:"></asp:Label></div>
+                                <div><asp:DropDownList runat="server" ID="DropDownList2" Width="160px"></asp:DropDownList></div>
+                                <div style="margin-top:10px;"><asp:Label runat="server" ID="Label4" Text="Profile Name:"></asp:Label></div>
+                                <div><asp:TextBox runat="server" ID="TextBox2" Width="162px"></asp:TextBox></div>
+                                <div style="margin-top:16px">
+                                    <asp:Button runat="server" ID="Button3" Text="Load" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
+                                    <asp:Button runat="server" ID="Button4" Text="Save" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
             </td>
             <td style="width:500px; height:500px;">
                 <div id='calendar'></div>
             </td>
         </tr>
-        <tr>
-            <td colspan="2">
-                <div style="text-align:right; background-color:lightgray; padding:5px;">
-                    <table style="width:800px;">
-                        <tr>
-                            <td>
-                                <div style="text-align:right;">
-                                    <asp:Label runat="server" ID="lblProfiles" Text="Profiles:"></asp:Label>
-                                    <ajaxToolkit:ComboBox runat="server" ID="cboProfiles" DropDownStyle ="DropDown" RenderMode ="Inline"></ajaxToolkit:ComboBox>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label runat="server" ID="lblProfileName" Text="Profile Name:"></asp:Label>
-                                <asp:TextBox runat="server" ID="txtProfileName"></asp:TextBox>
-                                <asp:Button runat="server" ID="btnProfileName" Text="Save" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-
-
     </table>
-
-
 </asp:Content>
