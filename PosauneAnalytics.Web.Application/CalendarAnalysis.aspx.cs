@@ -11,18 +11,20 @@ namespace PosauneAnalytics.Web.Application
 {
     public partial class CalendarAnalysis : System.Web.UI.Page
     {
+        private static CalendarAnalysisController _controller = new CalendarAnalysisController();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
             LoadCalendarProfiles();
         }
 
         private void LoadCalendarProfiles()
         {
-            TableStorageManager tableManager = new TableStorageManager();
-            var names = tableManager.GetProfileNames("Admin1");
-            //cboProfiles.DataSource = names;
-            //cboProfiles.DataBind();
+            var _controller = new CalendarAnalysisController();
 
+            ddlProfilenames.DataSource = _controller.GetProfileNames("Admin");
+            ddlProfilenames.DataBind();
         }
 
 
@@ -30,16 +32,19 @@ namespace PosauneAnalytics.Web.Application
         public static void AjaxPost(List<CalendarEvent> calEvents)
         {
             Debug.WriteLine("AjaxPost");
+            _controller.AddCalenderEvent(calEvents);
 
-        }
-
-        public class CalendarEvent
-        {
-            public string EventDate { get; set; }
-            public string Weight { get; set; }
         }
 
         protected void btnProfileName_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txtProfilename.Text))
+            {
+                _controller.SendProfileToStorage("Admin", txtProfilename.Text);
+            }
+        }
+
+        protected void btnProfilenameLoad_Click(object sender, EventArgs e)
         {
 
         }

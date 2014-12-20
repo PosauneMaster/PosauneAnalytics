@@ -13,7 +13,6 @@ namespace PosauneAnalytics.FileManager
         private ICloudStorageAccountManager _cloudStorageAccountManager;
         private CloudStorageAccount _cloudStorageAccount;
 
-        //internal const string connectonString = "UseDevelopmentStorage=true;";
         internal const string calendarProfileNamesTable = "CalendarProfileNames";
  
         public TableStorageManager()
@@ -33,20 +32,20 @@ namespace PosauneAnalytics.FileManager
         public async Task<List<string>> GetProfileNamesAsync(string username)
         {
             List<string> list = new List<string>();
-            CloudTable table = CreateTableAsync(calendarProfileNamesTable).Result;
+            CloudTable table = CreateTableAsync(GetTableName(username)).Result;
 
-            TableQuery<CalendarProfileNameEntity> partitionQuery = new TableQuery<CalendarProfileNameEntity>().Where(
+            TableQuery<CalendarProfileEntity> partitionQuery = new TableQuery<CalendarProfileEntity>().Where(
                 TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, username));
 
             TableContinuationToken token = null;
             partitionQuery.TakeCount = 50;
             do
             {
-                TableQuerySegment<CalendarProfileNameEntity> segment = await table.ExecuteQuerySegmentedAsync(partitionQuery, token).ConfigureAwait(false);
+                TableQuerySegment<CalendarProfileEntity> segment = await table.ExecuteQuerySegmentedAsync(partitionQuery, token).ConfigureAwait(false);
                 token = segment.ContinuationToken;
-                foreach (CalendarProfileNameEntity entity in segment)
+                foreach (CalendarProfileEntity entity in segment)
                 {
-                    list.Add(entity.Name);
+                    list.Add(entity.RowKey);
                 }
             }
             while (token != null);
@@ -54,72 +53,16 @@ namespace PosauneAnalytics.FileManager
             return list;
         }
 
-        public List<CalendarWeightEntity> GetWeights(string username, string profilename)
+        public void StoreCalendarProfile(string username, string profileName, string calendarProfileJson)
         {
-            var list = new List<CalendarWeightEntity>();
-            list = GetWeightsAsync(username, profilename).Result;
-
-            return list;
-        }
-
-        public async Task<List<CalendarWeightEntity>> GetWeightsAsync(string username, string profilename)
-        {
-            string tableName = GetTableName(username);
-            CloudTable table = CreateTableAsync(tableName).Result;
-
-            List<CalendarWeightEntity> list = new List<CalendarWeightEntity>();
-
-            TableQuery<CalendarWeightEntity> partitionQuery = new TableQuery<CalendarWeightEntity>().Where(
-                TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, profilename));
-
-            TableContinuationToken token = null;
-            partitionQuery.TakeCount = 50;
-            do
+            string tablename = GetTableName(username);
+            CloudTable table = CreateTableAsync(tablename).Result;
+            CalendarProfileEntity entity = new CalendarProfileEntity(username, profileName)
             {
-                TableQuerySegment<CalendarWeightEntity> segment = await table.ExecuteQuerySegmentedAsync(partitionQuery, token).ConfigureAwait(false);
-                token = segment.ContinuationToken;
-                foreach (CalendarWeightEntity entity in segment)
-                {
-                    list.Add(new CalendarWeightEntity(entity.PartitionKey, entity.RowKey)
-                    {
-                        Weight=entity.Weight,
-                        Date = entity.Date,
-                        CalendarProfile = entity.CalendarProfile
-                    });
-                }
-            }
-            while (token != null);
-
-            return list;
-        }
-
-        public void SaveCalendarProfileName(string partitionKey, string rowKey, string profileName)
-        {
-            CloudTable table = CreateTableAsync(calendarProfileNamesTable).Result;
-
-            CalendarProfileNameEntity entity = new CalendarProfileNameEntity(partitionKey, rowKey);
-            entity.Name = profileName;
-
-            StoreEntityAsync(table, entity).Wait();
-
-        }
-
-        public void StoreCalendarWeight(string username, string partitionKey, DateTime date, string weight)
-        {
-            string tableName = GetTableName(username);
-            CloudTable table = CreateTableAsync(tableName).Result;
-            CalendarWeightEntity entity = new CalendarWeightEntity(partitionKey, date.ToString("yyyyMMdd"))
-            {
-                CalendarProfile = partitionKey,
-                Weight = weight,
-                Date = date
+                CalendarProfileJson = calendarProfileJson
             };
 
-
-            StoreEntityAsync(table, entity).Wait();
-
-            SaveCalendarProfileName(username, partitionKey, partitionKey);
-
+            StoreEntityAsync(table, entity).Wait(10000);
         }
 
         private async Task<CloudTable> CreateTableAsync(string tableName)
@@ -155,5 +98,28 @@ namespace PosauneAnalytics.FileManager
         {
             return String.Format("calendarweights{0}", username);
         }
+
+        public string RetrieveProfile
+
+        /// <summary>
+        /// Demonstrate the most efficient storage query - the point query - where both partition key and row key are specified. 
+        /// </summary>
+        /// <param name="table">Sample table name</param>
+        /// <param name="partitionKey">Partition key - ie - last name</param>
+        /// <param name="rowKey">Row key - ie - first name</param>
+        private static async Task<CalendarProfileEntity> RetrieveEntityUsingPointQueryAsync(CloudTable table, string partitionKey, string rowKey)
+        {
+            TableOperation retrieveOperation = TableOperation.Retrieve<CalendarProfileEntity>(partitionKey, rowKey);
+            TableResult result = await table.ExecuteAsync(retrieveOperation);
+            CalendarProfileEntity profile = result.Result as CalendarProfileEntity;
+            //if (customer != null)
+            //{
+            //    Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", customer.PartitionKey, customer.RowKey, customer.Email, customer.PhoneNumber);
+            //}
+
+            return profile;
+        }
+
+
     }
 }

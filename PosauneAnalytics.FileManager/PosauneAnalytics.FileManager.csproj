@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlobManager.cs" />
+    <Compile Include="CalendarProfileEntity.cs" />
     <Compile Include="CalendarProfileNameEntity.cs" />
     <Compile Include="CalendarWeightEntity.cs" />
     <Compile Include="CloudStorageAccountManager.cs" />

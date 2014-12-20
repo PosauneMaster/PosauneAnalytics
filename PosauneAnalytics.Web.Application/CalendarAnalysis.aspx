@@ -376,12 +376,12 @@
                         <td>
                             <div id="profile-options">
                                 <div><asp:Label runat="server" ID="Label3" Text="Profiles:"></asp:Label></div>
-                                <div><asp:DropDownList runat="server" ID="DropDownList2" Width="160px"></asp:DropDownList></div>
+                                <div><asp:DropDownList runat="server" ID="ddlProfilenames" Width="160px"></asp:DropDownList></div>
                                 <div style="margin-top:10px;"><asp:Label runat="server" ID="Label4" Text="Profile Name:"></asp:Label></div>
-                                <div><asp:TextBox runat="server" ID="TextBox2" Width="162px"></asp:TextBox></div>
+                                <div><asp:TextBox runat="server" ID="txtProfilename" Width="162px"></asp:TextBox></div>
                                 <div style="margin-top:16px">
-                                    <asp:Button runat="server" ID="Button3" Text="Load" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
-                                    <asp:Button runat="server" ID="Button4" Text="Save" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
+                                    <asp:Button runat="server" ID="btnProfilenameSave" Text="Load" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
+                                    <asp:Button runat="server" ID="btnProfilenameLoad" Text="Save" CssClass="profile_save_button" OnClick="btnProfilenameLoad_Click" />
                                 </div>
                             </div>
                         </td>
