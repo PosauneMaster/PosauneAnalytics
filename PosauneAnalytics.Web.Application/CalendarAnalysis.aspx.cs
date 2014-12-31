@@ -36,17 +36,26 @@ namespace PosauneAnalytics.Web.Application
 
         }
 
-        protected void btnProfileName_Click(object sender, EventArgs e)
+        [System.Web.Services.WebMethod()]
+        public static List<CalendarEvent> LoadProfile(string profilename)
+        {
+            var events = _controller.GetCalendarEvents("Admin", profilename);
+            return events;
+        }
+
+
+
+        protected void btnProfileNameSave_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(txtProfilename.Text))
             {
                 _controller.SendProfileToStorage("Admin", txtProfilename.Text);
+                txtProfilename.Text = String.Empty;
             }
         }
 
         protected void btnProfilenameLoad_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

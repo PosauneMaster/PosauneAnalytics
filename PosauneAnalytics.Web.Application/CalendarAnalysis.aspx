@@ -213,21 +213,14 @@
 
                 var eventObject = {
                     title: $.trim($(this).text()),
-                    backgroundColor: $(this).css('background-color'),
-                    textColor: $(this).css('color'),
-                    weight: $(this).attr('data-weight').valueOf()
-
-                };
-
-                $(this).data('eventObject', {
-                    title: $.trim($(this).text()),
                     stick: true,
                     color: $(this).color,
                     backgroundColor: $(this).css('background-color'),
                     textColor: $(this).css('color'),
                     weight: $(this).attr('data-weight').valueOf()
+                };
 
-                });
+                $(document.body).data(eventObject.title, eventObject);
 
                 $(this).draggable({
                     zIndex: 999,
@@ -236,7 +229,6 @@
                 });
 
             });
-
 
             $('#calendar').fullCalendar({
                 header: {
@@ -248,74 +240,105 @@
                 droppable: true,
                 drop: function (date, allDay) {
 
-
-                    var originalEventObject = $(this).data('eventObject');
-                    var copyEvent = createEvent(date, allDay, originalEventObject);
-
-                    $('#calendar').fullCalendar('removeEvents', copyEvent.id);
-
-                    var fullCalendarEvents = $.makeArray(copyEvent);
-
-                    var calEvent =
-                        {
-                            EventDate: date.toDateString(),
-                            Weight: originalEventObject.weight
-                        }
-
-                    var calEvents = $.makeArray(calEvent);
-
-                    if ($("#recurring-event").is(':checked'))
-                    {
-                            for (i = 1; i < 53; i++ ) 
-                            {
-                                var nextDate = new Date(date);
-                                nextDate.setDate(date.getDate() + (i * 7));
-
-                                var nextEvent = createEvent(nextDate, allDay, originalEventObject);
-                                $('#calendar').fullCalendar('removeEvents', nextEvent.id);
-
-                                var item =
-                                    {
-                                        EventDate: nextEvent.start.toDateString(),
-                                        Weight: nextEvent.weight
-                                    }
-
-                                calEvents.push(item);
-                                fullCalendarEvents.push(nextEvent);
-                            }
-                    }
-
-
-                    var result = $.ajax({
-                        type: 'POST',
-                        url: 'CalendarAnalysis.aspx/AjaxPost',
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: "json",
-                        data: "{'calEvents':" + JSON.stringify(calEvents) + "}",
-                        error: function (data) {
-                            //alert("Error");
-                        },
-                        success: function (data) {
-                            //alert("Success");
-                        }
-                    });
-
-                    if (originalEventObject.weight != '1.0') {
-                        $('#calendar').fullCalendar('addEventSource', fullCalendarEvents);
-                    }
-
-                    if (originalEventObject.title.indexOf('Custom') > 0)
-                    {
-                        originalEventObject.weight = "-1.0";
-                    }
-
-                    $('#customEvent').html('Weight: Custom');
-                    $('#txtWeight').val('');
-                    $("#recurring-event").prop('checked', false);
+                    var title = $.trim($(this).text());
+                    addEvent(title, date, allDay);
 
                 }
             });
         });
+
+        function addEvent(title, date, allDay) {
+
+            var originalEventObject = $(document.body).data(title);
+            var copyEvent = createEvent(date, allDay, originalEventObject);
+
+            $('#calendar').fullCalendar('removeEvents', copyEvent.id);
+
+            var fullCalendarEvents = $.makeArray(copyEvent);
+
+            var calEvent =
+                {
+                    EventDate: date.toDateString(),
+                    Weight: originalEventObject.weight
+                }
+
+            var calEvents = $.makeArray(calEvent);
+
+            if ($("#recurring-event").is(':checked')) {
+                for (i = 1; i < 53; i++) {
+                    var nextDate = new Date(date);
+                    nextDate.setDate(date.getDate() + (i * 7));
+
+                    var nextEvent = createEvent(nextDate, allDay, originalEventObject);
+                    $('#calendar').fullCalendar('removeEvents', nextEvent.id);
+
+                    var item =
+                        {
+                            EventDate: nextEvent.start.toDateString(),
+                            Weight: nextEvent.weight
+                        }
+
+                    calEvents.push(item);
+                    fullCalendarEvents.push(nextEvent);
+                }
+            }
+
+
+            var result = $.ajax({
+                type: 'POST',
+                url: 'CalendarAnalysis.aspx/AjaxPost',
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                data: "{'calEvents':" + JSON.stringify(calEvents) + "}",
+                error: function (data) {
+                    //alert("Error");
+                },
+                success: function (data) {
+                    //alert("Success");
+                }
+            });
+
+            if (originalEventObject.weight != '1.0') {
+                $('#calendar').fullCalendar('addEventSource', fullCalendarEvents);
+            }
+
+            if (originalEventObject.title.indexOf('Custom') > 0) {
+                originalEventObject.weight = "-1.0";
+            }
+
+            $('#customEvent').html('Weight: Custom');
+            $('#txtWeight').val('');
+            $("#recurring-event").prop('checked', false);
+        }
+
+        function loadProfile()
+        {
+            var profilename = $('#ddlProfilenames option:selected').text();
+
+            var result = $.ajax({
+                type: 'POST',
+                url: 'CalendarAnalysis.aspx/LoadProfile',
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                data: "{'profilename':" + JSON.stringify(profilename) + "}",
+                error: function (data) {
+                    var events = data;
+                    //alert("Error");
+                },
+                success: function (data) {
+                    var events = data;
+                    events.each(function () {
+                        var obj = this;
+
+
+                    });
+
+
+                    //alert("Success");
+                }
+            });
+        }
+
 
         function createEvent(date, allDay, originalEventObject) {
 
@@ -376,12 +399,13 @@
                         <td>
                             <div id="profile-options">
                                 <div><asp:Label runat="server" ID="Label3" Text="Profiles:"></asp:Label></div>
-                                <div><asp:DropDownList runat="server" ID="ddlProfilenames" Width="160px"></asp:DropDownList></div>
+                                <div><asp:DropDownList runat="server" ID="ddlProfilenames" ClientIDMode="Static" Width="160px"></asp:DropDownList></div>
                                 <div style="margin-top:10px;"><asp:Label runat="server" ID="Label4" Text="Profile Name:"></asp:Label></div>
                                 <div><asp:TextBox runat="server" ID="txtProfilename" Width="162px"></asp:TextBox></div>
                                 <div style="margin-top:16px">
-                                    <asp:Button runat="server" ID="btnProfilenameSave" Text="Load" CssClass="profile_save_button" OnClick="btnProfileName_Click" />
-                                    <asp:Button runat="server" ID="btnProfilenameLoad" Text="Save" CssClass="profile_save_button" OnClick="btnProfilenameLoad_Click" />
+                                    <button id="btnProfilenameLoad" class="profile_save_button" onclick="loadProfile()" >Load</button>
+<%--                                    <asp:Button runat="server" ID="btnProfilenameLoad" Text="Load" ClientIDMode="Static" CssClass="profile_save_button" OnClientClick="loadProfile()" />--%>
+                                    <asp:Button runat="server" ID="btnProfilenameSave" Text="Save" ClientIDMode="Static" CssClass="profile_save_button" OnClick="btnProfileNameSave_Click" />
                                 </div>
                             </div>
                         </td>

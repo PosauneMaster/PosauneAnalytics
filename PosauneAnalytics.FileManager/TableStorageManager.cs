@@ -99,7 +99,13 @@ namespace PosauneAnalytics.FileManager
             return String.Format("calendarweights{0}", username);
         }
 
-        public string RetrieveProfile
+        public string RetrieveProfile(string username, string profileName)
+        {
+            string tablename = GetTableName(username);
+            CloudTable table = CreateTableAsync(tablename).Result;
+            CalendarProfileEntity profile = RetrieveEntityUsingPointQueryAsync(table, username, profileName).Result;
+            return profile.CalendarProfileJson;
+        }
 
         /// <summary>
         /// Demonstrate the most efficient storage query - the point query - where both partition key and row key are specified. 
@@ -110,7 +116,7 @@ namespace PosauneAnalytics.FileManager
         private static async Task<CalendarProfileEntity> RetrieveEntityUsingPointQueryAsync(CloudTable table, string partitionKey, string rowKey)
         {
             TableOperation retrieveOperation = TableOperation.Retrieve<CalendarProfileEntity>(partitionKey, rowKey);
-            TableResult result = await table.ExecuteAsync(retrieveOperation);
+            TableResult result = await table.ExecuteAsync(retrieveOperation).ConfigureAwait(false);
             CalendarProfileEntity profile = result.Result as CalendarProfileEntity;
             //if (customer != null)
             //{

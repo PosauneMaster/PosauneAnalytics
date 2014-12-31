@@ -31,5 +31,10 @@ namespace PosauneAnalytics.Web.Application
             Name = name;
             return JsonConvert.SerializeObject(this);
         }
+
+        public static CalendarProfile ReHydrate(string json)
+        {
+            return JsonConvert.DeserializeObject<CalendarProfile>(json);
+        }
     }
 }
