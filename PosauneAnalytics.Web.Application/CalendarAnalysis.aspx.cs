@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -37,12 +38,12 @@ namespace PosauneAnalytics.Web.Application
         }
 
         [System.Web.Services.WebMethod()]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static List<CalendarEvent> LoadProfile(string profilename)
         {
             var events = _controller.GetCalendarEvents("Admin", profilename);
             return events;
         }
-
 
 
         protected void btnProfileNameSave_Click(object sender, EventArgs e)
@@ -52,10 +53,6 @@ namespace PosauneAnalytics.Web.Application
                 _controller.SendProfileToStorage("Admin", txtProfilename.Text);
                 txtProfilename.Text = String.Empty;
             }
-        }
-
-        protected void btnProfilenameLoad_Click(object sender, EventArgs e)
-        {
         }
     }
 }
