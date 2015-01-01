@@ -18,10 +18,26 @@ namespace PosauneAnalytics.Web.Application
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _controller = new VolatilityAnalysisController();
+            _controller = new VolatilityAnalysisController()
+                {
+                    Username = "Admin"
+                };
 
             calAnalysisDate.StartDate = _controller.MinDate;
             calAnalysisDate.EndDate = _controller.MaxDate;
+
+            if (!IsPostBack)
+            {
+                LoadCalendarProfiles();
+            }
+        }
+
+        private void LoadCalendarProfiles()
+        {
+            var calendarController = new CalendarAnalysisController();
+
+            ddlProfilenames.DataSource = calendarController.GetProfileNames("Admin");
+            ddlProfilenames.DataBind();
         }
 
         protected void btnRunAnalysis_Click(object sender, EventArgs e)
@@ -32,7 +48,7 @@ namespace PosauneAnalytics.Web.Application
                 return;
             }
 
-            var seriesDataList = _controller.Run(selectedDate);
+            var seriesDataList = _controller.Run(selectedDate, ddlProfilenames.SelectedValue);
 
             tcVolGrids.Visible = true;
 
@@ -51,6 +67,7 @@ namespace PosauneAnalytics.Web.Application
                 ((TextBox)control.FindControl("txtUnderlyingPrice1")).Text = data.Price;
                 ((TextBox)control.FindControl("txtExpirationDate")).Text = data.ExpirationDate;
                 ((TextBox)control.FindControl("txtDaysToExpiration")).Text = data.DaysToExpiration;
+                ((TextBox)control.FindControl("txtWeightedDays")).Text = data.WeightedDaysToExpiration;
                 ((TextBox)control.FindControl("txtRiskFreeRate")).Text = data.RiskFreeRate;
 
                 var gv = ((GridView)control.FindControl("gvSeriesInfo1"));

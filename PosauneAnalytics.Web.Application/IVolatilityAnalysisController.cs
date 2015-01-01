@@ -11,7 +11,7 @@ namespace PosauneAnalytics.Web.Application
         DateTime MinDate { get; }
         DateTime MaxDate { get; }
 
-        List<SeriesData> Run(DateTime date);
-
+        List<SeriesData> Run(DateTime date, string profilename);
+        string Username { get; set; }
     }
 }

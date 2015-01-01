@@ -14,8 +14,8 @@ namespace PosauneAnalytics.FileManager
         public List<OptionSeries> Series { get; set; }
         public PolynominalRegression Regression { get; set; }
 
-
         public int DaysToExpiration { get; set; }
+        public double WeightedDays { get; set; }
 
         public string ExpirationMonth { get; set; }
 

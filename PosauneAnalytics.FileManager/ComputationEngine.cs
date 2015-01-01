@@ -15,7 +15,7 @@ namespace PosauneAnalytics.FileManager
 
 
         public double RiskFreeRate { get; set; }
-        public double DaysToExpiration { get; set; }
+        //public double DaysToExpiration { get; set; }
 
         public ComputationEngine()
         {
@@ -44,7 +44,7 @@ namespace PosauneAnalytics.FileManager
             {
                 AssetPrice = option.Underlying.DollarPrice * 1000,
                 Strike = option.StrikePrice * 1000,
-                TimeToMaturity = CalcDaysToExpiration(option),
+                TimeToMaturity = option.DaysToExpiration,
                 RiskFreeRate = RiskFreeRate,
                 CostOfCarry = 0.00d,
                 PutCall = option.SecurityType
@@ -60,7 +60,7 @@ namespace PosauneAnalytics.FileManager
             DateTime settlementDate = option.BusinessDate;
             DateTime expirationDate = option.MaturityDate.AddDays(1);
 
-            DaysToExpiration = (expirationDate - settlementDate).TotalDays;
+            //DaysToExpiration = (expirationDate - settlementDate).TotalDays;
 
             return ((double)(expirationDate - settlementDate).TotalDays) / 360;
 
@@ -73,9 +73,10 @@ namespace PosauneAnalytics.FileManager
                 var seriesDictionary = new Dictionary<Double, OptionSeries>();
                 foreach (var opt in si.Options)
                 {
+                    opt.DaysToExpiration = CalcDaysToExpiration(opt);
                     ComputeImplied(opt);
                     si.RiskFreeRate = RiskFreeRate;
-                    si.DaysToExpiration = (int)DaysToExpiration;
+                    si.DaysToExpiration = Convert.ToInt32(CalcDaysToExpiration(opt));
 
                     if (!seriesDictionary.ContainsKey(opt.StrikePrice))
                     {

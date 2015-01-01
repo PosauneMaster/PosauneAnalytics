@@ -19,6 +19,7 @@ namespace PosauneAnalytics.Web.Application
 
         public DateTime MinDate { get { return _fileCollection.Keys.Min(); } }
         public DateTime MaxDate { get { return _fileCollection.Keys.Max(); } }
+        public string Username { get; set; }
 
         public VolatilityAnalysisController()
         {
@@ -47,13 +48,37 @@ namespace PosauneAnalytics.Web.Application
             }
         }
 
-        public List<SeriesData> Run(DateTime date)
+        private void ApplyWeights(IEnumerable<SeriesInfo> series, Dictionary<DateTime, double> adjustments)
         {
+            foreach (var si in series)
+            {
+                if (adjustments.ContainsKey(si.ExpirationDate))
+                {
+                    si.WeightedDays = adjustments[si.ExpirationDate];
+                }
+                else
+                {
+                    si.WeightedDays = Convert.ToDouble(si.DaysToExpiration);
+                }
+            }
+        }
+
+        public List<SeriesData> Run(DateTime date, string profilename)
+        {
+            ICalendarService service = new CalendarService()
+            {
+                Username = Username,
+                Profilename = profilename
+            };
+
             var seriesData = new List<SeriesData>();
 
             var fileName = FindFilename(date);
 
             var seriesInfoList = _fileMapper.MapToSeries(fileName);
+
+            ApplyWeights(seriesInfoList.Values, service.ComputeAdjustments(date, seriesInfoList.Keys));
+
             _engine.ComputeSeriesAnalysis(seriesInfoList.Values);
 
             
@@ -74,6 +99,7 @@ namespace PosauneAnalytics.Web.Application
                     ExpirationDate = si.ExpirationDate.ToString("MM/dd/yyyy"),
                     RiskFreeRate = si.RiskFreeRate.ToString("P2"),
                     DaysToExpiration = si.DaysToExpiration.ToString("G"),
+                    WeightedDaysToExpiration = si.WeightedDays.ToString("G"),
                     Polynomial = si.Regression.LeastSquaresFit(),
                     Model = table
                 });
@@ -166,6 +192,7 @@ namespace PosauneAnalytics.Web.Application
         public string ExpirationDate { get; set; }
         public string RiskFreeRate { get; set; }
         public string DaysToExpiration { get; set; }
+        public string WeightedDaysToExpiration { get; set; }
         public string Polynomial { get; set; }
         public VolatilityAnalysisModel.SeriesBaseDataTable Model { get; set; }
     }

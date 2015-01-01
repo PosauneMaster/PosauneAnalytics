@@ -13,6 +13,15 @@ namespace PosauneAnalytics.Web.Application {
     public partial class VolatilityAnalysis {
         
         /// <summary>
+        /// pnlSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSettings;
+        
+        /// <summary>
         /// txtAnalysisDate control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace PosauneAnalytics.Web.Application {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender calAnalysisDate;
+        
+        /// <summary>
+        /// ddlProfilenames control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlProfilenames;
         
         /// <summary>
         /// btnRunAnalysis control.

@@ -15,7 +15,7 @@ namespace PosauneAnalytics.FileManager
 {
     public class BlobManager : IBlobManager
     {
-        private CloudStorageAccount _storageAccount;
+        //private CloudStorageAccount _storageAccount;
         private CloudBlobClient _blobClient;
         private CloudBlobContainer _container;
 

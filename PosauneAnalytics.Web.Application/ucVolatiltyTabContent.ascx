@@ -27,6 +27,10 @@
                         <asp:TextBox runat="server" ID="txtDaysToExpiration" CssClass="series_info_textbox"></asp:TextBox>
                     </div>
                     <div>
+                        <asp:Label runat="server" Text="Weighted Days:"></asp:Label>
+                        <asp:TextBox runat="server" ID="txtWeightedDays" CssClass="series_info_textbox"></asp:TextBox>
+                    </div>
+                    <div>
                         <asp:Label runat="server" Text="Risk Free Rate:"></asp:Label>
                         <asp:TextBox runat="server" ID="txtRiskFreeRate" CssClass="series_info_textbox"></asp:TextBox>
                     </div>

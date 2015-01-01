@@ -3,15 +3,23 @@
 <asp:Content ContentPlaceHolderID="headerPlaceHolder" runat="server">
 
     <style type="text/css">
+
+        .calendar_popup_image {
+            padding-top:4px;
+            padding-left:10px;
+        }
+
         #analysis-date {
-            width: 260px;
-            height: 60px;
+            width: 200px;
+            height: 200px;
             padding: 10px;
             border: 1px solid #ccc;
             background: #eee;
             text-align: left;
             margin-top: 24px;
             vertical-align:top;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #DDD inset;
         }
 
         .expireDateInfo {
@@ -58,7 +66,6 @@
         .data_grid_center {
             font-family: Verdana, Arial, Helvetica, sans-serif;
             font-size: 11px;
-            /*color: #0F465B;*/
             color:black;
             background-color:lightblue;
             padding: 0px 4px 0px 20px;
@@ -132,26 +139,21 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div>
+        <asp:Panel runat="server" DefaultButton="btnRunAnalysis" ID="pnlSettings">
         <table>
             <tr>
                 <td style="vertical-align:top;">
                     <div id="analysis-date">
                         <table>
-                            <tr>
-                                <td><span>Analysis Date:</span></td>
-                                <td>
-                                    <asp:TextBox runat="server" ID="txtAnalysisDate" CssClass="expireDateInfo"></asp:TextBox></td>
-                                <td style="padding-top: 12px;">
-                                    <asp:ImageButton runat="server" ID="imgAnalysisDate" ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
-                                    <ajaxToolkit:CalendarExtender runat="server" ID="calAnalysisDate" Enabled="true" Format="MM/dd/yyyy"
-                                        PopupButtonID="imgAnalysisDate" TargetControlID="txtAnalysisDate">
-                                    </ajaxToolkit:CalendarExtender>
-                                </td>
-                            </tr>
+                            <tr><td><asp:Label runat="server" Text="Analysis Date:"></asp:Label></td></tr>
+                            <tr><td><asp:TextBox runat="server" ID="txtAnalysisDate" CssClass="expireDateInfo"></asp:TextBox>
+                                    <div><asp:ImageButton runat="server" ID="imgAnalysisDate" CssClass="calendar_popup_image" ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" /></div>
+                                    <ajaxToolkit:CalendarExtender runat="server" ID="calAnalysisDate" Enabled="true" Format="MM/dd/yyyy" PopupButtonID="imgAnalysisDate"
+                                         TargetControlID="txtAnalysisDate"></ajaxToolkit:CalendarExtender></td></tr>
+                            <tr><td><div style="padding-top:6px;"><asp:Label runat="server" Text="Calendar Profile:"></asp:Label></div></td></tr>
+                            <tr><td><asp:DropDownList runat="server" ID="ddlProfilenames" CssClass="expireDateInfo" Width="180px" ></asp:DropDownList></td></tr>
+                            <tr><td><div style="padding-top:16px; text-align:right;"><asp:Button runat="server" ID="btnRunAnalysis" CssClass="button" Text="Run Analysis" OnClick="btnRunAnalysis_Click" /></div></td></tr>
                         </table>
-                    </div>
-                    <div style="margin-top: 8px; width: 260px; text-align: right;">
-                        <asp:Button runat="server" ID="btnRunAnalysis" CssClass="button" Text="Run Analysis" OnClick="btnRunAnalysis_Click" />
                     </div>
                 </td>
                 <td>
@@ -162,6 +164,7 @@
                 </td>
             </tr>
         </table>
+    </asp:Panel>
     </div>
 </asp:Content>
 

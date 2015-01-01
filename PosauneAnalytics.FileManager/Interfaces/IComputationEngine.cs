@@ -9,7 +9,7 @@ namespace PosauneAnalytics.FileManager
     public interface IComputationEngine
     {
         double RiskFreeRate { get; set; }
-        double DaysToExpiration { get; set; }
+        //double DaysToExpiration { get; set; }
 
         void ComputeImplied(OptionSettlement option);
         void ComputeSeriesAnalysis(IEnumerable<SeriesInfo> seriesInfo);
