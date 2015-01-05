@@ -8,6 +8,7 @@ namespace PosauneAnalytics.Web.Application
 {
     public class CalendarEvent
     {
+        public string Id { get; set; }
         public string EventDate { get; set; }
         public string Weight { get; set; }
 

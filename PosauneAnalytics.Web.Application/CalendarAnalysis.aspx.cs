@@ -28,11 +28,9 @@ namespace PosauneAnalytics.Web.Application
             ddlProfilenames.DataBind();
         }
 
-
         [System.Web.Services.WebMethod()]
-        public static void AjaxPost(List<CalendarEvent> calEvents)
+        public static void AddEvent(List<CalendarEvent> calEvents)
         {
-            Debug.WriteLine("AjaxPost");
             _controller.AddCalenderEvent(calEvents);
 
         }
@@ -45,6 +43,18 @@ namespace PosauneAnalytics.Web.Application
             return events;
         }
 
+        [System.Web.Services.WebMethod()]
+        public static void RemoveEvents(List<CalendarEvent> calEvents)
+        {
+            _controller.RemovEvents(calEvents);
+        }
+
+
+        [System.Web.Services.WebMethod()]
+        public static void ClearAllEvents()
+        {
+            _controller.ClearAllEvents();
+        }
 
         protected void btnProfileNameSave_Click(object sender, EventArgs e)
         {

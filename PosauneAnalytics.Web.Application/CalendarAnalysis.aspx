@@ -175,9 +175,9 @@
 
                 if ($.isNumeric(this.value))
                 {
-                    $('#customEvent').html('Weight: ' + this.value);
+                    $('#weight_custom').html('Weight: ' + this.value);
 
-                    var eventObj = $('#customEvent').data('eventObject');
+                    var eventObj = $('#weight_custom').data($('#weight_custom').attr('id'));
                     eventObj.weight = this.value;
                 }
                 else
@@ -211,6 +211,8 @@
 
             $('#external-events .fc-event').each(function () {
 
+                var id = $(this).attr('id');
+
                 var eventObject = {
                     title: $.trim($(this).text()),
                     stick: true,
@@ -220,7 +222,7 @@
                     weight: $(this).attr('data-weight').valueOf()
                 };
 
-                $(document.body).data(eventObject.title, eventObject);
+                $(this).data(id, eventObject);
 
                 $(this).draggable({
                     zIndex: 999,
@@ -241,26 +243,42 @@
                 drop: function (date, allDay) {
 
                     var title = $.trim($(this).text());
-                    addEvent(title, date, allDay);
+                    var id = $(this).attr('id');
+                    addEvent(id, title, date, allDay);
 
                 }
             });
         });
 
-        function addEvent(title, date, allDay) {
+        function addEvent(id, title, date, allDay, weight) {
 
-            var originalEventObject = $(document.body).data(title);
-            var copyEvent = createEvent(date, allDay, originalEventObject);
+            var originalEventObject = $('#' + id).data(id);
+
+            var wght = originalEventObject.weight;
+
+            if (arguments.length == 5)
+            {
+                wght = weight;
+            }
+
+            var copyEvent = createEvent(date, allDay, originalEventObject, wght);
 
             $('#calendar').fullCalendar('removeEvents', copyEvent.id);
 
-            var fullCalendarEvents = $.makeArray(copyEvent);
-
             var calEvent =
-                {
-                    EventDate: date.toDateString(),
-                    Weight: originalEventObject.weight
-                }
+            {
+                Id: id,
+                EventDate: date.toDateString(),
+                Weight: wght
+            }
+
+            if (id == "weight_1")
+            {
+                removeEvent(calEvent);
+                return;
+            }
+
+            var fullCalendarEvents = $.makeArray(copyEvent);
 
             var calEvents = $.makeArray(calEvent);
 
@@ -269,11 +287,12 @@
                     var nextDate = new Date(date);
                     nextDate.setDate(date.getDate() + (i * 7));
 
-                    var nextEvent = createEvent(nextDate, allDay, originalEventObject);
+                    var nextEvent = createEvent(nextDate, allDay, originalEventObject, wght);
                     $('#calendar').fullCalendar('removeEvents', nextEvent.id);
 
                     var item =
                         {
+                            Id: id,
                             EventDate: nextEvent.start.toDateString(),
                             Weight: nextEvent.weight
                         }
@@ -283,10 +302,9 @@
                 }
             }
 
-
             var result = $.ajax({
                 type: 'POST',
-                url: 'CalendarAnalysis.aspx/AjaxPost',
+                url: 'CalendarAnalysis.aspx/AddEvent',
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 data: "{'calEvents':" + JSON.stringify(calEvents) + "}",
@@ -306,13 +324,33 @@
                 originalEventObject.weight = "-1.0";
             }
 
-            $('#customEvent').html('Weight: Custom');
+            $('#weight_custom').html('Weight: Custom');
             $('#txtWeight').val('');
             $("#recurring-event").prop('checked', false);
         }
 
+        function removeAll()
+        {
+            var eventsToDelete = $('#calendar').fullCalendar('removeEvents');
+
+            var result = $.ajax({
+                type: 'POST',
+                url: 'CalendarAnalysis.aspx/ClearAllEvents',
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                error: function (data) {
+                    //alert("Error");
+                },
+                success: function (data) {
+                    //alert("Success");
+                }
+            });
+        }
+
         function loadProfile()
         {
+            removeAll();
+
             var profilename = $('#ddlProfilenames option:selected').text();
 
             var result = $.ajax({
@@ -329,36 +367,58 @@
 
                     $.each(data.d, function (index, value) {
                         var eventObj = value;
+                        var id = eventObj.Id;
                         var title = 'Weight: ' + eventObj.Weight;
                         var eventDate = new Date(eventObj.EventDate);
-                        addEvent(title, eventDate, true);
+                        addEvent(id, title, eventDate, true, eventObj.Weight);
 
                     });
-
-                    //alert("Success");
                 }
             });
         }
 
-
-        function createEvent(date, allDay, originalEventObject) {
+        function createEvent(date, allDay, originalEventObject, weight) {
 
             var copiedEventObject = $.extend({}, originalEventObject);
 
             copiedEventObject.start = date;
             copiedEventObject.allDay = allDay;
-            copiedEventObject.title = "Weight: " + originalEventObject.weight;
+            copiedEventObject.title = "Weight: " + weight;
             copiedEventObject.backgroundColor = originalEventObject.backgroundColor;
             copiedEventObject.textColor = originalEventObject.textColor;
-            copiedEventObject.weight = originalEventObject.weight;
+            copiedEventObject.weight = weight;
             copiedEventObject.id = date.toDateString();
             copiedEventObject.editable = false;
 
             return copiedEventObject;
-
         }
 
         var _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+        function removeEvent(calEvent) {
+
+            var calEvents = $.makeArray(calEvent);
+            removeEvents(calEvents);
+
+        }
+
+        function removeEvents(calEvents) {
+
+            var result = $.ajax({
+                type: 'POST',
+                url: 'CalendarAnalysis.aspx/RemoveEvents',
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                data: "{'calEvents':" + JSON.stringify(calEvents) + "}",
+                error: function (data) {
+                    //alert("Error");
+                },
+                success: function (data) {
+                    //alert("Success");
+                }
+            });
+        }
+
 
     </script>
 
@@ -367,6 +427,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
   
     <div style="height:50px;"></div>
+    <div><asp:Button runat="server" Text="Clear" Width="120px" Height="26px" ClientIDMode="Static" ID="btnClear" UseSubmitBehavior="false" OnClientClick="removeAll(); return false;"/></div>
 
     <table id="mainTable">
         <tr>
@@ -376,12 +437,12 @@
                         <td>
                             <div id='external-events'>
                                 <h4>Weights</h4>
-                                <div class='fc-event' data-weight="0">Weight: Zero</div>
-                                <div class='fc-event' data-weight="1.0" style="background-color: black; color: white;">Weight: Normal</div>
-                                <div class='fc-event' data-weight="1.5" style="background-color: darkblue; color: white;">Weight: 1.5</div>
-                                <div class='fc-event' data-weight="2.0" style="background-color: green; color: white;">Weight: 2.0</div>
-                                <div class='fc-event' data-weight="2.5" style="background-color: olive; color: white;">Weight: 2.5</div>
-                                <div class='fc-event' data-weight="3.0" style="background-color: orange; color: black;">Weight: 3.0</div>
+                                <div class='fc-event' id="weight_zero" data-weight="0">Weight: Zero</div>
+                                <div class='fc-event' id="weight_1" data-weight="1.0" style="background-color: black; color: white;">Weight: Normal</div>
+                                <div class='fc-event' id="weight_1_5" data-weight="1.5" style="background-color: darkblue; color: white;">Weight: 1.5</div>
+                                <div class='fc-event' id="weight_2_0" data-weight="2.0" style="background-color: green; color: white;">Weight: 2.0</div>
+                                <div class='fc-event' id="weight_2_5" data-weight="2.5" style="background-color: olive; color: white;">Weight: 2.5</div>
+                                <div class='fc-event' id="weight_3_0" data-weight="3.0" style="background-color: orange; color: black;">Weight: 3.0</div>
                                 <div>
                                     <div style="margin-bottom: 4px;">
                                         <input type="checkbox" id="recurring-event" style="float: left; margin-right: 0.4em;" />
@@ -392,7 +453,7 @@
                                         <input id="txtWeight" style="width: 50px; margin-left: 15px; height: 24px;" /><br />
                                     </div>
                                 </div>
-                                <div class='fc-event' id="customEvent" data-weight="-1.0" style="background-color: gold; color: black;">Weight: Custom</div>
+                                <div class='fc-event' id="weight_custom" data-weight="-1.0" style="background-color: gold; color: black;">Weight: Custom</div>
                             </div>
                         </td>
                     </tr>
@@ -404,14 +465,13 @@
                                 <div style="margin-top:10px;"><asp:Label runat="server" ID="Label4" Text="Profile Name:"></asp:Label></div>
                                 <div><asp:TextBox runat="server" ID="txtProfilename" Width="162px"></asp:TextBox></div>
                                 <div style="margin-top:16px">
-                                    <asp:Button runat="server" ID="btnProfilenameLoad" Text="Load" ClientIDMode="Static" CssClass="profile_save_button" OnClientClick="loadProfile(); return false;" />
+                                    <asp:Button runat="server" ID="btnProfilenameLoad" Text="Load" ClientIDMode="Static" UseSubmitBehavior="false" CssClass="profile_save_button" OnClientClick="loadProfile(); return false;" />
                                     <asp:Button runat="server" ID="btnProfilenameSave" Text="Save" ClientIDMode="Static" CssClass="profile_save_button" OnClick="btnProfileNameSave_Click" />
                                 </div>
                             </div>
                         </td>
                     </tr>
                 </table>
-
             </td>
             <td style="width:500px; height:500px;">
                 <div id='calendar'></div>
