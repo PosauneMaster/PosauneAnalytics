@@ -15,7 +15,6 @@ namespace PosauneAnalytics.FileManager
 
 
         public double RiskFreeRate { get; set; }
-        //public double DaysToExpiration { get; set; }
 
         public ComputationEngine()
         {
@@ -44,7 +43,7 @@ namespace PosauneAnalytics.FileManager
             {
                 AssetPrice = option.Underlying.DollarPrice * 1000,
                 Strike = option.StrikePrice * 1000,
-                TimeToMaturity = option.DaysToExpiration,
+                TimeToMaturity = option.TimeToExpiration,
                 RiskFreeRate = RiskFreeRate,
                 CostOfCarry = 0.00d,
                 PutCall = option.SecurityType
@@ -55,28 +54,54 @@ namespace PosauneAnalytics.FileManager
                 optionDataObject.PutCall, optionDataObject.Strike, optionDataObject.AssetPrice, optionDataObject.TimeToMaturity, optionDataObject.RiskFreeRate, optionDataObject.CostOfCarry, option.ImpliedVolatility);
         }
 
-        private double CalcDaysToExpiration(OptionSettlement option)
+        private double CalcTimeToExpiration(OptionSettlement option)
         {
             DateTime settlementDate = option.BusinessDate;
             DateTime expirationDate = option.MaturityDate.AddDays(1);
-
-            //DaysToExpiration = (expirationDate - settlementDate).TotalDays;
 
             return ((double)(expirationDate - settlementDate).TotalDays) / 360;
 
         }
 
-        public void ComputeSeriesAnalysis(IEnumerable<SeriesInfo> seriesInfo)
+        public Dictionary<Guid, SeriesInfo> ComputeSeriesAnalysisWeighted(IEnumerable<SeriesInfo> seriesInfo)
         {
+            SetSeriesTimeToExpiration(seriesInfo);
+            return ComputeSeries(seriesInfo);
+        }
+
+        private void SetSeriesTimeToExpiration(IEnumerable<SeriesInfo> seriesInfo)
+        {
+            foreach (var si in seriesInfo)
+            {
+                si.Options.ForEach(o => o.TimeToExpiration = si.TimeToExpiration);
+            }
+        }
+
+        private void CalcTimeToExpiration(IEnumerable<SeriesInfo> seriesInfo)
+        {
+            foreach (var si in seriesInfo)
+            {
+                si.Options.ForEach(o => o.TimeToExpiration = CalcTimeToExpiration(o));
+                si.TimeToExpiration = CalcTimeToExpiration(si.Options.FirstOrDefault());
+            }
+        }
+
+        public Dictionary<Guid, SeriesInfo> ComputeSeriesAnalysis(IEnumerable<SeriesInfo> seriesInfo)
+        {
+            CalcTimeToExpiration(seriesInfo);
+            return ComputeSeries(seriesInfo);
+        }
+
+        private Dictionary<Guid, SeriesInfo> ComputeSeries(IEnumerable<SeriesInfo> seriesInfo)
+        {
+            var seriesLookUp = new Dictionary<Guid, SeriesInfo>();
             foreach (var si in seriesInfo)
             {
                 var seriesDictionary = new Dictionary<Double, OptionSeries>();
                 foreach (var opt in si.Options)
                 {
-                    opt.DaysToExpiration = CalcDaysToExpiration(opt);
                     ComputeImplied(opt);
                     si.RiskFreeRate = RiskFreeRate;
-                    si.DaysToExpiration = Convert.ToInt32(CalcDaysToExpiration(opt));
 
                     if (!seriesDictionary.ContainsKey(opt.StrikePrice))
                     {
@@ -89,7 +114,10 @@ namespace PosauneAnalytics.FileManager
 
                 si.Regression = ComputeSkew(seriesDictionary.Values);
                 si.AddOptionSeries(seriesDictionary.Values);
+                seriesLookUp.Add(si.SeriesId, si);
             }
+
+            return seriesLookUp;
         }
 
         public PolynominalRegression ComputeSkew(IEnumerable<OptionSeries> series)
@@ -121,7 +149,7 @@ namespace PosauneAnalytics.FileManager
 
                 double underlyingPrice = o.Call.Underlying.DollarPrice * 1000;
                 double strikePrice = o.Call.StrikePrice * 1000;
-                double timeToMaturity = CalcDaysToExpiration(o.Call);
+                double timeToMaturity = CalcTimeToExpiration(o.Call);
 
                 o.SetCallPrice(_blackScholes.GBlackScholesPrice(
                     SecurityType.Call, underlyingPrice, strikePrice, timeToMaturity, RiskFreeRate, 0.00d, o.SeriesBaseImpliedVolatility));
@@ -136,6 +164,7 @@ namespace PosauneAnalytics.FileManager
         }
     }
 
+    [Serializable]
     public class OptionSeries
     {
         public OptionSettlement Call { get; set; }

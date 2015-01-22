@@ -1,21 +1,27 @@
 ﻿using PosauneAnalytics.Libraries;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PosauneAnalytics.FileManager
 {
+    [Serializable]
     public class SeriesInfo
     {
+        public Guid SeriesId { get; set; }
+        public Guid ParentSeriesId { get; set; }
+
         public Settlement Underlying { get; set; }
         public List<OptionSettlement> Options { get; set; }
         public List<OptionSeries> Series { get; set; }
         public PolynominalRegression Regression { get; set; }
 
         public int DaysToExpiration { get; set; }
-        public double WeightedDays { get; set; }
+        public double TimeToExpiration { get; set; }
 
         public string ExpirationMonth { get; set; }
 
@@ -36,6 +42,8 @@ namespace PosauneAnalytics.FileManager
         public SeriesInfo()
         {
             Options = new List<OptionSettlement>();
+            SeriesId = Guid.NewGuid();
+            ParentSeriesId = SeriesId;
         }
 
         public void AddOptionSeries(IEnumerable<OptionSeries> series)
@@ -74,6 +82,24 @@ namespace PosauneAnalytics.FileManager
             }
 
             return sb.ToString();
+        }
+
+        public void SetParent(Guid parentId)
+        {
+            ParentSeriesId = parentId;
+            SeriesId = Guid.NewGuid();
+        }
+
+        public static SeriesInfo DeepCopy(SeriesInfo source)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, source);
+                ms.Position = 0;
+
+                return formatter.Deserialize(ms) as SeriesInfo;
+            }
         }
     }
 }

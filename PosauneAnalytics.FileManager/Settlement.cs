@@ -8,6 +8,7 @@ using System.Xml;
 
 namespace PosauneAnalytics.FileManager
 {
+    [Serializable]
     public class Settlement
     {
         public DateTime BusinessDate { get; set; }

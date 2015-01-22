@@ -48,19 +48,19 @@ namespace PosauneAnalytics.Web.Application
             }
         }
 
-        private void ApplyWeights(IEnumerable<SeriesInfo> series, Dictionary<DateTime, double> adjustments)
+        private Dictionary<DateTime, SeriesInfo> CreateWeightedSeries(Dictionary<DateTime, SeriesInfo> seriesList, Dictionary<DateTime, double> weights)
         {
-            foreach (var si in series)
+
+            var weighted = new Dictionary<DateTime, SeriesInfo>();
+            foreach (var kvp in seriesList)
             {
-                if (adjustments.ContainsKey(si.ExpirationDate))
-                {
-                    si.WeightedDays = adjustments[si.ExpirationDate];
-                }
-                else
-                {
-                    si.WeightedDays = Convert.ToDouble(si.DaysToExpiration);
-                }
+                var info = SeriesInfo.DeepCopy(kvp.Value);
+                info.SetParent(info.SeriesId);
+                info.TimeToExpiration = weights[kvp.Key];
+                weighted.Add(kvp.Key, info);
             }
+
+            return weighted;
         }
 
         public List<SeriesData> Run(DateTime date, string profilename)
@@ -76,12 +76,12 @@ namespace PosauneAnalytics.Web.Application
             var fileName = FindFilename(date);
 
             var seriesInfoList = _fileMapper.MapToSeries(fileName);
+            var weights = service.ComputeAdjustments(date, seriesInfoList.Keys);
+            var weightedSeriesList = CreateWeightedSeries(seriesInfoList, weights);
 
-            ApplyWeights(seriesInfoList.Values, service.ComputeAdjustments(date, seriesInfoList.Keys));
+            var seriesLookUp = _engine.ComputeSeriesAnalysis(seriesInfoList.Values);
+            _engine.ComputeSeriesAnalysisWeighted(weightedSeriesList.Values);
 
-            _engine.ComputeSeriesAnalysis(seriesInfoList.Values);
-
-            
             foreach (SeriesInfo si in seriesInfoList.Values)
             {
                 var table = new VolatilityAnalysisModel.SeriesBaseDataTable();
@@ -99,7 +99,7 @@ namespace PosauneAnalytics.Web.Application
                     ExpirationDate = si.ExpirationDate.ToString("MM/dd/yyyy"),
                     RiskFreeRate = si.RiskFreeRate.ToString("P2"),
                     DaysToExpiration = si.DaysToExpiration.ToString("G"),
-                    WeightedDaysToExpiration = si.WeightedDays.ToString("G"),
+                    //WeightedDaysToExpiration = si.WeightedDays.ToString("G"),
                     Polynomial = si.Regression.LeastSquaresFit(),
                     Model = table
                 });

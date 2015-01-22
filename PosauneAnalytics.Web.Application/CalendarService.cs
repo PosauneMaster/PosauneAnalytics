@@ -13,6 +13,11 @@ namespace PosauneAnalytics.Web.Application
 
         public CalendarService() { }
 
+        public double ComputeWeightedTime(DateTime analysisDate, DateTime expiration)
+        {
+            return ComputeWeightedDays(analysisDate, expiration) / 360;
+        }
+
         public double ComputeWeightedDays(DateTime analysisDate, DateTime expiration)
         {
             double weight = 0.00d;
@@ -37,7 +42,7 @@ namespace PosauneAnalytics.Web.Application
 
             foreach (var dt in expirations)
             {
-                adjustments.Add(dt, ComputeWeightedDays(analysisDate, dt));
+                adjustments.Add(dt, ComputeWeightedTime(analysisDate, dt));
             }
 
             return adjustments;

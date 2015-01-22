@@ -8,6 +8,7 @@ using System.Xml;
 
 namespace PosauneAnalytics.FileManager
 {
+    [Serializable]
     public class SettlementUtils : ISettlementUtils
     {
         public DateTime GetDateTimeFromNode(XmlNode node, string attrName)

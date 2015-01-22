@@ -7,12 +7,13 @@ using System.Xml;
 
 namespace PosauneAnalytics.FileManager
 {
+    [Serializable]
     public class OptionSettlement : Settlement
     {
         public double StrikePrice { get; set; }
         public double ImpliedVolatility { get; set; }
         public double Delta { get; set; }
-        public double DaysToExpiration { get; set; }
+        public double TimeToExpiration { get; set; }
 
         public string ImpliedVolatilityDisplay 
         {

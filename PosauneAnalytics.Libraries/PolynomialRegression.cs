@@ -10,6 +10,7 @@ using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace PosauneAnalytics.Libraries
 {
+    [Serializable]
     public class PolynominalRegression
     {
         private int _order;
