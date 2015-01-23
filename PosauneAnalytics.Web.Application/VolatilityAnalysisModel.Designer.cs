@@ -309,6 +309,18 @@ namespace PosauneAnalytics.Web.Application {
             
             private global::System.Data.DataColumn columnTheoPut;
             
+            private global::System.Data.DataColumn columnImpliedVolCall_Weighted;
+            
+            private global::System.Data.DataColumn columnImpliedVolPut_Weighted;
+            
+            private global::System.Data.DataColumn columnPutDelta_Weighted;
+            
+            private global::System.Data.DataColumn columnCallDelta_Weighted;
+            
+            private global::System.Data.DataColumn columnTheoCall_Weighted;
+            
+            private global::System.Data.DataColumn columnTheoPut_Weighted;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SeriesBaseDataTable() {
@@ -464,6 +476,54 @@ namespace PosauneAnalytics.Web.Application {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImpliedVolCall_WeightedColumn {
+                get {
+                    return this.columnImpliedVolCall_Weighted;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImpliedVolPut_WeightedColumn {
+                get {
+                    return this.columnImpliedVolPut_Weighted;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PutDelta_WeightedColumn {
+                get {
+                    return this.columnPutDelta_Weighted;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CallDelta_WeightedColumn {
+                get {
+                    return this.columnCallDelta_Weighted;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TheoCall_WeightedColumn {
+                get {
+                    return this.columnTheoCall_Weighted;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TheoPut_WeightedColumn {
+                get {
+                    return this.columnTheoPut_Weighted;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -499,7 +559,28 @@ namespace PosauneAnalytics.Web.Application {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SeriesBaseRow AddSeriesBaseRow(double StrikePrice, string SettlePriceCall, string SettlePricePut, string ImpliedVolCall, string ImpliedVolPut, bool Visible, double DollarSettleCall, double DollarSettlePut, double PutDelta, double CallDelta, double SeriesBaseVol, double TheoCallDollar, double TheoPutDollar, string TheoCall, string TheoPut) {
+            public SeriesBaseRow AddSeriesBaseRow(
+                        double StrikePrice, 
+                        string SettlePriceCall, 
+                        string SettlePricePut, 
+                        string ImpliedVolCall, 
+                        string ImpliedVolPut, 
+                        bool Visible, 
+                        double DollarSettleCall, 
+                        double DollarSettlePut, 
+                        double PutDelta, 
+                        double CallDelta, 
+                        double SeriesBaseVol, 
+                        double TheoCallDollar, 
+                        double TheoPutDollar, 
+                        string TheoCall, 
+                        string TheoPut, 
+                        string ImpliedVolCall_Weighted, 
+                        string ImpliedVolPut_Weighted, 
+                        double PutDelta_Weighted, 
+                        double CallDelta_Weighted, 
+                        string TheoCall_Weighted, 
+                        string TheoPut_Weighted) {
                 SeriesBaseRow rowSeriesBaseRow = ((SeriesBaseRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         StrikePrice,
@@ -516,7 +597,13 @@ namespace PosauneAnalytics.Web.Application {
                         TheoCallDollar,
                         TheoPutDollar,
                         TheoCall,
-                        TheoPut};
+                        TheoPut,
+                        ImpliedVolCall_Weighted,
+                        ImpliedVolPut_Weighted,
+                        PutDelta_Weighted,
+                        CallDelta_Weighted,
+                        TheoCall_Weighted,
+                        TheoPut_Weighted};
                 rowSeriesBaseRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSeriesBaseRow);
                 return rowSeriesBaseRow;
@@ -561,6 +648,12 @@ namespace PosauneAnalytics.Web.Application {
                 this.columnTheoPutDollar = base.Columns["TheoPutDollar"];
                 this.columnTheoCall = base.Columns["TheoCall"];
                 this.columnTheoPut = base.Columns["TheoPut"];
+                this.columnImpliedVolCall_Weighted = base.Columns["ImpliedVolCall_Weighted"];
+                this.columnImpliedVolPut_Weighted = base.Columns["ImpliedVolPut_Weighted"];
+                this.columnPutDelta_Weighted = base.Columns["PutDelta_Weighted"];
+                this.columnCallDelta_Weighted = base.Columns["CallDelta_Weighted"];
+                this.columnTheoCall_Weighted = base.Columns["TheoCall_Weighted"];
+                this.columnTheoPut_Weighted = base.Columns["TheoPut_Weighted"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -596,6 +689,18 @@ namespace PosauneAnalytics.Web.Application {
                 base.Columns.Add(this.columnTheoCall);
                 this.columnTheoPut = new global::System.Data.DataColumn("TheoPut", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTheoPut);
+                this.columnImpliedVolCall_Weighted = new global::System.Data.DataColumn("ImpliedVolCall_Weighted", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImpliedVolCall_Weighted);
+                this.columnImpliedVolPut_Weighted = new global::System.Data.DataColumn("ImpliedVolPut_Weighted", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImpliedVolPut_Weighted);
+                this.columnPutDelta_Weighted = new global::System.Data.DataColumn("PutDelta_Weighted", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPutDelta_Weighted);
+                this.columnCallDelta_Weighted = new global::System.Data.DataColumn("CallDelta_Weighted", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCallDelta_Weighted);
+                this.columnTheoCall_Weighted = new global::System.Data.DataColumn("TheoCall_Weighted", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTheoCall_Weighted);
+                this.columnTheoPut_Weighted = new global::System.Data.DataColumn("TheoPut_Weighted", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTheoPut_Weighted);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnStrikePrice}, true));
                 this.columnStrikePrice.AllowDBNull = false;
@@ -977,6 +1082,102 @@ namespace PosauneAnalytics.Web.Application {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ImpliedVolCall_Weighted {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeriesBase.ImpliedVolCall_WeightedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ImpliedVolCall_Weighted\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.ImpliedVolCall_WeightedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ImpliedVolPut_Weighted {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeriesBase.ImpliedVolPut_WeightedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ImpliedVolPut_Weighted\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.ImpliedVolPut_WeightedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double PutDelta_Weighted {
+                get {
+                    try {
+                        return ((double)(this[this.tableSeriesBase.PutDelta_WeightedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PutDelta_Weighted\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.PutDelta_WeightedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double CallDelta_Weighted {
+                get {
+                    try {
+                        return ((double)(this[this.tableSeriesBase.CallDelta_WeightedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CallDelta_Weighted\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.CallDelta_WeightedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TheoCall_Weighted {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeriesBase.TheoCall_WeightedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TheoCall_Weighted\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.TheoCall_WeightedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TheoPut_Weighted {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeriesBase.TheoPut_WeightedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TheoPut_Weighted\' in table \'SeriesBase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSeriesBase.TheoPut_WeightedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSettlePriceCallNull() {
                 return this.IsNull(this.tableSeriesBase.SettlePriceCallColumn);
             }
@@ -1141,6 +1342,78 @@ namespace PosauneAnalytics.Web.Application {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTheoPutNull() {
                 this[this.tableSeriesBase.TheoPutColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImpliedVolCall_WeightedNull() {
+                return this.IsNull(this.tableSeriesBase.ImpliedVolCall_WeightedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImpliedVolCall_WeightedNull() {
+                this[this.tableSeriesBase.ImpliedVolCall_WeightedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImpliedVolPut_WeightedNull() {
+                return this.IsNull(this.tableSeriesBase.ImpliedVolPut_WeightedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImpliedVolPut_WeightedNull() {
+                this[this.tableSeriesBase.ImpliedVolPut_WeightedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPutDelta_WeightedNull() {
+                return this.IsNull(this.tableSeriesBase.PutDelta_WeightedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPutDelta_WeightedNull() {
+                this[this.tableSeriesBase.PutDelta_WeightedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCallDelta_WeightedNull() {
+                return this.IsNull(this.tableSeriesBase.CallDelta_WeightedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCallDelta_WeightedNull() {
+                this[this.tableSeriesBase.CallDelta_WeightedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTheoCall_WeightedNull() {
+                return this.IsNull(this.tableSeriesBase.TheoCall_WeightedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTheoCall_WeightedNull() {
+                this[this.tableSeriesBase.TheoCall_WeightedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTheoPut_WeightedNull() {
+                return this.IsNull(this.tableSeriesBase.TheoPut_WeightedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTheoPut_WeightedNull() {
+                this[this.tableSeriesBase.TheoPut_WeightedColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -26,13 +26,13 @@ namespace PosauneAnalytics.Web.Application
 
             foreach (var day in events)
             {
-                if (day.GetEventDate() <= expiration)
+                if (day.GetEventDate() <= expiration && day.GetEventDate() >= analysisDate)
                 {
                     weight += day.GetEventWeight();
                 }
             }
 
-            double weightedDays = (expiration - analysisDate).TotalDays + weight;
+            double weightedDays = (expiration.AddDays(1) - analysisDate).TotalDays + weight;
             return weightedDays;
         }
 

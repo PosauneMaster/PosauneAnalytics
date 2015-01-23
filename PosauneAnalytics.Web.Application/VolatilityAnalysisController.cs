@@ -54,7 +54,7 @@ namespace PosauneAnalytics.Web.Application
             var weighted = new Dictionary<DateTime, SeriesInfo>();
             foreach (var kvp in seriesList)
             {
-                var info = SeriesInfo.DeepCopy(kvp.Value);
+                var info = SeriesInfo.DeepCopy(kvp.Value); ;
                 info.SetParent(info.SeriesId);
                 info.TimeToExpiration = weights[kvp.Key];
                 weighted.Add(kvp.Key, info);
@@ -80,13 +80,15 @@ namespace PosauneAnalytics.Web.Application
             var weightedSeriesList = CreateWeightedSeries(seriesInfoList, weights);
 
             var seriesLookUp = _engine.ComputeSeriesAnalysis(seriesInfoList.Values);
-            _engine.ComputeSeriesAnalysisWeighted(weightedSeriesList.Values);
+            var weightedSeriesLookUp = _engine.ComputeSeriesAnalysisWeighted(weightedSeriesList.Values);
 
             foreach (SeriesInfo si in seriesInfoList.Values)
             {
+                var veightedSi = weightedSeriesList.FirstOrDefault(s => s.Value.ParentSeriesId == si.SeriesId).Value;
+
                 var table = new VolatilityAnalysisModel.SeriesBaseDataTable();
 
-                CreateRows(si, table);
+                CreateRows(si, veightedSi, table);
 
                 SetRowVisibility(table);
 
@@ -98,8 +100,8 @@ namespace PosauneAnalytics.Web.Application
                     Symbol = si.Underlying.Symbol,
                     ExpirationDate = si.ExpirationDate.ToString("MM/dd/yyyy"),
                     RiskFreeRate = si.RiskFreeRate.ToString("P2"),
-                    DaysToExpiration = si.DaysToExpiration.ToString("G"),
-                    //WeightedDaysToExpiration = si.WeightedDays.ToString("G"),
+                    DaysToExpiration = (si.TimeToExpiration * 360).ToString("N2"),
+                    WeightedDaysToExpiration = (veightedSi.TimeToExpiration * 360).ToString("N2"),
                     Polynomial = si.Regression.LeastSquaresFit(),
                     Model = table
                 });
@@ -134,10 +136,12 @@ namespace PosauneAnalytics.Web.Application
             table.DefaultView.RowFilter = "Visible = true";
         }
 
-        private void CreateRows(SeriesInfo si, VolatilityAnalysisModel.SeriesBaseDataTable table)
+        private void CreateRows(SeriesInfo si, SeriesInfo weightedInfo,  VolatilityAnalysisModel.SeriesBaseDataTable table)
         {
             foreach(OptionSeries series in si.Series)
             {
+                var weightedSeries = weightedInfo.FindOptionSeries(series.StrikePrice);
+
                 VolatilityAnalysisModel.SeriesBaseRow row = table.NewSeriesBaseRow();
                 row = table.NewSeriesBaseRow();
                 row.StrikePrice = series.StrikePrice;
@@ -155,6 +159,13 @@ namespace PosauneAnalytics.Web.Application
                 row.TheoPutDollar = series.TheoPutDollar;
                 row.TheoCall = series.TheoCall;
                 row.TheoPut = series.TheoPut;
+                row.ImpliedVolCall_Weighted = weightedSeries.Call.ImpliedVolatilityDisplay;
+                row.ImpliedVolPut_Weighted = weightedSeries.Put.ImpliedVolatilityDisplay;
+                row.CallDelta_Weighted = weightedSeries.Call.Delta;
+                row.PutDelta_Weighted = weightedSeries.Put.Delta;
+                row.TheoCall_Weighted = weightedSeries.TheoCall;
+                row.TheoPut_Weighted = weightedSeries.TheoPut;
+
 
                 table.Rows.Add(row);
             }

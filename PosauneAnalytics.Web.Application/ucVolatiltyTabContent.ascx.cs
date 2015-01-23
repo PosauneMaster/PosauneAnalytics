@@ -27,7 +27,7 @@ namespace PosauneAnalytics.Web.Application
                 headerGridRow.Cells.Add(new TableCell()
                 {
                     Text = "Calls",
-                    ColumnSpan = 3,
+                    ColumnSpan = 5,
                     CssClass = "header_grid"
                 });
 
@@ -41,11 +41,65 @@ namespace PosauneAnalytics.Web.Application
                 headerGridRow.Cells.Add(new TableCell()
                 {
                     Text = "Puts",
-                    ColumnSpan = 3,
+                    ColumnSpan = 5,
                     CssClass = "header_grid"
                 });
 
                 gv.Controls[0].Controls.AddAt(0, headerGridRow);
+
+                var subHeaderGridRow = new GridViewRow(1, 0, DataControlRowType.Header, DataControlRowState.Insert);
+
+                subHeaderGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "Theo Call",
+                    ColumnSpan = 2,
+                    CssClass = "header_grid"
+                });
+
+                subHeaderGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "Implied Vol",
+                    ColumnSpan = 2,
+                    CssClass = "header_grid"
+                });
+
+                subHeaderGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "",
+                    CssClass = "header_grid"
+
+                });
+
+                subHeaderGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "",
+                    CssClass = "header_grid"
+
+                });
+
+                subHeaderGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "",
+                    CssClass = "header_grid"
+
+                });
+
+                subHeaderGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "Implied Vol",
+                    ColumnSpan = 2,
+                    CssClass = "header_grid"
+                });
+
+                subHeaderGridRow.Cells.Add(new TableCell()
+                {
+                    Text = "Theo Put",
+                    ColumnSpan = 2,
+                    CssClass = "header_grid"
+                });
+
+                gv.Controls[0].Controls.AddAt(1, subHeaderGridRow);
+
 
             }
         }

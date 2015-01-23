@@ -200,7 +200,7 @@ namespace PosauneAnalytics.FileManager
             double ticks = Math.Truncate((price - (handle * 64 * 15.625)) / 15.625);
             double fraction = (price - ((handle * 64 * 15.625) + (ticks * 15.625)))/15.625;
 
-            return String.Format("{0:N0} {1:N0} {2:N2}", handle, ticks, fraction);
+            return String.Format("{0:N0} {1:00} {2:N2}", handle, ticks, fraction);
         }
 
         public void AddOption(OptionSettlement option)

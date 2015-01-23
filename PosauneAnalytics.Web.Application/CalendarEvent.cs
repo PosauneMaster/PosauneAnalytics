@@ -28,6 +28,10 @@ namespace PosauneAnalytics.Web.Application
             double weight;
             if (Double.TryParse(Weight, out weight))
             {
+                if (weight == 0.00d)
+                {
+                    return -1.00d;
+                }
                 return weight;
             }
 

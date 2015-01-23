@@ -55,7 +55,7 @@
             font-family: Verdana, Arial, Helvetica, sans-serif;
             font-size: 11px;
             color: #0F465B;
-            padding: 0px 4px 0px 20px;
+            padding: 0px 4px 0px 8px;
             font-weight: normal;
             line-height: 16px;
             height: 18px;
@@ -158,7 +158,7 @@
                 </td>
                 <td>
                     <div style="margin-top: 24px; margin-left:24px;">
-                        <ajaxToolkit:TabContainer runat="server" ID="tcVolGrids" Height="800px" Width="800px" BorderStyle="None" Visible="false">
+                        <ajaxToolkit:TabContainer runat="server" ID="tcVolGrids" Height="800px" Width="1000px" BorderStyle="None" Visible="false">
                         </ajaxToolkit:TabContainer>
                     </div>
                 </td>

@@ -46,6 +46,11 @@ namespace PosauneAnalytics.FileManager
             ParentSeriesId = SeriesId;
         }
 
+        public OptionSeries FindOptionSeries(double strike)
+        {
+            return Series.FirstOrDefault(o => o.StrikePrice == strike);
+        }
+
         public void AddOptionSeries(IEnumerable<OptionSeries> series)
         {
             Series = new List<OptionSeries>(series);

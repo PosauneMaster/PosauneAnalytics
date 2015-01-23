@@ -41,11 +41,19 @@
                 </div>
             </td>
             <td>
-                <div style="width: 800px; padding-left: 40px; overflow: auto; max-height:750px;">
+                <div style="width:100%; padding-left: 40px; overflow: auto; max-height:750px;">
                     <asp:GridView runat="server" ID="gvSeriesInfo1" AutoGenerateColumns="false" OnRowCreated="gvSeriesInfo1_RowCreated">
                         <Columns>
 
-                            <asp:TemplateField HeaderText="Theo Call" SortExpression="TheoCall">
+                            <asp:TemplateField HeaderText="Weighted" SortExpression="TheoCall_Weighted">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTheoCallPrice_Weighted" runat="server" Text='<%# Bind("TheoCall_Weighted")%>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Unweighted" SortExpression="TheoCall">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTheoCallPrice" runat="server" Text='<%# Bind("TheoCall")%>'></asp:Label>
                                 </ItemTemplate>
@@ -53,7 +61,15 @@
                                 <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
                             </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Implied Vol" SortExpression="ImpliedVolCall">
+                            <asp:TemplateField HeaderText="Weighted" SortExpression="ImpliedVolCall_Weighted">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblImpliedCVolCall_Weighted" runat="server" Text='<%# Bind("ImpliedVolCall_Weighted")%>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Unweighted" SortExpression="ImpliedVolCall">
                                 <ItemTemplate>
                                     <asp:Label ID="lblImpliedCVolCall" runat="server" Text='<%# Bind("ImpliedVolCall")%>'></asp:Label>
                                 </ItemTemplate>
@@ -85,7 +101,15 @@
                                 <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
                             </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Implied Vol" SortExpression="ImpliedVolPut">
+                            <asp:TemplateField HeaderText="Weighted" SortExpression="ImpliedVolPut_Weighted">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblImpliedVolPut_Weighted" runat="server" Text='<%# Bind("ImpliedVolPut_Weighted")%>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Unweighted" SortExpression="ImpliedVolPut">
                                 <ItemTemplate>
                                     <asp:Label ID="lblImpliedVolPut" runat="server" Text='<%# Bind("ImpliedVolPut")%>'></asp:Label>
                                 </ItemTemplate>
@@ -93,7 +117,15 @@
                                 <ItemStyle CssClass="data_grid" HorizontalAlign="Left" />
                             </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Theo Put" SortExpression="TheoPut">
+                            <asp:TemplateField HeaderText="Weighted" SortExpression="TheoPut_Weighted">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTheoPutPrice_Weighted" runat="server" Text='<%# Bind("TheoPut_Weighted")%>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="header_grid" HorizontalAlign="Left" />
+                                <ItemStyle CssClass="data_grid" HorizontalAlign="Left"/>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Unweighted" SortExpression="TheoPut">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTheoPutPrice" runat="server" Text='<%# Bind("TheoPut")%>'></asp:Label>
                                 </ItemTemplate>
