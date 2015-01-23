@@ -87,7 +87,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> -Posaune Analytics, LLC </p>
+                <p>&copy; <%: DateTime.Now.Year %> - Posaune Analytics, LLC </p>
             </footer>
         </div>
     </form>

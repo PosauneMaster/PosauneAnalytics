@@ -16,8 +16,10 @@ namespace PosauneAnalytics.Web.Application
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            LoadCalendarProfiles();
+            if (!IsPostBack)
+            {
+                LoadCalendarProfiles();
+            }
         }
 
         private void LoadCalendarProfiles()
@@ -31,7 +33,14 @@ namespace PosauneAnalytics.Web.Application
         [System.Web.Services.WebMethod()]
         public static void AddEvent(List<CalendarEvent> calEvents)
         {
-            _controller.AddCalenderEvent(calEvents);
+            try
+            {
+                _controller.AddCalenderEvent(calEvents);
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
 
         }
 
@@ -62,6 +71,7 @@ namespace PosauneAnalytics.Web.Application
             {
                 _controller.SendProfileToStorage("Admin", txtProfilename.Text);
                 txtProfilename.Text = String.Empty;
+                LoadCalendarProfiles();
             }
         }
     }

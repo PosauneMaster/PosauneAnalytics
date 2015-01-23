@@ -254,6 +254,11 @@
 
             var originalEventObject = $('#' + id).data(id);
 
+            if (originalEventObject == null)
+            {
+                return;
+            }
+
             var wght = originalEventObject.weight;
 
             if (arguments.length == 5)
@@ -370,7 +375,14 @@
                         var id = eventObj.Id;
                         var title = 'Weight: ' + eventObj.Weight;
                         var eventDate = new Date(eventObj.EventDate);
-                        addEvent(id, title, eventDate, true, eventObj.Weight);
+                        try
+                        {
+                            addEvent(id, title, eventDate, true, eventObj.Weight);
+                        }
+                        catch(err)
+                        {
+                            
+                        }
 
                     });
                 }

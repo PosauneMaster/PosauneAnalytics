@@ -152,7 +152,7 @@
                                          TargetControlID="txtAnalysisDate"></ajaxToolkit:CalendarExtender></td></tr>
                             <tr><td><div style="padding-top:6px;"><asp:Label runat="server" Text="Calendar Profile:"></asp:Label></div></td></tr>
                             <tr><td><asp:DropDownList runat="server" ID="ddlProfilenames" CssClass="expireDateInfo" Width="180px" ></asp:DropDownList></td></tr>
-                            <tr><td><div style="padding-top:16px; text-align:right;"><asp:Button runat="server" ID="btnRunAnalysis" CssClass="button" Text="Run Analysis" OnClick="btnRunAnalysis_Click" /></div></td></tr>
+                            <tr><td><div style="padding-top:16px; text-align:right;"><asp:Button runat="server" ID="btnRunAnalysis" CssClass="btn btn-primary" Text="Run Analysis" OnClick="btnRunAnalysis_Click" /></div></td></tr>
                         </table>
                     </div>
                 </td>
