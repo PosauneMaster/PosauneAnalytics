@@ -477,8 +477,8 @@
                                 <div style="margin-top:10px;"><asp:Label runat="server" ID="Label4" Text="Profile Name:"></asp:Label></div>
                                 <div><asp:TextBox runat="server" ID="txtProfilename" Width="162px"></asp:TextBox></div>
                                 <div style="margin-top:16px">
-                                    <asp:Button runat="server" ID="btnProfilenameLoad" Text="Load" ClientIDMode="Static" UseSubmitBehavior="false" CssClass="profile_save_button" OnClientClick="loadProfile(); return false;" />
-                                    <asp:Button runat="server" ID="btnProfilenameSave" Text="Save" ClientIDMode="Static" CssClass="profile_save_button" OnClick="btnProfileNameSave_Click" />
+                                    <asp:Button runat="server" ID="btnProfilenameLoad" Text="Load" ClientIDMode="Static" UseSubmitBehavior="false" CssClass="btn btn-primary btn-sm" OnClientClick="loadProfile(); return false;" />
+                                    <asp:Button runat="server" ID="btnProfilenameSave" Text="Save" ClientIDMode="Static" CssClass="btn btn-primary btn-sm" OnClick="btnProfileNameSave_Click" />
                                 </div>
                             </div>
                         </td>
