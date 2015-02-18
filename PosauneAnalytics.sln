@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.Libraries", "PosauneAnalytics.Libraries\PosauneAnalytics.Libraries.csproj", "{90F05C30-7128-432D-BC20-F6D59ACE3160}"
 EndProject
@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 	ProjectSection(SolutionItems) = preProject
 		PublishScripts\Configurations\PosauneAnalyticsCloudWebUI-WAWS-dev.json = PublishScripts\Configurations\PosauneAnalyticsCloudWebUI-WAWS-dev.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosauneAnalytics.Volatility.Web.Application", "PosauneAnalytics.Volatility.Web.Application\PosauneAnalytics.Volatility.Web.Application.csproj", "{19920625-97E3-43A0-BB16-B905BCB8EFB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +64,10 @@ Global
 		{496B9709-771C-418B-8267-AFFDF48317B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{496B9709-771C-418B-8267-AFFDF48317B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{496B9709-771C-418B-8267-AFFDF48317B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19920625-97E3-43A0-BB16-B905BCB8EFB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19920625-97E3-43A0-BB16-B905BCB8EFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19920625-97E3-43A0-BB16-B905BCB8EFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19920625-97E3-43A0-BB16-B905BCB8EFB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
