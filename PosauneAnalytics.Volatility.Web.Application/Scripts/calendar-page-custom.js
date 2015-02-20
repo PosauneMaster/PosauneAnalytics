@@ -161,7 +161,7 @@ function addEvent(id, title, date, allDay, weight) {
 
     var result = $.ajax({
         type: 'POST',
-        url: 'CalendarAnalysis.aspx/AddEvent',
+        url: 'Calendar.aspx/AddEvent',
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         data: "{'calEvents':" + JSON.stringify(calEvents) + "}",
@@ -191,7 +191,7 @@ function removeAll() {
 
     var result = $.ajax({
         type: 'POST',
-        url: 'CalendarAnalysis.aspx/ClearAllEvents',
+        url: 'Calendar.aspx/ClearAllEvents',
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         error: function (data) {
@@ -210,13 +210,13 @@ function loadProfile() {
 
     var result = $.ajax({
         type: 'POST',
-        url: 'CalendarAnalysis.aspx/LoadProfile',
+        url: 'Calendar.aspx/LoadProfile',
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         data: "{'profilename':" + JSON.stringify(profilename) + "}",
         error: function (data) {
             var events = data;
-            alert("Error");
+            alert("Error Loading Profiles");
         },
         success: function (data) {
 
@@ -266,7 +266,7 @@ function removeEvents(calEvents) {
 
     var result = $.ajax({
         type: 'POST',
-        url: 'CalendarAnalysis.aspx/RemoveEvents',
+        url: 'Calendar.aspx/RemoveEvents',
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         data: "{'calEvents':" + JSON.stringify(calEvents) + "}",

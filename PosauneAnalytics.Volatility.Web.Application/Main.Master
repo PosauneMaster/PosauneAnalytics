@@ -13,11 +13,11 @@
     <meta name="author" content=""/>
 
     <%-- Script Section --%>
-    <%: Scripts.Render("~/bundles/jQuery") %>
-    <%: Scripts.Render("~/bundles/BootstrapJs") %>
+    <%# Scripts.Render("~/bundles/jQuery") %>
+    <%# Scripts.Render("~/bundles/BootstrapJs") %>
 
     <%-- Style Section --%>
-    <%: Styles.Render("~/bundles/BootstrapCss")  %>
+    <%# Styles.Render("~/bundles/BootstrapCss")  %>
     
     <asp:ContentPlaceHolder ID="ScriptSection" runat="server" />
     <asp:ContentPlaceHolder ID="StyleSection" runat="server">
@@ -73,8 +73,6 @@
         </div>
     </div>
     <!-- /container -->
-    </form>
-    <%--</form>--%>
 
 </body>
 </html>
