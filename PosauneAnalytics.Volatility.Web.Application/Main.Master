@@ -13,18 +13,16 @@
     <meta name="author" content=""/>
 
     <%-- Script Section --%>
-    <%# Scripts.Render("~/bundles/jQuery") %>
-    <%# Scripts.Render("~/bundles/BootstrapJs") %>
+    <%: Scripts.Render("~/bundles/jQuery") %>
+    <%: Scripts.Render("~/bundles/BootstrapJs") %>
+    <asp:ContentPlaceHolder ID="ScriptSection" runat="server" />
 
     <%-- Style Section --%>
-    <%# Styles.Render("~/bundles/BootstrapCss")  %>
-    
-    <asp:ContentPlaceHolder ID="ScriptSection" runat="server" />
+    <%: Styles.Render("~/bundles/BootstrapCss")  %>
     <asp:ContentPlaceHolder ID="StyleSection" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-<%--    <form runat="server">--%>
     <div class="container">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -76,3 +74,5 @@
 
 </body>
 </html>
+
+

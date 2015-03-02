@@ -37,8 +37,8 @@
                             <label class="control-label" for="txtAnalysisDate">Analysis Date:</label>
                             <asp:TextBox runat="server" ID="txtAnalysisDate" CssClass="form-control input-sm"></asp:TextBox>
                             <asp:ImageButton runat="server" ID="imgAnalysisDate" CssClass="calendar_popup_image" ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
-                            <ajaxToolkit:CalendarExtender runat="server" ID="calAnalysisDate" Enabled="true" Format="MM/dd/yyyy" PopupButtonID="imgAnalysisDate"
-                                         TargetControlID="txtAnalysisDate"></ajaxToolkit:CalendarExtender>
+<%--                            <ajaxToolkit:CalendarExtender runat="server" ID="calAnalysisDate" Enabled="true" Format="MM/dd/yyyy" PopupButtonID="imgAnalysisDate"
+                                         TargetControlID="txtAnalysisDate"></ajaxToolkit:CalendarExtender>--%>
                         </div>
 
                     </fieldset>
