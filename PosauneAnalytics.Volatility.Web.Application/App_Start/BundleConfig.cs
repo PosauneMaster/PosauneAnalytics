@@ -33,6 +33,10 @@ namespace BootstrapDemo.App_Start
                 "~/Scripts/calendar-page-custom.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/BootstrapDatePickerJs").Include(
+                "~/Scripts/bootstrap-datepicker.js"
+            ));
+
             bundles.Add(new StyleBundle("~/bundles/BootstrapCss").Include(
                   "~/Content/bootstrap.css"
                 , "~/Content/bootstrap-theme-spacelab.css"
@@ -45,6 +49,14 @@ namespace BootstrapDemo.App_Start
             bundles.Add(new StyleBundle("~/bundles/CalendarPageCss").Include(
                 "~/Content/calendar-page-custom.css"
                 ));
+
+            bundles.Add(new StyleBundle("~/bundles/BootstrapDatePickerCss").Include(
+                "~/Content/datepicker3.css"
+    ));
+
+
+
+
 
             BundleTable.EnableOptimizations = true;
         }

@@ -1,7 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="VolatilityAnalysis.aspx.cs" Inherits="PosauneAnalytics.Volatility.Web.Application.VolatilityAnalysis" %>
+
+
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ScriptSection" runat="server">
+
+    <%: Scripts.Render("~/bundles/BootstrapDatePickerJs") %>
+
+   <script type="text/javascript">
+
+       $(document).ready(function () {
+
+           $('#datetimepicker1').datepicker();
+       });
+
+    </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="StyleSection" runat="server">
+
+    <%: Styles.Render("~/bundles/BootstrapDatePickerCss")  %>
 
     <style type="text/css">
         #analysis-selector {
@@ -20,40 +38,25 @@
             padding-left:10px;
         }
 
-
-
     </style>
 
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentSection" runat="server">
-
-    <form runat="server" role="form">
-        <div class="row>">
-            <div class="col-md-2">
-                <div id="analysis-selector">
-                    <fieldset>
-                        <div class="form-group">
-                            <label class="control-label" for="txtAnalysisDate">Analysis Date:</label>
-                            <asp:TextBox runat="server" ID="txtAnalysisDate" CssClass="form-control input-sm"></asp:TextBox>
-                            <asp:ImageButton runat="server" ID="imgAnalysisDate" CssClass="calendar_popup_image" ImageUrl="~/images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
-<%--                            <ajaxToolkit:CalendarExtender runat="server" ID="calAnalysisDate" Enabled="true" Format="MM/dd/yyyy" PopupButtonID="imgAnalysisDate"
-                                         TargetControlID="txtAnalysisDate"></ajaxToolkit:CalendarExtender>--%>
-                        </div>
-
-                    </fieldset>
-
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-2'>
+                <div class="input-group date" id="datetimepicker1">
+                    <input type="text" class="form-control" />
+                        <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-th"></i></span>
                 </div>
+            </div>
+            <div class="col-sm-10">
+
 
 
             </div>
-
-
-        </div>            
-
-
-
-    </form>
-
-
+        </div>
+    </div>
 </asp:Content>

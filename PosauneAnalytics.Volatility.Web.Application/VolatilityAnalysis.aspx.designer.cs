@@ -11,23 +11,5 @@ namespace PosauneAnalytics.Volatility.Web.Application {
     
     
     public partial class VolatilityAnalysis {
-        
-        /// <summary>
-        /// txtAnalysisDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAnalysisDate;
-        
-        /// <summary>
-        /// imgAnalysisDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgAnalysisDate;
     }
 }
