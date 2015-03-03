@@ -12,11 +12,6 @@ namespace PosauneAnalytics.Volatility.Web.Application
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            Scripts.Render("~/bundles/jQuery");
-            Scripts.Render("~/bundles/BootstrapJs");
-            Styles.Render("~/bundles/BootstrapCss");
-
         }
     }
 }
