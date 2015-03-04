@@ -51,12 +51,10 @@ namespace BootstrapDemo.App_Start
                 ));
 
             bundles.Add(new StyleBundle("~/bundles/BootstrapDatePickerCss").Include(
-                "~/Content/datepicker3.css"
-    ));
+                "~/Content/datepicker3.css"));
 
-
-
-
+            bundles.Add(new StyleBundle("~/bundles/VolatilityPageCss").Include(
+                "~/Content/volitility-page-custom.css"));
 
             BundleTable.EnableOptimizations = true;
         }

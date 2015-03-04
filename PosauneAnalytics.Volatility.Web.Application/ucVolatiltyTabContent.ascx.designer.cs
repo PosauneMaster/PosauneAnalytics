@@ -13,6 +13,78 @@ namespace PosauneAnalytics.Volatility.Web.Application {
     public partial class ucVolatiltyTabContent {
         
         /// <summary>
+        /// txtSeries1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSeries1;
+        
+        /// <summary>
+        /// txtUnderlying1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUnderlying1;
+        
+        /// <summary>
+        /// txtUnderlyingPrice1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUnderlyingPrice1;
+        
+        /// <summary>
+        /// txtExpirationDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtExpirationDate;
+        
+        /// <summary>
+        /// txtDaysToExpiration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDaysToExpiration;
+        
+        /// <summary>
+        /// txtWeightedDays control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWeightedDays;
+        
+        /// <summary>
+        /// txtRiskFreeRate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRiskFreeRate;
+        
+        /// <summary>
+        /// txtSymbol1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSymbol1;
+        
+        /// <summary>
         /// gvSeriesInfo1 control.
         /// </summary>
         /// <remarks>

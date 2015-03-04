@@ -26,10 +26,6 @@
     <asp:ContentPlaceHolder ID="StyleSection" runat="server">
     </asp:ContentPlaceHolder>
 
-    <form runat="server">
-
-            <ajaxToolkit:ToolkitScriptManager runat="server">
-    </ajaxToolkit:ToolkitScriptManager>
 
 
     <div class="container">
@@ -53,10 +49,9 @@
                 </div>
             </div>
         </nav>
+        </div>
         <asp:ContentPlaceHolder ID="ContentSection" runat="server">
         </asp:ContentPlaceHolder>
-        </div>
-    </form>
 </body>
 </html>
 
