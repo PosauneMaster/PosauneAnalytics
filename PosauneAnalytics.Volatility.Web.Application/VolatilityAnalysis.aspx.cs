@@ -57,14 +57,14 @@ namespace PosauneAnalytics.Volatility.Web.Application
                 panel.Controls.Add(control);
                 tcVolGrids.Tabs.Add(panel);
 
-                //((TextBox)control.FindControl("txtSeries1")).Text = data.SeriesName;
-                //((TextBox)control.FindControl("txtUnderlying1")).Text = data.Underlying;
-                //((TextBox)control.FindControl("txtSymbol1")).Text = data.Symbol;
-                //((TextBox)control.FindControl("txtUnderlyingPrice1")).Text = data.Price;
-                //((TextBox)control.FindControl("txtExpirationDate")).Text = data.ExpirationDate;
-                //((TextBox)control.FindControl("txtDaysToExpiration")).Text = data.DaysToExpiration;
-                //((TextBox)control.FindControl("txtWeightedDays")).Text = data.WeightedDaysToExpiration;
-                //((TextBox)control.FindControl("txtRiskFreeRate")).Text = data.RiskFreeRate;
+                ((TextBox)control.FindControl("txtSeries1")).Text = data.SeriesName;
+                ((TextBox)control.FindControl("txtUnderlying1")).Text = data.Underlying;
+                ((TextBox)control.FindControl("txtSymbol1")).Text = data.Symbol;
+                ((TextBox)control.FindControl("txtUnderlyingPrice1")).Text = data.Price;
+                ((TextBox)control.FindControl("txtExpirationDate")).Text = data.ExpirationDate;
+                ((TextBox)control.FindControl("txtDaysToExpiration")).Text = data.DaysToExpiration;
+                ((TextBox)control.FindControl("txtWeightedDays")).Text = data.WeightedDaysToExpiration;
+                ((TextBox)control.FindControl("txtRiskFreeRate")).Text = data.RiskFreeRate;
 
                 var gv = ((GridView)control.FindControl("gvSeriesInfo1"));
                 gv.DataSource = data.Model;
